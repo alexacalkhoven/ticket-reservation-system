@@ -6,8 +6,6 @@ public class MainFrame extends JFrame{
     private JPanel mainPanel, buttonPanel;
     private JButton loginAsGuest, loginAsRegisteredUser, loginAsOrdinaryUser;
     private JLabel initialMessage;
-    //private JScrollPane
-    //private JTextArea
     
     public MainFrame (String s){
         super(s);

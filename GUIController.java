@@ -5,6 +5,7 @@ public class GUIController {
     private MainFrame mainFrame;
     private GuestFrame guestFrame;
     private UserLoginFrame loginFrame;
+    private HomePageFrame homeFrame;
 
     public GUIController (MainFrame f){
         mainFrame = f;
@@ -18,7 +19,7 @@ public class GUIController {
     public class LoginGuestListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            guestFrame = new GuestFrame("Ticket Reservation System");
+            homeFrame = new HomePageFrame("Ticket Reservation System", "Guest user");
             mainFrame.dispose();
         }
     }
@@ -44,7 +45,23 @@ public class GUIController {
     public class LoginListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            homeFrame = new HomePageFrame("Ticket Reservation System", loginFrame.usernameAnswer);
+            loginFrame.dispose();
+        }
+    }
+
+    public class ViewMoviesListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
             
         }
     }
+
+    public class PurchaseTicketListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+        }
+    }
+
 }

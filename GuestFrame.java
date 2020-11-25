@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Currently not in use
+
 public class GuestFrame extends JFrame{
     
     private JPanel guestPanel, buttonPanel;

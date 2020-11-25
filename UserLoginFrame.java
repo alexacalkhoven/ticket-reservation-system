@@ -9,7 +9,7 @@ public class UserLoginFrame extends JFrame{
     private JLabel message;
     private JTextField usernameInput;
     private JTextField passwordInput;
-    private String usernameAnswer, passwordAnswer;
+    public String usernameAnswer, passwordAnswer;
 
     public UserLoginFrame (String s){
         super(s);
