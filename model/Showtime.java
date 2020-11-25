@@ -3,23 +3,27 @@ package model;
 import java.util.ArrayList;
 
 
+
 public class Showtime {
 
+	public int MAXSEATS=100;
 	private Time localDateTime;
-	private Theatre theatre;
+	private Theater theater;
 	private Movie movie;
 	private ArrayList<Seat> seats;
 	private boolean isFull;
 	
 	
-	
-	public Showtime(Time localDateTime, Theatre theatre, Movie movie, ArrayList<Seat> seats, boolean isFull) {
+	//constructor
+	public Showtime(Time localDateTime, Theater theater, Movie movie, ArrayList<Seat> seats, boolean isFull) {
 		this.localDateTime = localDateTime;
-		this.theatre = theatre;
+		this.theater = theater;
 		this.movie = movie;
 		setSeats(seats);
 		this.isFull = isFull;
 	}
+	
+	//finds all seats that are not taken and puts them into an arrayList which is returned
 	public ArrayList<Seat> getAvailableSeats() {
 		ArrayList<Seat> open;
 	
@@ -39,12 +43,12 @@ public class Showtime {
 		this.localDateTime = localDateTime;
 	}
 
-	public Theatre getTheatre() {
-		return theatre;
+	public Theater getTheater() {
+		return theater;
 	}
 
-	public void setTheatre(Theatre theatre) {
-		this.theatre = theatre;
+	public void setTheater(Theater theatre) {
+		this.theater = theatre;
 	}
 
 	public Movie getMovie() {

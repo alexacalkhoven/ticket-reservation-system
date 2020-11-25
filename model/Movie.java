@@ -10,12 +10,14 @@ public class Movie {
 		this.promotion = promotion;
 	}
 
+	public Movie(String name) {
+		this.name = name;
+		setPromotion(new Promotion());
+	}
+	
 	public Movie() {
 		setName("");
 		setPromotion(new Promotion());
-	}
-	public void addPromotion(Promotion promo) {
-		this.promotion=promo;
 	}
 
 	public String getName() {
@@ -30,7 +32,8 @@ public class Movie {
 		return promotion;
 	}
 
-	public void setPromotion(Promotion promotion) {
+	//adds promotion to provided movie
+	public void addPromotion(Promotion promotion) {
 		this.promotion = promotion;
 	}
 }
