@@ -21,14 +21,19 @@ import java.sql.SQLException;
  */
 public class DBController {
 	private Connection connection;
+	
+	// Macros
+	String ENSF_DB_URL = "jdbc:mysql://localhost:3306/ensf480";
+	String ENSF_DB_USER = "root";
+	String ENSF_DB_PASSWORD = "pw";
 
 	/**
 	 * Constructs a DBManager.
 	 */
 	public DBController() {
-		String url = System.getenv("ENSF_DB_URL");
-		String user = System.getenv("ENSF_DB_USER");
-		String password = System.getenv("ENSF_DB_PASSWORD");
+		String url = ENSF_DB_URL;
+		String user = ENSF_DB_USER;
+		String password = ENSF_DB_PASSWORD;
 
 		if (url == null || user == null || password == null) {
 			System.err.println("Environment variables for database not set");
@@ -37,7 +42,7 @@ public class DBController {
 
 		try {
 			connection = DriverManager.getConnection(url, user, password);
-			executeFile("/init.sql");
+			executeFile("../../resources/init.sql");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -118,5 +123,10 @@ public class DBController {
 		}
 
 		return null;
+	}
+	
+	public static void main(String[] args) {
+		DBController dbman = new DBController();
+		dbman.execute("INSERT INTO user (username, userType) VALUES (?, ?)", "raduwu", 1);
 	}
 }
