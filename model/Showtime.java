@@ -25,7 +25,7 @@ public class Showtime {
 	
 	//finds all seats that are not taken and puts them into an arrayList which is returned
 	public ArrayList<Seat> getAvailableSeats() {
-		ArrayList<Seat> open;
+		ArrayList<Seat> open = new ArrayList<Seat>();
 	
 		for(int i=0; i< MAXSEATS; i++) {
 			if (this.getSeats().get(i).isTaken ==false) {
@@ -34,6 +34,7 @@ public class Showtime {
 			}
 			
 		}
+		return open;
 	}
 	public Time getLocalDateTime() {
 		return localDateTime;

@@ -4,22 +4,23 @@ import java.util.ArrayList;
 
 public class Ticket {
 
+	private User user;
 	private String name;
 	private Showtime showtime;
 	private Receipt receipt;
 	private Seat seat;
 	public Payment payment;
 
-	public Ticket(String name, Showtime showtime, Receipt receipt, Payment payment) {
+	public Ticket(String name, Showtime showtime, Receipt receipt, Payment payment, User user) {
 		this.name = name;
 		this.showtime = showtime;
 		this.receipt = receipt;
 		this.payment = payment;
+		this.user=user;
 	}
 
 	public Ticket() {
 		setName("");
-		setShowtime(new Showtime());
 		setReceipt(new Receipt());
 		setPayment(new Payment());
 	}
@@ -64,12 +65,28 @@ public class Ticket {
 					}
 					//change showtime state
 					theater.setShowtimes(st);
-					payment.makePaymentToTheatre();//make payment for ticket
+					payment.makePaymentToTheatre(user);//make payment for ticket
 					if(payment.isComplete==true) //check to see payment went through
-						receipt.emailReceiptAndTicket(); //get recepit for payment with ticket
+						receipt.emailReceiptAndTicket(user); //get recepit for payment with ticket
 				}
 			}
 		}
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Seat getSeat() {
+		return seat;
+	}
+
+	public void setSeat(Seat seat) {
+		this.seat = seat;
 	}
 
 	public String getName() {

@@ -2,8 +2,8 @@ package model;
 
 public class OrdinaryUser {
 
-	public void registerAsRegisteredUser(String name, String address, Card card, String email) {
-		RegisteredUser ru;
-		ru.setRegisteredUser(name,address,card,email);
+public void registerAsRegisteredUser(String name, String address, Card card, Email email) {
+		RegisteredUser ru=new RegisteredUser(name,address,card,email);
+		
 	}
 }

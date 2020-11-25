@@ -12,12 +12,12 @@ public class Movie {
 
 	public Movie(String name) {
 		this.name = name;
-		setPromotion(new Promotion());
+		addPromotion(new Promotion());
 	}
 	
 	public Movie() {
 		setName("");
-		setPromotion(new Promotion());
+		addPromotion(new Promotion());
 	}
 
 	public String getName() {
