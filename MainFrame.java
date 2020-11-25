@@ -29,7 +29,7 @@ public class MainFrame extends JFrame{
     }
 
     private void addComponents(){
-        initialMessage = new JLabel("Welcome to Ticket Registration System");
+        initialMessage = new JLabel("       Welcome to Ticket Registration System");
         initialMessage.setBounds(300, 300, 300, 300);
         mainPanel.add(initialMessage);
 
