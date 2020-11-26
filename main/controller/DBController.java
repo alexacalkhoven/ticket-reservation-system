@@ -13,6 +13,7 @@ import java.sql.SQLException;
 /**
  * (From 409 project)
  * Manages accesses to the database.
+ * Maybe should make this a singleton class?
  * 
  * @author Alexa Calkhoven
  * @author Radu Schirliu
@@ -81,7 +82,7 @@ public class DBController {
 	 * 
 	 * @param query the command given to the database.
 	 * @param args  the arguments given to the database.
-	 * @return returns 0.
+	 * @return returns # rows changed or 0.
 	 */
 	public int execute(String query, Object... args) {
 		try {
@@ -123,10 +124,5 @@ public class DBController {
 		}
 
 		return null;
-	}
-	
-	public static void main(String[] args) {
-		DBController dbman = new DBController();
-		dbman.execute("INSERT INTO user (username, userType) VALUES (?, ?)", "raduwu", 1);
 	}
 }
