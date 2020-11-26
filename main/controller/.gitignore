@@ -4,3 +4,5 @@
 /ShowtimeController.class
 /TicketController.class
 /EmailController.class
+/MovieController.class
+/PaymentController.class
