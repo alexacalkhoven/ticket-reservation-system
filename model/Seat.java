@@ -4,19 +4,17 @@ public class Seat {
 
 	String number;
 	boolean isTaken;
-	double price;
 	char screen;
-	int type;
+	int type; // 0 = OU, 1 = RU
 	
 	public Seat() {
 		
 	}
 	
-	public Seat(int type, String number, boolean isTaken, double price, char screen) {
+	public Seat(int type, String number, boolean isTaken, char screen) {
 		this.type = type;
 		this.number = number;
 		this.isTaken = isTaken;
-		this.price = price;
 		this.screen = screen;
 	}
 	
@@ -39,12 +37,7 @@ public class Seat {
 	public void setTaken(boolean isTaken) {
 		this.isTaken = isTaken;
 	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
+	
 	public char getScreen() {
 		return screen;
 	}

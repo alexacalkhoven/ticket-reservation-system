@@ -4,14 +4,14 @@ public class RegisteredUser extends User{
 
 	String name;
 	String address;
-	Card card; 
 	Email email;
+	int cardNum;//card num - 8digits 
 	
-	public RegisteredUser(String name, String address, Card card, Email email) {
+	public RegisteredUser(String name, String address, int cardNum) {
 		this.name = name;
 		this.address = address;
-		this.card = card; 
 		this.email = email;
+		this.cardNum = cardNum;
 		
 	}
 	
@@ -36,13 +36,6 @@ public class RegisteredUser extends User{
 		this.address = address;
 	}
 
-	public Card getCard() {
-		return card;
-	}
-
-	public void setCard(Card card) {
-		this.card = card;
-	}
 
 	public Email getEmail() {
 		return email;
@@ -51,19 +44,8 @@ public class RegisteredUser extends User{
 	public void setEmail(Email email) {
 		this.email = email;
 	}
+
 	
-	
-	
-	//additional functions 
-	void addPaymentMethod(Card card) {
-		this.card = card;
-	}
-	
-	void payFee(double value) {
-		
-		card.makePayment(value);
-		
-	}
 	
 	
 }
