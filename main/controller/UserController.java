@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 public class UserController {
 	
-	DBController DB;
+	private DBController DB;
 	
 	public UserController() {
 		DB = new DBController();
 	}
 	
-	boolean isValidUser(String username){
+	public boolean isValidUser(String username){
 		// if username exists in User table return true
 		// else return false
 		ResultSet result = DB.query("SELECT COUNT(*) AS count FROM User WHERE User.username = ?", username);
@@ -29,7 +29,7 @@ public class UserController {
 		return false;
 	}
 	
-	void addRegisteredUser(String username, String name, String address, int cardNum){
+	public void addRegisteredUser(String username, String name, String address, int cardNum){
 		// check if username is already in user table ???
 		// if so, change type to 1 (RU)
 		// if not, add username and 1 to User
@@ -43,7 +43,7 @@ public class UserController {
 	}
 	
 	
-	void addGuestUser(String username) {
+	public void addGuestUser(String username) {
 		if(!isValidUser(username)) { // if this username already exists, don't do anything
 			DB.execute("INSERT INTO user (username, userType) VALUES (?, ?)", username, 0); // type = 0 --> OU
 		}
@@ -56,7 +56,7 @@ public class UserController {
 		ResultSet r = DB.query("SELECT * FROM RegUser");
 		ArrayList<RegisteredUser> ruList = new ArrayList<RegisteredUser>();
 		try {
-			while(result.next()) {
+			while(r.next()) {
 				RegisteredUser ru = new RegisteredUser(r.getString("username"), r.getString("name"), r.getString("address"), r.getInt("cardNum"));
 				ruList.add(ru);
 			}
@@ -67,6 +67,7 @@ public class UserController {
 	}
 	*/
 	
+	/*
 	public static void main(String[] args) {
 		// a few tests...
 		UserController uc = new UserController();
@@ -75,5 +76,6 @@ public class UserController {
 		uc.addRegisteredUser("jordan11", "jordan", "1 home st", 99999999);
 		System.out.println(uc.isValidUser("alexa123"));
 	}
+	*/
 	
 }

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Seat (
 	seatId INT PRIMARY KEY AUTO_INCREMENT,
     rowNumber INT NOT NULL CHECK (rowNumber BETWEEN 0 AND 3),
     colNumber INT NOT NULL CHECK (colNumber BETWEEN 0 AND 4),
-    screen CHAR NOT NULL CHECK (screen BETWEEN 'A' AND 'G'),
+    screen VARCHAR(1) NOT NULL,
     isTaken BOOLEAN NOT NULL,
     seatType INT NOT NULL CHECK (seatType BETWEEN 0 AND 1)
 );

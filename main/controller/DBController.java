@@ -95,7 +95,7 @@ public class DBController {
 			s.execute();
 			return s.getUpdateCount();
 		} catch (SQLException e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 
 		return 0;
