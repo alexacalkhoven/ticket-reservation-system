@@ -6,7 +6,8 @@ public class Time {
 	private String month;
 	private String year;
 	private String hour;
-	
+	private String minute;
+	private String second;
 	
 	public Time(String day, String month, String year, String hour, String minute) {
 		this.day = day;
@@ -17,11 +18,7 @@ public class Time {
 	}
 
 	public Time() {
-		setDay("");
-		setMonth("");
-		setYear("");
-		setHour("");
-		setMinute("");
+		
 	}
 	
 	public String getMonth() {
@@ -55,18 +52,11 @@ public class Time {
 	public void setHour(String hour) {
 		this.hour = hour;
 	}
-	private String minute;
+	
 	
 	public String getTime() {
-		return day+"/"+month+"/"+year+"  "+hour+"/"+minute;
+		return year+ "-"+ month +"-"+day+" "+hour+": "+minute+": "+second;
 	}
 	
 	
-	public String getDay() {
-		return day+"/"+month+"/"+year;
-		
-	}
-	public String getHour() {
-		return hour+"/"+minute;
-	}
 }

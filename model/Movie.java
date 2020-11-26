@@ -3,21 +3,16 @@ package model;
 public class Movie {
 
 	private String name;
-	private Promotion promotion;
+	private int movieId;
 	
-	public Movie(String name, Promotion promotion) {
+	public Movie( int movieId,String name) {
 		this.name = name;
-		this.promotion = promotion;
+		this.movieId = movieId;
 	}
 
-	public Movie(String name) {
-		this.name = name;
-		addPromotion(new Promotion());
-	}
 	
 	public Movie() {
-		setName("");
-		addPromotion(new Promotion());
+		
 	}
 
 	public String getName() {
@@ -28,12 +23,15 @@ public class Movie {
 		this.name = name;
 	}
 
-	public Promotion getPromotion() {
-		return promotion;
+
+	public int getMovieId() {
+		return movieId;
 	}
 
-	//adds promotion to provided movie
-	public void addPromotion(Promotion promotion) {
-		this.promotion = promotion;
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
+
+	
 }

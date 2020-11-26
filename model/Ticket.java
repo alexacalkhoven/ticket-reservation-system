@@ -1,125 +1,118 @@
 package model;
 
-import java.util.ArrayList;
 
 public class Ticket {
 
-	private User user;
-	private String name;
-	private Showtime showtime;
-	private Receipt receipt;
-	private Seat seat;
-	public Payment payment;
+	private int ticketId;
+	private int seatId;
+	private int showtimeId;
+	private int paymentId;
+	private Time timePurchased;
+	
 
-	public Ticket(String name, Showtime showtime, Receipt receipt, Payment payment, User user) {
-		this.name = name;
-		this.showtime = showtime;
-		this.receipt = receipt;
-		this.payment = payment;
-		this.user=user;
+	
+	public Ticket() {
+		
 	}
 
-	public Ticket() {
-		setName("");
-		setReceipt(new Receipt());
-		setPayment(new Payment());
+	public Ticket(int ticketId, int seatId, int showtimeId, int paymentId, Time timePurchased) {
+		this.ticketId = ticketId;
+		this.seatId = seatId;
+		this.showtimeId = showtimeId;
+		this.paymentId = paymentId;
+		this.timePurchased = timePurchased;
+
 	}
 
 	//cancel ticket at theatre by freeing the seat corresponding to the ticket and getting a refund receipt
-	public void cancelTicket(Theater theater) {
-		ArrayList<Showtime> st=theater.getShowtimes();
-		//find showtime of ticket in db
-		for(int i=0; i<st.size();i++) {
-			if(st.get(i)==this.showtime) {
-				ArrayList<Seat> s =st.get(i).getSeats();
-				//find corresponding seat 
-				for(int j=0; j< s.size(); j++) {
-					//change seat state
-					if(s.get(j)==seat) {
-						s.get(j).freeSeat();
-					}
-					//change showtime state
-					theater.setShowtimes(st);
-					receipt.createRefundReceipt(); //get refund for ticket
-				}
-			}
+//	public void cancelTicket() {
+//		
+////		
+////		ArrayList<Showtime> st=theater.getShowtimes();
+////		//find showtime of ticket in db
+////		for(int i=0; i<st.size();i++) {
+////			if(st.get(i).showtimeId==this.showtimeId) {
+////				ArrayList<Seat> s =st.get(i).getSeats();
+////				//find corresponding seat 
+////				for(int j=0; j< s.size(); j++) {
+////					//change seat state
+////					if(s.get(j).seatId==seatId) {
+////						s.get(j).freeSeat();
+////					}
+////					//change showtime state
+////					theater.setShowtimes(st);
+////					receipt.createRefundReceipt(); //get refund for ticket
+////				}
+////			}
+////
+////
+////		}
+//
+//
+//	}
+//
+//	//book a ticket for a specific showtime 
+//	public void payForTicket(Theater theater) {
+////		ArrayList<Showtime> st=theater.getShowtimes();
+////		//find showtime of ticket in db
+////		for(int i=0; i<st.size();i++) {
+////			if(st.get(i).showtimeId==this.showtimeId) {
+////				ArrayList<Seat> s =st.get(i).getSeats();
+////				//find corresponding seat 
+////				for(int j=0; j< s.size(); j++) {
+////					//change seat state
+////					if(s.get(j).seatId==seatId) {
+////						s.get(j).claimSeat();
+////					}
+////					//change showtime state
+////					theater.setShowtimes(st);
+////					payment.makePaymentToTheatre(user);//make payment for ticket
+////					if(payment.isComplete==true) //check to see payment went through
+////						receipt.emailReceiptAndTicket(user); //get recepit for payment with ticket
+////				}
+////			}
+////		}
+//	}
 
-
-		}
-
-
+	public int getTicketId() {
+		return ticketId;
 	}
 
-	//book a ticket for a specific showtime 
-	public void payForTicket(Theater theater) {
-		ArrayList<Showtime> st=theater.getShowtimes();
-		//find showtime of ticket in db
-		for(int i=0; i<st.size();i++) {
-			if(st.get(i)==this.showtime) {
-				ArrayList<Seat> s =st.get(i).getSeats();
-				//find corresponding seat 
-				for(int j=0; j< s.size(); j++) {
-					//change seat state
-					if(s.get(j)==seat) {
-						s.get(j).claimSeat();
-					}
-					//change showtime state
-					theater.setShowtimes(st);
-					payment.makePaymentToTheatre(user);//make payment for ticket
-					if(payment.isComplete==true) //check to see payment went through
-						receipt.emailReceiptAndTicket(user); //get recepit for payment with ticket
-				}
-			}
-		}
+	public void setTicketId(int ticketId) {
+		this.ticketId = ticketId;
 	}
 
-	public User getUser() {
-		return user;
+	public int getSeatId() {
+		return seatId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setSeatId(int seatId) {
+		this.seatId = seatId;
 	}
 
-	public Seat getSeat() {
-		return seat;
+	public int getShowtimeId() {
+		return showtimeId;
 	}
 
-	public void setSeat(Seat seat) {
-		this.seat = seat;
+	public void setShowtimeId(int showtimeId) {
+		this.showtimeId = showtimeId;
 	}
 
-	public String getName() {
-		return name;
+	public int getPaymentId() {
+		return paymentId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPaymentId(int paymentId) {
+		this.paymentId = paymentId;
 	}
 
-	public Showtime getShowtime() {
-		return showtime;
+	public Time getTimePurchased() {
+		return timePurchased;
 	}
 
-	public void setShowtime(Showtime showtime) {
-		this.showtime = showtime;
+	public void setTimePurchased(Time timePurchased) {
+		this.timePurchased = timePurchased;
 	}
-
-	public Receipt getReceipt() {
-		return receipt;
-	}
-
-	public void setReceipt(Receipt receipt) {
-		this.receipt = receipt;
-	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
+	
 
 }
