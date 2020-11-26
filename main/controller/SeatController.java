@@ -33,7 +33,15 @@ public class SeatController {
 	
 	// getSeat(seatId)?
 	
-	//isValidSeat(username, seatId): boolean
+	/**
+	 * Determines if a seat with seatId is valid. First checks that it exists. Then checks if it's taken. Lastly checks if the username entered is valid to purchase the seat or not.
+	 * 
+	 * Note: may be beneficial to break these down into separate functions.
+	 * 
+	 * @param username PK of user.
+	 * @param seatId points to the seat that we want to check.
+	 * @return true if seat is valid, false if not.
+	 */
 	public boolean isValidSeat(String username, int seatId) {
 		// check first that the seat exists
 		ResultSet countResult = DB.query("SELECT COUNT(*) AS count FROM Seat WHERE Seat.seatId = ?", seatId);
@@ -73,7 +81,11 @@ public class SeatController {
 		return true;
 	}
 	
-	//markSeatAsTaken(seatId): void
+	/**
+	 * Changes status of seat from false (not taken) to true (taken). If already taken, does nothing.
+	 * 
+	 * @param seatId seat to update.
+	 */
 	public void markSeatAsTaken(int seatId) {
 		DB.execute("UPDATE seat SET isTaken = 1 WHERE seatId = ?", seatId);
 	}

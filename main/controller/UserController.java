@@ -15,6 +15,12 @@ public class UserController {
 		DB = new DBController();
 	}
 	
+	/**
+	 * Checks to see if username is present in the User table.
+	 * 
+	 * @param username PK of user.
+	 * @return if user is valid or not. True if valid, false if not.
+	 */
 	public boolean isValidUser(String username){
 		// if username exists in User table return true
 		// else return false
@@ -29,23 +35,45 @@ public class UserController {
 		return false;
 	}
 	
-	public void addRegisteredUser(String username, String name, String address, int cardNum){
+	/**
+	 * Returns false if failed to enter. This may be due to duplicate PK, or another SQL related error.
+	 * Checks if username entered corresponds to an existing user already, if so, changes their type to registered.
+	 * 
+	 * NOTE: we may want this to return a User/RegUser object in the future depending on what operations we will need in the GUI.
+	 * 
+	 * @param username PK for user.
+	 * @param name name of user.
+	 * @param address address of user (String format).
+	 * @param cardNum card number to have on file for user.
+	 * @return
+	 */
+	public boolean addRegisteredUser(String username, String name, String address, int cardNum){
 		// check if username is already in user table ???
 		// if so, change type to 1 (RU)
 		// if not, add username and 1 to User
 		// add username and other info to RegUser
+		
+		int userTable;
 		if(isValidUser(username)) { // this username already exists, let's update it to RU
-			DB.execute("UPDATE user SET userType = 1 WHERE username = ?", username);
+			userTable = DB.execute("UPDATE User SET userType = 1 WHERE username = ?", username);
 		} else {
-			DB.execute("INSERT INTO user (username, userType) VALUES (?, ?)", username, 1); // type = 1 --> RU
+			userTable = DB.execute("INSERT INTO User (username, userType) VALUES (?, ?)", username, 1); // type = 1 --> RU
 		}
-		DB.execute("INSERT INTO reguser (username, name, address, cardNum) VALUES (?, ?, ?, ?)", username, name, address, cardNum);
+		
+		int regTable = DB.execute("INSERT INTO RegUser (username, name, address, cardNum) VALUES (?, ?, ?, ?)", username, name, address, cardNum);
+		
+		if(userTable != 1 || regTable != 1) return false;
+		return true;
 	}
 	
-	
+	/**
+	 * Adds username and type = 0 (OU) to User table for guest logins.
+	 * 
+	 * @param username PK of user.
+	 */
 	public void addGuestUser(String username) {
 		if(!isValidUser(username)) { // if this username already exists, don't do anything
-			DB.execute("INSERT INTO user (username, userType) VALUES (?, ?)", username, 0); // type = 0 --> OU
+			DB.execute("INSERT INTO User (username, userType) VALUES (?, ?)", username, 0); // type = 0 --> OU
 		}
 	}
 	

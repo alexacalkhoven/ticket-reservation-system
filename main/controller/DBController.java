@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * (From 409 project)
@@ -99,6 +100,38 @@ public class DBController {
 		}
 
 		return 0;
+	}
+	
+	/**
+	 * adds information to the database given a query and arguments, and then returns the auto generated primary key associated with the new row.
+	 * 
+	 * @param query the command given to the database.
+	 * @param args  the arguments given to the database.
+	 * @return returns -1 on error (no rows changed), or the PK of the newly inserted row.
+	 */
+	public int executeReturnKey(String query, Object... args) {
+		try {
+			PreparedStatement s = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+			for (int i = 0; i < args.length; i++) {
+				s.setObject(i + 1, args[i]);
+			}
+
+			int rows = s.executeUpdate();
+			if(rows == 0) return -1;
+			try (ResultSet generatedKeys = s.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	                return generatedKeys.getInt(1);
+	            }
+	            else {
+	                throw new SQLException("Error in fetching generated key.");
+	            }
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return -1;
 	}
 
 	/**

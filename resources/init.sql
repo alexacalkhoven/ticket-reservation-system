@@ -65,12 +65,10 @@ CREATE TABLE IF NOT EXISTS Ticket (
     seatId INT NOT NULL,
     showtimeId INT NOT NULL,
     paymentId INT NOT NULL,
-    emailId INT NOT NULL,
     timePurchased DATETIME NOT NULL,
     FOREIGN KEY (seatId) REFERENCES Seat (seatId) ON DELETE CASCADE,
     FOREIGN KEY (showtimeId) REFERENCES Showtime (showtimeId) ON DELETE CASCADE,
-    FOREIGN KEY (paymentId) REFERENCES Payment (paymentId) ON DELETE CASCADE,
-    FOREIGN KEY (emailId) REFERENCES Email (emailId)
+    FOREIGN KEY (paymentId) REFERENCES Payment (paymentId) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS UserToTicket (
