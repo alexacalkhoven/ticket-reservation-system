@@ -31,6 +31,8 @@ public class SeatController {
 	}
 	*/
 	
+	// getSeat(seatId)?
+	
 	//isValidSeat(username, seatId): boolean
 	public boolean isValidSeat(String username, int seatId) {
 		// check first that the seat exists
