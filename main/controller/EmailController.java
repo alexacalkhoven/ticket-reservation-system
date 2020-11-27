@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import main.model.Email;
 
 public class EmailController {
-	
+
 	private DBController DB;
 
 	public EmailController() {
 		DB = DBController.getInstance();
 	}
-	
+
 	/**
-	 * Fetches all emails attached to a username. Will be needed to load the email view GUI.
+	 * Fetches all emails attached to a username. Will be needed to load the email
+	 * view GUI.
 	 * 
 	 * @param username User to fetch emails for
 	 * @return ArrayList of emails
@@ -23,7 +24,7 @@ public class EmailController {
 		ResultSet r = DB.query("SELECT emailId FROM UserToEmail WHERE username = ?", username);
 		ArrayList<Email> emailList = new ArrayList<Email>();
 		try {
-			while(r.next()) {
+			while (r.next()) {
 				int emailId = r.getInt("emailId");
 				ResultSet e = DB.query("SELECT * FROM Email WHERE emailId = ?", emailId);
 				e.next();
@@ -35,29 +36,30 @@ public class EmailController {
 		}
 		return emailList;
 	}
-	
+
 	// creates receipt email for ticket PURCHASE. inserts to Email and UserToEmail.
-	public boolean addEmail(String username, String message) {
-		// insert to Email
-		int emailId = DB.executeReturnKey("INSERT INTO Email (emailType, message) VALUES (?, ?)", 0, message); 
-		if(emailId == -1) return false;
-		// insert to UserToEmail
+	public boolean addEmailToUser(String username, int emailId) {
 		int rowCount = DB.execute("INSERT INTO UserToEmail (username, emailId) VALUES (?, ?)", username, emailId);
-		if(rowCount != 0) return false;
-		return true; 
+		if (rowCount != 0)
+			return false;
+		return true;
 	}
-	
-	
+
+	// creates receipt email for ticket PURCHASE. inserts to Email and UserToEmail.
+	public Email addEmail(int type, String message) {
+		// insert to Email
+		int emailId = DB.executeReturnKey("INSERT INTO Email (emailType, message) VALUES (?, ?)", type, message);
+		if (emailId == -1) return null;
+		// insert to UserToEmail
+		return new Email(emailId, type, message);
+	}
+
 	/*
-	public static void main(String[] args) {
-		// a few tests...
-		EmailController ec = new EmailController();
-		ec.addEmail("alexa12", "hello???");
-		ec.addEmail("alexa12", "email2");
-		ArrayList<Email> el = ec.getEmails("alexa12");
-		for(int i = 0; i < el.size(); i++) {
-			System.out.println(el.get(i).getEmailId() + " " + el.get(i).getMessage());
-		}
-	}	
-	*/
+	 * public static void main(String[] args) { // a few tests... EmailController ec
+	 * = new EmailController(); ec.addEmail("alexa12", "hello???");
+	 * ec.addEmail("alexa12", "email2"); ArrayList<Email> el =
+	 * ec.getEmails("alexa12"); for(int i = 0; i < el.size(); i++) {
+	 * System.out.println(el.get(i).getEmailId() + " " + el.get(i).getMessage()); }
+	 * }
+	 */
 }

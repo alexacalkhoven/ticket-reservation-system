@@ -81,7 +81,7 @@ public class UserController {
 	 * 
 	 * @return ArrayList of RUs
 	 */
-	ArrayList<RegisteredUser> getRegisteredUsers(){
+	public ArrayList<RegisteredUser> getRegisteredUsers(){
 		// get all rows from RegUser table
 		// construct into RegisteredUser objects and add to arraylist
 		ResultSet r = DB.query("SELECT * FROM RegUser");
