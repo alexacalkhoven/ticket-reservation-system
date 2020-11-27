@@ -4,7 +4,4 @@ ENSF 480 Final Proj
 Compile:
 
 javac *.java
-
-Run:
-
-java filename1 filename2 ...
+java TicketApp DataCommunicator GuestFrame MainFrame GuiController HomePageFrame UserLoginFrame
