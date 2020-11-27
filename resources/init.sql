@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS RegUser (
     name VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL,
     cardNum INT NOT NULL CHECK (cardNum BETWEEN 1000000 AND 99999999),
+    feePaid TINYINT NOT NULL,
 	FOREIGN KEY (username) REFERENCES User (username) ON DELETE CASCADE
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Movie (
 
 CREATE TABLE IF NOT EXISTS Showtime (
 	showtimeId INT PRIMARY KEY AUTO_INCREMENT,
-    time VARCHAR(255) NOT NULL,
+    time VARCHAR(255) NOT NULL,usertoticketusertoemail
     movieId INT NOT NULL,
     FOREIGN KEY (movieId) REFERENCES Movie (movieId) 
 );
@@ -78,5 +79,3 @@ CREATE TABLE IF NOT EXISTS UserToTicket (
     FOREIGN KEY (username) REFERENCES User (username) ON DELETE CASCADE,
     FOREIGN KEY (ticketId) REFERENCES Ticket (ticketId) ON DELETE CASCADE 
 );
-
-
