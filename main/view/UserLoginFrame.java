@@ -1,6 +1,4 @@
-package main.view;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -10,7 +8,6 @@ public class UserLoginFrame extends JFrame{
     private JButton login;
     private JLabel message;
     private JTextField usernameInput;
-    private JTextField passwordInput;
     public String usernameAnswer, passwordAnswer;
 
     public UserLoginFrame (String s){
@@ -38,7 +35,6 @@ public class UserLoginFrame extends JFrame{
         mainPanel.add(message);
 
         usernameAnswer = this.displayInputDialog("Username: ");
-        passwordAnswer = this.displayInputDialog("Password: ");
 
         login = new JButton("Login");
         login.setAlignmentX(Component.CENTER_ALIGNMENT);

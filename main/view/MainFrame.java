@@ -1,6 +1,4 @@
-package main.view;
 import javax.swing.*;
-
 import java.awt.*;
 
 public class MainFrame extends JFrame{
@@ -11,6 +9,7 @@ public class MainFrame extends JFrame{
     
     public MainFrame (String s){
         super(s);
+        //setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());

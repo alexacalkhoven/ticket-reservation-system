@@ -1,6 +1,4 @@
-package main.view;
 import javax.swing.*;
-
 import java.awt.*;
 
 // Currently not in use
