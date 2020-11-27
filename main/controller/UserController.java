@@ -4,8 +4,7 @@ import java.sql.ResultSet;
 //import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-// import main.model.User;
-// import main.model.RegisteredUser;
+import main.model.RegisteredUser;
 
 public class UserController {
 	
@@ -77,7 +76,11 @@ public class UserController {
 		}
 	}
 	
-	/* test once RegisteredUser class is available
+	/**
+	 * Gets all RUs in database. Will be helpful for sending promotions.
+	 * 
+	 * @return ArrayList of RUs
+	 */
 	ArrayList<RegisteredUser> getRegisteredUsers(){
 		// get all rows from RegUser table
 		// construct into RegisteredUser objects and add to arraylist
@@ -93,18 +96,20 @@ public class UserController {
 		}
 		return ruList;
 	}
-	*/
 	
 	/*
 	public static void main(String[] args) {
 		// a few tests...
 		UserController uc = new UserController();
-		uc.addGuestUser("alexa123");
-		uc.addRegisteredUser("alexa123", "alexa", "123 main st", 10001234);
-		uc.addRegisteredUser("jordan11", "jordan", "1 home st", 99999999);
-		uc.addRegisteredUser("radu123", "radu", "112 home st", 99999999);
+		uc.addGuestUser("user1");
+		uc.addRegisteredUser("user2", "alexa", "123 main st", 10001234);
+		uc.addRegisteredUser("user3", "jordan", "1 home st", 99999999);
+		uc.addRegisteredUser("user4", "radu", "112 home st", 99999999);
 		System.out.println(uc.isValidUser("alexa123"));
+		ArrayList<RegisteredUser> ul = uc.getRegisteredUsers();
+		for(int i = 0; i < ul.size(); i++) {
+			System.out.println(ul.get(i).getUsername());
+		}
 	}
-	*/
-	
+	*/	
 }

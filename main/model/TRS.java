@@ -1,7 +1,8 @@
 package main.model;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 //likely to not be used
 public class TRS {
+	/*
 	ArrayList<Theatre> theatres;
 	ArrayList<Movie> movies;
 	
@@ -36,6 +37,5 @@ public class TRS {
 	void addTheatre(Theatre t) {
 		theatres.add(t);
 	}
-	
-	
+	*/	
 }

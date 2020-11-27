@@ -1,8 +1,10 @@
 package main.controller;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
-//import main.model.Ticket;
+import main.model.Ticket;
 
 public class TicketController {
 
@@ -12,7 +14,6 @@ public class TicketController {
 		DB = DBController.getInstance();
 	}
 	
-	/*
 	// creates new ticket in database and return it as a ticket object 
 	public Ticket addTicket(int seatId, int showtimeId, int paymentId) {
 		// note: ticketId is automatically generated
@@ -22,9 +23,7 @@ public class TicketController {
 		if(ticketId == -1) return null;
 		return new Ticket(ticketId, seatId, showtimeId, paymentId, date);
 	}
-	*/
 	
-	/*
 	// Returns a list of tickets associated with a user.
 	public ArrayList<Ticket> getTickets(String username) {
 		ResultSet r = DB.query("SELECT ticketId FROM UserToTicket WHERE username = ?", username);
@@ -33,6 +32,7 @@ public class TicketController {
 			while(r.next()) {
 				int ticketId = r.getInt("ticketId");
 				ResultSet t = DB.query("SELECT * FROM Ticket WHERE ticketId = ?", ticketId);
+				t.next();
 				Ticket ticket = new Ticket(t.getInt("ticketId"), t.getInt("seatId"), t.getInt("showtimeId"), t.getInt("paymentId"), t.getDate("timePurchased"));
 				ticketList.add(ticket);
 			}
@@ -41,7 +41,6 @@ public class TicketController {
 		}
 		return ticketList;
 	}
-	*/
 	
 	// getTicket(ticketId)
 	
@@ -75,11 +74,20 @@ public class TicketController {
 	public static void main(String[] args) {
 		// a few tests...
 		TicketController sc = new TicketController();
-		sc.assignTicketToUser("alexa12", 1);
-		sc.cancelTicket(1);
-	}
+		Ticket t = sc.addTicket(1, 1, 1);
+		sc.assignTicketToUser("alexa12", t.getTicketId());
+		Ticket t2 = sc.addTicket(1, 3, 1);
+		sc.assignTicketToUser("alexa12", t2.getTicketId());
+		ArrayList<Ticket> tl = sc.getTickets("alexa12");
+		for(int i = 0; i < tl.size(); i++) {
+			System.out.println(tl.get(i).toString());
+		}
+		sc.cancelTicket(t2.getTicketId());
+		System.out.println("After cancellation..");
+		ArrayList<Ticket> tl2 = sc.getTickets("alexa12");
+		for(int i = 0; i < tl2.size(); i++) {
+			System.out.println(tl2.get(i).toString());
+		}
+	}	
 	*/
-	
-	
-	
 }

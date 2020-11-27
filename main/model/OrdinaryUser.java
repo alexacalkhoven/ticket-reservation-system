@@ -1,5 +1,6 @@
 package main.model;
 
+// We probably won't need this class any more
 public class OrdinaryUser {
 
 	private String username;
@@ -14,10 +15,5 @@ public class OrdinaryUser {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public void registerAsRegisteredUser(String username, String name, String address, int card, String email) {
-		RegisteredUser ru=new RegisteredUser(username, name,address,card,email);
-
 	}
 }

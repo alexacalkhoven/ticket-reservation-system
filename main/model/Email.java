@@ -3,18 +3,24 @@ package main.model;
 public class Email {
 
 	String message;
-	int emailId; 
-	int type; //0 = receipt, 1 = promo
-	
+	int emailId;
+	int type; // 0 = receipt, 1 = promo
+
 	public Email() {
-		
+
 	}
-	
+
+	public Email(int emailId, int emailType, String message) {
+		this.emailId = emailId;
+		this.type = emailType;
+		this.message = message;
+	}
+
 	public Email(String message) {
 		this.message = message;
 	}
 
-	//getters and setters
+	// getters and setters
 	public String getMessage() {
 		return message;
 	}
@@ -38,5 +44,5 @@ public class Email {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
+
 }

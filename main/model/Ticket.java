@@ -1,5 +1,6 @@
 package main.model;
 
+import java.util.Date;
 
 public class Ticket {
 
@@ -7,15 +8,13 @@ public class Ticket {
 	private int seatId;
 	private int showtimeId;
 	private int paymentId;
-	private Time timePurchased;
-	
+	private Date timePurchased;
 
-	
 	public Ticket() {
-		
+
 	}
 
-	public Ticket(int ticketId, int seatId, int showtimeId, int paymentId, Time timePurchased) {
+	public Ticket(int ticketId, int seatId, int showtimeId, int paymentId, Date timePurchased) {
 		this.ticketId = ticketId;
 		this.seatId = seatId;
 		this.showtimeId = showtimeId;
@@ -24,13 +23,10 @@ public class Ticket {
 
 	}
 
-
-	
-
 	@Override
 	public String toString() {
-		return "ticketId: " + ticketId + "seatId: " + seatId + "showtimeId:" + showtimeId + "paymentId:"
-				+ paymentId + "timePurchased:" + timePurchased.toString() ;
+		return "ticketId: " + ticketId + " seatId: " + seatId + " showtimeId:" + showtimeId + " paymentId:" + paymentId
+				+ " timePurchased:" + timePurchased.toString();
 	}
 
 	public int getTicketId() {
@@ -65,13 +61,12 @@ public class Ticket {
 		this.paymentId = paymentId;
 	}
 
-	public Time getTimePurchased() {
+	public Date getTimePurchased() {
 		return timePurchased;
 	}
 
-	public void setTimePurchased(Time timePurchased) {
+	public void setTimePurchased(Date timePurchased) {
 		this.timePurchased = timePurchased;
 	}
-	
 
 }

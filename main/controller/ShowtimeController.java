@@ -1,5 +1,8 @@
 package main.controller;
-//import main.model.Showtime;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import main.model.Showtime;
 
 public class ShowtimeController {
 
@@ -9,7 +12,6 @@ public class ShowtimeController {
 		DB = DBController.getInstance();
 	}
 
-	/*
 	public ArrayList<Showtime> getShowtimes() {
 		ResultSet r = DB.query("SELECT * FROM Showtime");
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
@@ -23,8 +25,24 @@ public class ShowtimeController {
 		}
 		return showtimeList;
 	}
-	*/
 	
-	// get showtime(showtimeId)?
-
+	public Showtime addShowtime(String time, int movieId) {
+		int showtimeId = DB.executeReturnKey("INSERT INTO Showtime (time, movieId) VALUES (?, ?)", time, movieId);
+		if(showtimeId == -1) return null;
+		return new Showtime(showtimeId, time, movieId);
+	}
+	
+	/*
+	public static void main(String[] args) {
+		// a few tests...
+		ShowtimeController sc = new ShowtimeController();
+		MovieController mc = new MovieController();
+		Movie m = mc.addMovie("test movie");
+		sc.addShowtime("Wednesday evening", m.getMovieId());
+		ArrayList<Showtime> sl = sc.getShowtimes();
+		for(int i = 0; i < sl.size(); i++) {
+			System.out.println(sl.toString());
+		}
+	}	
+	*/
 }

@@ -1,18 +1,19 @@
 package main.model;
-import java.util.ArrayList;
 
+// We probably won't need this class anymore (the type attribute will allow us to distinguish) 
 public class Promotion extends Email{
 
 	String desc;
-	ArrayList<ShowTime> applicableShowtimes;
+	//ArrayList<ShowTime> applicableShowtimes;
 	
 	public Promotion() {
 		
 	}
 	
+	/*
 	public Promotion(String desc, ArrayList<ShowTime> applicableShowtimes) {
 		this.desc = desc;
-		this.applicableShowtimes = applicableShowtimes;
+		//this.applicableShowtimes = applicableShowtimes;
 	}
 
 	//getters and setters
@@ -31,10 +32,5 @@ public class Promotion extends Email{
 	public void setApplicableShowtimes(ArrayList<ShowTime> applicableShowtimes) {
 		this.applicableShowtimes = applicableShowtimes;
 	}
-	
-	
-	
-	
-	
-	
+	*/	
 }

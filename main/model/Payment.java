@@ -2,8 +2,7 @@ package main.model;
 
 public class Payment {
 
-	boolean isComplete;
-	PaymentController paymentController;
+	//boolean isComplete; take out for now, might need later
 	int paymentId;
 	double amount;
 	int cardNum;
@@ -12,14 +11,13 @@ public class Payment {
 		
 	}
 	
-	public Payment(boolean isComplete, PaymentController paymentController, int paymentId, double amount, int cardNum) {
-		this.isComplete = isComplete;
-		this.paymentController = paymentController;
+	public Payment(int paymentId, double amount, int cardNum) {
 		this.paymentId = paymentId;
 		this.amount = amount;
 		this.cardNum = cardNum;
 	}
 	
+	/*
 	//getters and setters
 	public boolean isComplete() {
 		return isComplete;
@@ -36,6 +34,7 @@ public class Payment {
 	public void setPaymentController(PaymentController paymentController) {
 		this.paymentController = paymentController;
 	}
+	*/
 
 	public int getPaymentId() {
 		return paymentId;
@@ -61,6 +60,7 @@ public class Payment {
 		this.cardNum = cardNum;
 	}
 
+	/*
 	//additoinal functions 
 	void makePaymentToTheatre(User user) { //need to change payment functionality now that account is no longer going to be considered . 
 		
@@ -70,7 +70,5 @@ public class Payment {
 	void makeRefundToUser(User user) { //need to change payment functionality now that account is no longer going to be considered . 
 		
 	}
-	
-	
-	
+	*/
 }

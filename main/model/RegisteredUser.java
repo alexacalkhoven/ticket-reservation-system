@@ -4,13 +4,13 @@ public class RegisteredUser extends User{
 
 	String name;
 	String address;
-	Email email;
 	int cardNum;//card num - 8digits 
+	//String email; // do we need this?
 	
-	public RegisteredUser(String name, String address, int cardNum) {
+	public RegisteredUser(String username, String name, String address, int cardNum) {
+		super(1, username);
 		this.name = name;
 		this.address = address;
-		this.email = email;
 		this.cardNum = cardNum;
 		
 	}
@@ -35,17 +35,5 @@ public class RegisteredUser extends User{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-
-	public Email getEmail() {
-		return email;
-	}
-
-	public void setEmail(Email email) {
-		this.email = email;
-	}
-
-	
-	
 	
 }

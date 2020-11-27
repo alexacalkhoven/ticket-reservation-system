@@ -1,5 +1,6 @@
 package main.model;
 
+// likely wont need this class anymore either
 public class Card {
 
 	private int number;
