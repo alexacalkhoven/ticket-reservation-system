@@ -11,31 +11,24 @@ public class Showtime {
 	private int showtimeId;
 	private int movieId;
 
-	
-	
-	
-	
-	//finds all seats that are not taken and puts them into an arrayList which is returned
-//	public ArrayList<Seat> getAvailableSeats() {
-//		ArrayList<Seat> open = new ArrayList<Seat>();
-//	
-//		for(int i=0; i< MAXSEATS; i++) {
-//			if (this.getSeats().get(i).isTaken ==false) {
-//				open.add(this.getSeats().get(i));
-//
-//			}
-//			
-//		}
-//		return open;
-//	}
+
+
+
+
 	public Showtime(Time time, int showtimeId, int movieId) {
-	this.time = time;
-	this.showtimeId = showtimeId;
-	this.movieId = movieId;
-}
-	public Showtime() {
-		
+		this.time = time;
+		this.showtimeId = showtimeId;
+		this.movieId = movieId;
 	}
+	public Showtime() {
+
+	}
+	
+	@Override
+	public String toString() {
+		return "time:" + time + "showtimeId: " + showtimeId + "movieId: " + movieId;
+	}
+	
 	public Time getTime() {
 		return time;
 	}
@@ -54,7 +47,7 @@ public class Showtime {
 	public void setMovieId(int movieId) {
 		this.movieId = movieId;
 	}
-	
 
-	
+
+
 }

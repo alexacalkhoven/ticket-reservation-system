@@ -58,5 +58,9 @@ public class Time {
 		return year+ "-"+ month +"-"+day+" "+hour+": "+minute+": "+second;
 	}
 	
+	@Override
+	public String toString() {
+		return year+ "-"+ month +"-"+day+" "+hour+": "+minute+": "+second;
+	}
 	
 }
