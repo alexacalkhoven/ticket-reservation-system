@@ -9,7 +9,7 @@ public class MovieController {
 	private DBController DB;
 
 	public MovieController() {
-		DB = new DBController();
+		DB = DBController.getInstance();
 	}
 	
 	//getMovies(): Movie []

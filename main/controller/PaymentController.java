@@ -7,7 +7,7 @@ public class PaymentController {
 	private DBController DB;
 
 	public PaymentController() {
-		DB = new DBController();
+		DB = DBController.getInstance();
 	}
 	
 	//addPayment(cardNum, amount): Payment ???

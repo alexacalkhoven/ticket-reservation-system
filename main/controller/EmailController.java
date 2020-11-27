@@ -11,14 +11,14 @@ public class EmailController {
 	private DBController DB;
 
 	public EmailController() {
-		DB = new DBController();
+		DB = DBController.getInstance();
 	}
 	
 	/*
 	// Fetches all emails attached to a username. Will be needed to load the email view GUI.
 	public ArrayList<Email> getEmails(String username) {
 		ResultSet r = DB.query("SELECT emailId FROM UserToEmail WHERE username = ?", username);
-		ArrayList<Email> emailList = new ArrayList<Seat>();
+		ArrayList<Email> emailList = new ArrayList<Email>();
 		try {
 			while(r.next()) {
 				int emailId = r.getInt("emailId");

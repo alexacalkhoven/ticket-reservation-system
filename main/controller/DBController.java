@@ -14,7 +14,8 @@ import java.sql.Statement;
 /**
  * (From 409 project)
  * Manages accesses to the database.
- * Maybe should make this a singleton class?
+ * This is now a singleton class. Only one instance of DBController will ever be made.
+ * NOTE: when assigning a DBController object, use "DBController.getInstance()"
  * 
  * @author Alexa Calkhoven
  * @author Radu Schirliu
@@ -28,6 +29,9 @@ public class DBController {
 	String ENSF_DB_URL = "jdbc:mysql://localhost:3306/ensf480";
 	String ENSF_DB_USER = "root";
 	String ENSF_DB_PASSWORD = "pw";
+	
+	// Handles Singleton 
+	static DBController instance;
 
 	/**
 	 * Constructs a DBManager.
@@ -49,6 +53,13 @@ public class DBController {
 			e.printStackTrace();
 			System.exit(1);
 		}
+	}
+	
+	public static DBController getInstance()
+	{ // don't need to redeclare static here
+	    if (instance == null)
+	        instance = new DBController();
+	    return instance;
 	}
 
 	/**

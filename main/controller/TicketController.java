@@ -9,7 +9,7 @@ public class TicketController {
 	private DBController DB;
 
 	public TicketController() {
-		DB = new DBController();
+		DB = DBController.getInstance();
 	}
 	
 	/*
@@ -75,10 +75,11 @@ public class TicketController {
 	public static void main(String[] args) {
 		// a few tests...
 		TicketController sc = new TicketController();
-		//sc.assignTicketToUser("alexa12", 1);
+		sc.assignTicketToUser("alexa12", 1);
 		sc.cancelTicket(1);
 	}
 	*/
+	
 	
 	
 }

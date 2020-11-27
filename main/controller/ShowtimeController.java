@@ -6,7 +6,7 @@ public class ShowtimeController {
 	private DBController DB;
 
 	public ShowtimeController() {
-		DB = new DBController();
+		DB = DBController.getInstance();
 	}
 
 	/*

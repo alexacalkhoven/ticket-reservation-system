@@ -12,7 +12,7 @@ public class UserController {
 	private DBController DB;
 	
 	public UserController() {
-		DB = new DBController();
+		DB = DBController.getInstance();
 	}
 	
 	/**
@@ -102,6 +102,7 @@ public class UserController {
 		uc.addGuestUser("alexa123");
 		uc.addRegisteredUser("alexa123", "alexa", "123 main st", 10001234);
 		uc.addRegisteredUser("jordan11", "jordan", "1 home st", 99999999);
+		uc.addRegisteredUser("radu123", "radu", "112 home st", 99999999);
 		System.out.println(uc.isValidUser("alexa123"));
 	}
 	*/

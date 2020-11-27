@@ -9,7 +9,7 @@ public class SeatController {
 	private DBController DB;
 	
 	public SeatController() {
-		DB = new DBController();
+		DB = DBController.getInstance();
 	}
 	
 	//getSeats(showtimeId): Seat []

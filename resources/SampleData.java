@@ -15,4 +15,5 @@ public class SampleData {
  * Test all functions once models are done.
  * Revise models; may need more or less functions, may also need to change syntax of some functions.
  * Link to GUI.
+ * Go through the original document and make sure all functionalities are achieved (should make a pay fee function for RUs).
  */
