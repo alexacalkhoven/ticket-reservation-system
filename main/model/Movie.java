@@ -15,6 +15,12 @@ public class Movie {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "name: " + name + "movieId: " + movieId;
+	}
+
+
 	public String getName() {
 		return name;
 	}

@@ -16,8 +16,8 @@ public class OrdinaryUser {
 		this.username = username;
 	}
 
-	public void registerAsRegisteredUser(String name, String address, Card card, Email email) {
-		RegisteredUser ru=new RegisteredUser(name,address,card,email);
+	public void registerAsRegisteredUser(String username, String name, String address, int card, String email) {
+		RegisteredUser ru=new RegisteredUser(username, name,address,card,email);
 
 	}
 }

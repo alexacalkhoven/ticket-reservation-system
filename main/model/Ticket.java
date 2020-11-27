@@ -24,55 +24,14 @@ public class Ticket {
 
 	}
 
-	//cancel ticket at theatre by freeing the seat corresponding to the ticket and getting a refund receipt
-//	public void cancelTicket() {
-//		
-////		
-////		ArrayList<Showtime> st=theater.getShowtimes();
-////		//find showtime of ticket in db
-////		for(int i=0; i<st.size();i++) {
-////			if(st.get(i).showtimeId==this.showtimeId) {
-////				ArrayList<Seat> s =st.get(i).getSeats();
-////				//find corresponding seat 
-////				for(int j=0; j< s.size(); j++) {
-////					//change seat state
-////					if(s.get(j).seatId==seatId) {
-////						s.get(j).freeSeat();
-////					}
-////					//change showtime state
-////					theater.setShowtimes(st);
-////					receipt.createRefundReceipt(); //get refund for ticket
-////				}
-////			}
-////
-////
-////		}
-//
-//
-//	}
-//
-//	//book a ticket for a specific showtime 
-//	public void payForTicket(Theater theater) {
-////		ArrayList<Showtime> st=theater.getShowtimes();
-////		//find showtime of ticket in db
-////		for(int i=0; i<st.size();i++) {
-////			if(st.get(i).showtimeId==this.showtimeId) {
-////				ArrayList<Seat> s =st.get(i).getSeats();
-////				//find corresponding seat 
-////				for(int j=0; j< s.size(); j++) {
-////					//change seat state
-////					if(s.get(j).seatId==seatId) {
-////						s.get(j).claimSeat();
-////					}
-////					//change showtime state
-////					theater.setShowtimes(st);
-////					payment.makePaymentToTheatre(user);//make payment for ticket
-////					if(payment.isComplete==true) //check to see payment went through
-////						receipt.emailReceiptAndTicket(user); //get recepit for payment with ticket
-////				}
-////			}
-////		}
-//	}
+
+	
+
+	@Override
+	public String toString() {
+		return "ticketId: " + ticketId + "seatId: " + seatId + "showtimeId:" + showtimeId + "paymentId:"
+				+ paymentId + "timePurchased:" + timePurchased.toString() ;
+	}
 
 	public int getTicketId() {
 		return ticketId;
