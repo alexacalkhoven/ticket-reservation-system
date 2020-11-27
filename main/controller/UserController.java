@@ -46,7 +46,7 @@ public class UserController {
 	 * @param cardNum card number to have on file for user.
 	 * @return
 	 */
-	public boolean addRegisteredUser(String username, String name, String address, int cardNum){
+	public boolean addRegisteredUser(String username, String name, String address, int cardNum, boolean feePaid){
 		// check if username is already in user table ???
 		// if so, change type to 1 (RU)
 		// if not, add username and 1 to User
@@ -59,7 +59,7 @@ public class UserController {
 			userTable = DB.execute("INSERT INTO User (username, userType) VALUES (?, ?)", username, 1); // type = 1 --> RU
 		}
 		
-		int regTable = DB.execute("INSERT INTO RegUser (username, name, address, cardNum) VALUES (?, ?, ?, ?)", username, name, address, cardNum);
+		int regTable = DB.execute("INSERT INTO RegUser (username, name, address, cardNum, feePaid) VALUES (?, ?, ?, ?, ?)", username, name, address, cardNum, feePaid);
 		
 		if(userTable != 1 || regTable != 1) return false;
 		return true;
@@ -88,7 +88,7 @@ public class UserController {
 		ArrayList<RegisteredUser> ruList = new ArrayList<RegisteredUser>();
 		try {
 			while(r.next()) {
-				RegisteredUser ru = new RegisteredUser(r.getString("username"), r.getString("name"), r.getString("address"), r.getInt("cardNum"));
+				RegisteredUser ru = new RegisteredUser(r.getString("username"), r.getString("name"), r.getString("address"), r.getInt("cardNum"), false);
 				ruList.add(ru);
 			}
 		} catch (SQLException e) {
