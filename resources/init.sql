@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Movie (
 
 CREATE TABLE IF NOT EXISTS Showtime (
 	showtimeId INT PRIMARY KEY AUTO_INCREMENT,
-    time VARCHAR(255) NOT NULL,usertoticketusertoemail
+    time VARCHAR(255) NOT NULL,
     movieId INT NOT NULL,
     FOREIGN KEY (movieId) REFERENCES Movie (movieId) 
 );
