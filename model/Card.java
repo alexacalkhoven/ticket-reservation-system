@@ -1,4 +1,4 @@
-package main.model;
+package model;
 
 // likely wont need this class anymore either
 public class Card {
