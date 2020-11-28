@@ -1,4 +1,4 @@
-package main.model;
+package model;
 
 import java.util.ArrayList;
 
@@ -52,11 +52,15 @@ public class User {
 	void selectSeat(Seat seat) {
 		seat.claimSeat();
 	}
-
-	void cancelTicket(Ticket t) {
-		ArrayList.remove(t);
-
+*/ 
+	void cancelTicket(Ticket t) { //i think we need this here, so we can pass user name into the ticket class for a refund to simplify. 
+	
+		t.cancelTicket(username, type);
+		
 	}
-	*/
+	
+	
+	
+	
 
 }
