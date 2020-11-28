@@ -2,11 +2,10 @@
 
 ENSF 480 Final Proj
 
-Compile:
-javac *.java
 
-Run:
-java filename1 filename2 ...
+Compile:
+javac *.java java TicketApp DataCommunicator GuestFrame MainFrame GuiController HomePageFrame UserLoginFrame
+
 
 Connecting to the Database:
 - Start MySQL in your system Services (search Services from Windows Start button, scroll to MySQL, right-click, start)

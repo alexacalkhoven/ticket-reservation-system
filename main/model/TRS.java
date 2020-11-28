@@ -1,4 +1,4 @@
-package model;
+package main.model;
 //import java.util.ArrayList;
 //likely to not be used
 public class TRS {

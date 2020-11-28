@@ -1,4 +1,4 @@
-
+package main.view;
 
 class TicketApp {
 

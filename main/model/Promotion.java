@@ -1,4 +1,4 @@
-package model;
+package main.model;
 
 // We probably won't need this class anymore (the type attribute will allow us to distinguish) 
 public class Promotion extends Email{

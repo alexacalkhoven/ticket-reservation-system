@@ -1,4 +1,4 @@
-package model;
+package main.model;
 
 // We probably won't need this class any more
 public class OrdinaryUser {
