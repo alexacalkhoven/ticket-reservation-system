@@ -133,7 +133,7 @@ public class Ticket {
 	 * @param username The user who is canceling their ticket.
 	 * @param type The user type. 
 	 */
-	public void cancelTicket(String username, int type) {
+	public void cancelTicket(String username) {
 
 		TicketController tc = new TicketController();
 
@@ -141,6 +141,8 @@ public class Ticket {
 
 		PaymentController pc = new PaymentController();
 
+		UserController uc = new UserController(); //to see if username matches a registered user or not. 
+		
 		// check if cancellation is valid
 		if (validCancel() == false) {
 			return;
@@ -157,6 +159,18 @@ public class Ticket {
 
 		// rough form of what it should like. Next version should have the actual amount
 		// refunded by using payment id to get amount.
+		
+		
+		//quick check in db if a user is registered or not. 
+		int type = 0; //defaults to non registered user.
+		
+		
+		for(RegisteredUser ru: uc.getRegisteredUsers()) {
+			if(ru.getUsername().equals(username)) { //set the type to registerd user and exit the loop
+				type =1;
+				return;
+			}
+		}
 
 		if (type == 1) { // if it is a registered user generate a return receipt email for a Ru - no 15%
 							// deduction
