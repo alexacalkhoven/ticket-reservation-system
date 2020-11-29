@@ -226,7 +226,7 @@ public class GUIController {
         	//could reuse the view tickets listener to fill the homeframe test area. 
         	 String message = "-----My Tickets-----\n";
              TicketController tc = new TicketController();
-             ArrayList<Ticket> ticketList = tc.getTickets(loginFrame.usernameAnswer);
+             ArrayList<Ticket> ticketList = tc.getTickets(username);
              for(int i = 0; i < ticketList.size(); i++) {
              	message += ticketList.get(i).toString();
              }
