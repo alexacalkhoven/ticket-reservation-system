@@ -1,6 +1,6 @@
+package main.view;
 import javax.swing.*;
 import java.awt.*;
-package main.view;
 
 public class MainFrame extends JFrame{
 

@@ -1,8 +1,8 @@
-
+package main.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-package main.view;
+
 
 public class HomePageFrame extends JFrame{
     private JPanel mainPanel, buttonPanel;

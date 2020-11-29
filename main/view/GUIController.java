@@ -1,10 +1,18 @@
-
+package main.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-package main.view;
+import java.util.ArrayList;
+
+import main.controller.EmailController;
+import main.controller.MovieController;
+import main.model.Email;
+import main.model.Movie;
+import main.model.Ticket;
+import main.controller.TicketController;
+
 
 public class GUIController {
     private MainFrame mainFrame;
@@ -65,13 +73,25 @@ public class GUIController {
     public class ViewMoviesListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            homeFrame.printToTextArea("This is all movies");
+        	String message = "-----Movies-----\n";
+        	MovieController mc = new MovieController();
+        	ArrayList<Movie> movieList = mc.getMovies();
+        	for(int i = 0; i < movieList.size(); i++) {
+        		message += (movieList.get(i).toString() + "\n");
+        	}
+            homeFrame.printToTextArea(message);
         }
     }
 
     public class PurchaseTicketListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+        	// show movies
+            // select movie id
+            // show showtimes for chosen movie
+            // select a showtime id
+            // show seats for chosen showtime (might have to change the seat grid to show seat IDs)?
+            // select a seat placement (choose a seat ID?)
             String movie = displayInputDialog("Enter the name of the movie you would like to book ticket(s) for: ");
             if(movie == null) return;
             homeFrame.printToTextArea(theatre);
@@ -88,13 +108,20 @@ public class GUIController {
     public class ViewTicketsListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            homeFrame.printToTextArea("My tickets: ");
+            String message = "-----My Tickets-----\n";
+            TicketController tc = new TicketController();
+            ArrayList<Ticket> ticketList = tc.getTickets(loginFrame.usernameAnswer);
+            for(int i = 0; i < ticketList.size(); i++) {
+            	message += ticketList.get(i).toString();
+            }
+            homeFrame.printToTextArea(message);
         }
     }
 
     public class CancelTicketListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+        	// is there a way to call the view tickets function without pressing the button?
             homeFrame.printToTextArea("My tickets: ");
             String ticket = displayInputDialog("Enter the ticketId you would like to cancel: ");
             if(ticket == null) return;
@@ -111,8 +138,13 @@ public class GUIController {
     public class ViewEmailListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            String emails = "This is the list of all my emails!";
-            homeFrame.printToTextArea("My emails: " + "\n\n" + emails);
+            String message = "-----My Emails-----\n";
+            EmailController ec = new EmailController();
+        	ArrayList<Email> emailList = ec.getEmails(loginFrame.usernameAnswer);
+        	for(int i = 0; i < emailList.size(); i++) {
+        		message += (emailList.get(i).getMessage() + "\n");
+        	}
+            homeFrame.printToTextArea(message);
         }
     }
 
