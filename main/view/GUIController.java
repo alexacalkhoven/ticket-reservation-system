@@ -205,19 +205,6 @@ public class GUIController {
         }
     }
 
-    // TODO Trevor
-    public class ViewTicketsListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            String message = "-----My Tickets-----\n";
-            TicketController tc = new TicketController();
-            ArrayList<Ticket> ticketList = tc.getTickets(loginFrame.usernameAnswer);
-            for(int i = 0; i < ticketList.size(); i++) {
-            	message += ticketList.get(i).toString();
-            }
-            homeFrame.printToTextArea(message);
-        }
-    }
 
     // TODO Trevor
     public class CancelTicketListener implements ActionListener{
