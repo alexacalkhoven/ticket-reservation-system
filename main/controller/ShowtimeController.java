@@ -69,6 +69,26 @@ public class ShowtimeController {
 		}
 		return null;
 	}
+	
+	/**
+	 * Gets Showtime for movieId.
+	 * 
+	 * @param showtimeId PK of showtime to retrieve.
+	 * @return Showtime if successful. Null if error.
+	 */
+	public ArrayList<Showtime> getShowtimesForMovie(int movieId) {
+		ResultSet r = DB.query("SELECT * FROM Showtime WHERE movieId = ?", movieId);
+		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
+		try {
+			while (r.next()) {
+				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getString("time"), r.getInt("movieId"));
+				showtimeList.add(showtime);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return showtimeList;
+	}
 
 	/*
 	 * public static void main(String[] args) { // a few tests... ShowtimeController

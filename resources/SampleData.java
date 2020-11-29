@@ -70,7 +70,9 @@ public class SampleData {
 		SeatController sc = new SeatController();
 		for (int i = 0; i < Constants.NUM_ROWS; i++) {
 			for (int j = 0; j < Constants.NUM_COLS; j++) {
-				Seat added = sc.addSeat(i, j, theatre, false, 0);
+				int type = 0; 
+				if((i == 0 && j == 0) || (i == 0 && j == 1)) type = 1;
+				Seat added = sc.addSeat(i, j, theatre, false, type);
 				sc.addSeatToShowtime(showtimeId, added.getSeatId());
 			}
 		}
