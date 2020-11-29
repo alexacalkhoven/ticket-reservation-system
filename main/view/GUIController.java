@@ -48,8 +48,6 @@ public class GUIController {
         @Override
         public void actionPerformed(ActionEvent e){
             username = displayInputDialog("Username: ");
-            boolean valid = validateUsername(username);
-            if(!valid) return;
             type = "G";
             loginFrame = new UserLoginFrame("Ticket Reservation System");
             loginFrame.addActionListeners(new LoginListener());
