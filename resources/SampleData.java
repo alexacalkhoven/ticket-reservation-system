@@ -103,4 +103,5 @@ public class SampleData {
  * Link to GUI. 
  * Go through the original document and make sure all functionalities are achieved (should make
  * a pay fee function for RUs).
+ * DOCUMENT
  */

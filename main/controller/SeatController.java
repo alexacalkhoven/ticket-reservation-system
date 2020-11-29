@@ -126,6 +126,19 @@ public class SeatController {
 			return true;
 		return false;
 	}
+	
+	// gets Ticket for ticketId
+	public Seat getSeat(int seatId) {
+		ResultSet r = DB.query("SELECT * FROM Seat WHERE seatId = ?", seatId);
+		try {
+			if (r.next()) {
+				return new Seat(r.getInt("seatId"), r.getInt("row"), r.getInt("col"), r.getString("screen"), r.getBoolean("isTaken"), r.getInt("type"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/*
 	public static void main(String[] args) {
