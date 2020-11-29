@@ -12,6 +12,7 @@ import main.model.Email;
 import main.model.Movie;
 import main.model.Ticket;
 import main.controller.TicketController;
+import main.controller.UserController;
 
 
 public class GUIController {
@@ -21,15 +22,29 @@ public class GUIController {
     private String theatre = "-----SCREEN-----" + '\n' + "       1  2  3  4  5" + '\n' + "    1  •  •  •  •  •" + '\n' + "    2  •  •  •  •  •"
                             + '\n' + "    3  •  •  •  •  •" + '\n' + "    4  •  •  •  •  •";
     private String type;
+    private String username;
+    private UserController uc;
 
     public GUIController (MainFrame f){
         mainFrame = f;
         mainFrame.addActionListeners(new LoginGuestListener(), new LoginRUListener(), new LoginOUListener());
     }
 
+    public boolean validateUsername (String u){
+        uc = new UserController();
+        if(!uc.isValidUser(u)) {
+        	JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); //should pop up an error window
+        	return false;
+        }
+        return true;
+    }
+
     public class LoginGuestListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            username = displayInputDialog("Username: ");
+            boolean valid = validateUsername(username);
+            if(!valid) return;
             type = "G";
             loginFrame = new UserLoginFrame("Ticket Reservation System");
             loginFrame.addActionListeners(new LoginListener());
@@ -40,7 +55,9 @@ public class GUIController {
     public class LoginOUListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            //check username validity in UserLoginFrame.java -> addComponents()
+            username = displayInputDialog("Username: ");
+            boolean valid = validateUsername(username);
+            if(!valid) return;
             type = "O";
             loginFrame = new UserLoginFrame("Ticket Reservation System");
             loginFrame.addActionListeners(new LoginListener());
@@ -51,7 +68,9 @@ public class GUIController {
     public class LoginRUListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            //check username validity in UserLoginFrame.java -> addComponents()
+            username = displayInputDialog("Username: ");
+            boolean valid = validateUsername(username);
+            if(!valid) return;
             type = "R";
             loginFrame = new UserLoginFrame("Ticket Reservation System");
             loginFrame.addActionListeners(new LoginListener());
@@ -62,7 +81,7 @@ public class GUIController {
     public class LoginListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            homeFrame = new HomePageFrame("Ticket Reservation System", loginFrame.usernameAnswer, type);
+            homeFrame = new HomePageFrame("Ticket Reservation System", username, type);
             homeFrame.addActionListeners(new ViewMoviesListener(), new PurchaseTicketListener(), new ViewTicketsListener(), 
                                         new CancelTicketListener(), new ViewEmailListener(), new PaySubscriptionListener(),
                                         new QuitListener(), new SearchMovieListener(), new RegisterListener());
@@ -113,7 +132,7 @@ public class GUIController {
         public void actionPerformed(ActionEvent e){
             String message = "-----My Tickets-----\n";
             TicketController tc = new TicketController();
-            ArrayList<Ticket> ticketList = tc.getTickets(loginFrame.usernameAnswer);
+            ArrayList<Ticket> ticketList = tc.getTickets(username);
             for(int i = 0; i < ticketList.size(); i++) {
             	message += ticketList.get(i).toString();
             }
@@ -144,7 +163,7 @@ public class GUIController {
         public void actionPerformed(ActionEvent e){
             String message = "-----My Emails-----\n";
             EmailController ec = new EmailController();
-        	ArrayList<Email> emailList = ec.getEmails(loginFrame.usernameAnswer);
+        	ArrayList<Email> emailList = ec.getEmails(username);
         	for(int i = 0; i < emailList.size(); i++) {
         		message += (emailList.get(i).getMessage() + "\n");
         	}
@@ -179,13 +198,14 @@ public class GUIController {
         @Override
         public void actionPerformed(ActionEvent e){
             String selectedType = displayInputDialog("Enter 'RU' to become a Registered User or 'OU' to become an Ordinary User");
+            if(selectedType == null) return;
             if(selectedType == "RU"){
-                //register bs
-                homeFrame.printToTextArea("You are now a Registered User");
+                
+                homeFrame.printToTextArea("You are now a Registered User. Logout and login to see the changes.");
             }
             else if(selectedType == "OU"){
-                //register bs
-                homeFrame.printToTextArea("You are now a Ordinary User");
+                
+                homeFrame.printToTextArea("You are now a Ordinary User. Logout and login to see the changes.");
             }
             else
                 homeFrame.printToTextArea("Invalid entry... Try again!");
