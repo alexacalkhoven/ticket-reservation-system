@@ -12,7 +12,15 @@ import main.controller.SeatController;
 import main.controller.MovieController;
 import main.controller.ShowtimeController;
 
-
+/**
+ * This class holds information about a ticket.
+ * It is used to provide information to the GUI and update information in the dataBase when functions are called.
+ * @author Alexa Calkhoven
+ * @author Madisson Carle
+ * @author Trevor Brown
+ * @author Noah Bradley
+ *
+ */
 public class Ticket {
 
 	private int ticketId;
@@ -21,10 +29,21 @@ public class Ticket {
 	private int paymentId;
 	private Date timePurchased;
 
+	/**
+	 * Ticket constructor
+	 */
 	public Ticket() {
 
 	}
 
+	/**
+	 * Constructor of ticket 
+	 * @param ticketId The unique ticket ID
+	 * @param seatId The corresponding seat ID
+	 * @param showtimeId The showtime ID of the ticket
+	 * @param paymentId The tickets payment ID
+	 * @param timePurchased The time the ticket was purchased
+	 */
 	public Ticket(int ticketId, int seatId, int showtimeId, int paymentId, Date timePurchased) {
 		this.ticketId = ticketId;
 		this.seatId = seatId;
@@ -34,6 +53,10 @@ public class Ticket {
 
 	}
 
+	/**
+	 * Converts Ticket class to a string to be passed over to the GUI.
+	 * @return Returns the ticket class as a String.
+	 */
 	@Override
 	public String toString() {
 		return "ticketId: " + ticketId + " seatId: " + seatId + " showtimeId:" + showtimeId + " paymentId:" + paymentId
@@ -80,6 +103,12 @@ public class Ticket {
 		this.timePurchased = timePurchased;
 	}
 
+	/**
+	 * Determines if the ticket is still able to be cancelled.
+	 * The is determined by comparing the time of ticket purchase to the current time. 
+	 * If the time is less than 72 hours the ticket be canceled.
+	 * @return Returns true if it can be cancelled and false if it cannot be cancelled.
+	 */
 	public boolean validCancel() {
 
 		long timeDifMS = new java.util.Date().getTime() - timePurchased.getTime(); // get current time in ms and
@@ -95,6 +124,14 @@ public class Ticket {
 
 	}
 
+	/**
+	 *This method first calls validCancel() to see if the ticket can be cancelled. 
+	 *If it cannot be it returns, otherwise it creates an email refund receipt which will be different for different user types.
+	 *RU get full refund and ordinary users get 15%deduction.
+	 *The receipt is then sent and the seat of the ticket is freed up for the showtime.
+	 * @param username The user who is canceling their ticket.
+	 * @param type The user type. 
+	 */
 	public void cancelTicket(String username, int type) {
 
 		TicketController tc = new TicketController();
@@ -157,6 +194,10 @@ public class Ticket {
 
 	}
 
+	/**
+	 * This method first requests payment and if it goes through it will update the seat status to taken and then a receipt message is made and sent to the user's email.
+	 * @param username The user's username to be used when booking a ticket.
+	 */
 	public void makePurchaseReceipt(String username) {
 
 		EmailController ec = new EmailController();
