@@ -96,7 +96,7 @@ public class User {
 	 * */
 	void cancelTicket(Ticket t) { //i think we need this here, so we can pass user name into the ticket class for a refund to simplify. 
 
-		t.cancelTicket(username, type);
+		t.cancelTicket(username);
 
 	}
 
