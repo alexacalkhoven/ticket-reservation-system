@@ -1,4 +1,5 @@
 package main.view;
+import javax.lang.model.util.ElementScanner6;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -33,19 +34,23 @@ public class GUIController {
     public boolean validateUsername (String u){
         uc = new UserController();
         if(!uc.isValidUser(u)) {
-        	JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); //should pop up an error window
+            JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); //should pop up an error window
         	return false;
         }
+        
+        if(type == "G")
+            uc.addGuestUser(username);
+
         return true;
     }
 
     public class LoginGuestListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            type = "G";
             username = displayInputDialog("Username: ");
             boolean valid = validateUsername(username);
             if(!valid) return;
-            type = "G";
             loginFrame = new UserLoginFrame("Ticket Reservation System");
             loginFrame.addActionListeners(new LoginListener());
             mainFrame.dispose();
@@ -55,10 +60,10 @@ public class GUIController {
     public class LoginOUListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            type = "O";
             username = displayInputDialog("Username: ");
             boolean valid = validateUsername(username);
             if(!valid) return;
-            type = "O";
             loginFrame = new UserLoginFrame("Ticket Reservation System");
             loginFrame.addActionListeners(new LoginListener());
             mainFrame.dispose();
@@ -68,10 +73,10 @@ public class GUIController {
     public class LoginRUListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            type = "R";
             username = displayInputDialog("Username: ");
             boolean valid = validateUsername(username);
             if(!valid) return;
-            type = "R";
             loginFrame = new UserLoginFrame("Ticket Reservation System");
             loginFrame.addActionListeners(new LoginListener());
             mainFrame.dispose();
@@ -193,19 +198,49 @@ public class GUIController {
         }
     }
 
-    // TODO Noah
+    public boolean addNewUserCredentials (String t){
+        if(t == "RU"){
+            String n = displayInputDialog("Enter your first name: ");
+            if(n == null) return false;
+            String a = displayInputDialog("Enter your address: ");
+            if(a == null) return false;
+            String c = displayInputDialog("Enter your card number (ex: 12345678): ");
+            if(c == null) return false;
+            String f = displayInputDialog("Enter 'Y' if you have paid your fee, 'N' if you have not: ");
+            if(f == null) return false;
+            boolean temp;
+            if(f == "Y")
+                temp = true; 
+            else if(f == "N")
+                temp = false;
+            else
+                return false;
+            uc.addRegisteredUser(username, n, a, Integer.parseInt(c), temp);
+        }
+        else if(t == "OU")
+            uc.addGuestUser(username);
+
+        return true; 
+    }
+
     public class RegisterListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             String selectedType = displayInputDialog("Enter 'RU' to become a Registered User or 'OU' to become an Ordinary User");
             if(selectedType == null) return;
             if(selectedType == "RU"){
-                
-                homeFrame.printToTextArea("You are now a Registered User. Logout and login to see the changes.");
+                boolean added = addNewUserCredentials(selectedType);
+                if(added)
+                    homeFrame.printToTextArea("You are now a Registered User. Logout and login to see the changes.");
+                else
+                    homeFrame.printToTextArea("One or more of your inputs was invalid. Please try again.");
             }
             else if(selectedType == "OU"){
-                
-                homeFrame.printToTextArea("You are now a Ordinary User. Logout and login to see the changes.");
+                boolean added = addNewUserCredentials(selectedType);
+                if(added)
+                    homeFrame.printToTextArea("You are now a Ordinary User. Logout and login to see the changes.");
+                else
+                    homeFrame.printToTextArea("Something went wrong... Try again.");
             }
             else
                 homeFrame.printToTextArea("Invalid entry... Try again!");
