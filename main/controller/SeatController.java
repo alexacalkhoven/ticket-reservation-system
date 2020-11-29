@@ -5,6 +5,12 @@ import java.sql.SQLException;
 import main.model.Seat;
 import resources.Constants;
 
+/**
+ * Controls access to the Seat table in the database.
+ * 
+ * @author Alexa Calkhoven
+ *
+ */
 public class SeatController {
 
 	private DBController DB;
@@ -13,6 +19,12 @@ public class SeatController {
 		DB = DBController.getInstance();
 	}
 
+	/**
+	 * Retrieves a 2D array of seats from the database.
+	 * 
+	 * @param showtimeId Showtime to recieve seats for.
+	 * @return 2D array of seats.
+	 */
 	public Seat[][] getSeats(int showtimeId) {
 		ResultSet r = DB.query("SELECT seatId FROM ShowtimeToSeat WHERE showtimeId = ?", showtimeId);
 		Seat[][] seatList = new Seat[Constants.NUM_ROWS][Constants.NUM_COLS];
@@ -98,14 +110,14 @@ public class SeatController {
 	}
 
 	/**
-	 * Adds seat to DB and returns the Seat
+	 * Adds seat to DB and returns the Seat.
 	 * 
-	 * @param row
-	 * @param col
-	 * @param screen
-	 * @param isTaken
-	 * @param seatType
-	 * @return
+	 * @param row      Row number of the seat.
+	 * @param col      Col number of the seat.
+	 * @param screen   Screen that the seat is in.
+	 * @param isTaken  If the seat is currently occupied.
+	 * @param seatType 0 -> normal seat, 1 -> reserved for RUs.
+	 * @return Seat added.
 	 */
 	public Seat addSeat(int row, int col, String screen, boolean isTaken, int seatType) {
 		// Note: the exact same row, col, screen will still have a diff seatId because
@@ -120,42 +132,36 @@ public class SeatController {
 		return new Seat(seatId, row, col, screen, isTaken, seatType);
 	}
 
+	/**
+	 * Assigns a seat to a showtime.
+	 * 
+	 * @param showtimeId Showtime to add seat to.
+	 * @param seatId     Seat being added.
+	 * @return True if successful, false if not.
+	 */
 	public boolean addSeatToShowtime(int showtimeId, int seatId) {
 		int rows = DB.execute("INSERT INTO ShowtimeToSeat (showtimeId, seatId) VALUES (?, ?)", showtimeId, seatId);
 		if (rows == 1)
 			return true;
 		return false;
 	}
-	
-	// gets Ticket for ticketId
+
+	/**
+	 * Gets Ticket for ticketId.
+	 * 
+	 * @param seatId PK for seat to be retrieved.
+	 * @return Seat if found. Null if error.
+	 */
 	public Seat getSeat(int seatId) {
 		ResultSet r = DB.query("SELECT * FROM Seat WHERE seatId = ?", seatId);
 		try {
 			if (r.next()) {
-				return new Seat(r.getInt("seatId"), r.getInt("row"), r.getInt("col"), r.getString("screen"), r.getBoolean("isTaken"), r.getInt("type"));
+				return new Seat(r.getInt("seatId"), r.getInt("row"), r.getInt("col"), r.getString("screen"),
+						r.getBoolean("isTaken"), r.getInt("type"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
-	/*
-	public static void main(String[] args) {
-		// a few tests...
-		SeatController sc = new SeatController();
-		for (int i = 0; i < Constants.NUM_ROWS; i++) {
-			for (int j = 0; j < Constants.NUM_COLS; j++) {
-				Seat added = sc.addSeat(i, j, "A", false, 0);
-				sc.addSeatToShowtime(1, added.getSeatId());
-			}
-		}
-		Seat[][] s = sc.getSeats(1);
-		for (int i = 0; i < s.length; i++) {
-			for (int j = 0; j < s[0].length; j++) {
-				System.out.println(s[i][j].getSeatId());
-			}
-		}
-	}
-	*/
 }

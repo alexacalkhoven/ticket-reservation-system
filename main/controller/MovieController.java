@@ -5,6 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import main.model.Movie;
 
+/**
+ * Controls access to the Movie table in the database.
+ * 
+ * @author Alexa Calkhoven
+ *
+ */
 public class MovieController {
 
 	private DBController DB;
@@ -13,7 +19,11 @@ public class MovieController {
 		DB = DBController.getInstance();
 	}
 
-	// returns all movies in the database. will be useful for search movies.
+	/**
+	 * Returns all movies in the database. will be useful for search movies.
+	 * 
+	 * @return ArrayList of all movies.
+	 */
 	public ArrayList<Movie> getMovies() {
 		ResultSet r = DB.query("SELECT * FROM Movie");
 		ArrayList<Movie> movieList = new ArrayList<Movie>();
@@ -28,6 +38,12 @@ public class MovieController {
 		return movieList;
 	}
 
+	/**
+	 * Adds movie to the database. Used to fill the database with initial data.
+	 * 
+	 * @param name Name of the movie.
+	 * @return New movie added.
+	 */
 	public Movie addMovie(String name) {
 		int movieId = DB.executeReturnKey("INSERT INTO Movie (name) VALUES (?)", name);
 		if (movieId == -1)
@@ -35,7 +51,12 @@ public class MovieController {
 		return new Movie(movieId, name);
 	}
 
-	// gets Movie for movieId
+	/**
+	 * Gets movie from the database with matching id.
+	 * 
+	 * @param movieId Id of desired movie.
+	 * @return Movie found. Null if error.
+	 */
 	public Movie getMovie(int movieId) {
 		ResultSet r = DB.query("SELECT * FROM Movie WHERE movieId = ?", movieId);
 		try {
@@ -48,10 +69,4 @@ public class MovieController {
 		return null;
 	}
 
-	/*
-	 * public static void main(String[] args) { // a few tests... MovieController mc
-	 * = new MovieController(); mc.addMovie("the incredibles");
-	 * mc.addMovie("mean girls"); ArrayList<Movie> ml = mc.getMovies(); for(int i =
-	 * 0; i < ml.size(); i++) { System.out.println(ml.get(i).getName()); } }
-	 */
 }

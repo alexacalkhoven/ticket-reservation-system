@@ -1,41 +1,43 @@
 package main.model;
 
+
+
+/**
+ * 
+ * @author(s) Noah Bradley, Trevor Brown, Alexa Calkhoven, Madisson Carle
+ * 
+ * ThePayment class. Responsible for keeping track of payment information.
+ * 
+ */
 public class Payment {
 
-	//boolean isComplete; take out for now, might need later
+	/** The ID of the a payment object. Stored in the Database. */
 	int paymentId;
+	
+	/** The amount to be paid.*/
 	double amount;
+	
+	/** The 8-digit card number to be charged to. */
 	int cardNum;
 	
+	/** The default constructor for the Seat object.*/
 	public Payment() {
 		
 	}
 	
+	/** The non-default constructor for the Seat object.
+	 * @param paymentId The ID of the a payment object. Stored in the Database.
+	 * @param amount The amount to be paid.
+	 * @param cardNum The 8-digit card number to be charged to.
+	 * */
 	public Payment(int paymentId, double amount, int cardNum) {
 		this.paymentId = paymentId;
 		this.amount = amount;
 		this.cardNum = cardNum;
 	}
 	
-	/*
-	//getters and setters
-	public boolean isComplete() {
-		return isComplete;
-	}
 
-	public void setComplete(boolean isComplete) {
-		this.isComplete = isComplete;
-	}
-
-	public PaymentController getPaymentController() {
-		return paymentController;
-	}
-
-	public void setPaymentController(PaymentController paymentController) {
-		this.paymentController = paymentController;
-	}
-	*/
-
+	//getters and setters:
 	public int getPaymentId() {
 		return paymentId;
 	}

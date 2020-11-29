@@ -12,30 +12,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * (From 409 project)
- * Manages accesses to the database.
- * This is now a singleton class. Only one instance of DBController will ever be made.
- * NOTE: when assigning a DBController object, use "DBController.getInstance()"
+ * Manages accesses to the database. This is a singleton class. Only one
+ * instance of DBController will ever be made. Note: was taken and modified from
+ * ENSF 409 W2020 project.
  * 
  * @author Alexa Calkhoven
- * @author Radu Schirliu
- * @author Jordan Kwan
  *
  */
 public class DBController {
 	private Connection connection;
-	
-	// Macros
+
+	// Macros to control DB access
+	// Note: change these locally as needed to access your database.
 	String ENSF_DB_URL = "jdbc:mysql://localhost:3306/ensf480";
 	String ENSF_DB_USER = "root";
 	String ENSF_DB_PASSWORD = "pw";
-	
-	// Handles Singleton 
+
+	// Handles Singleton
 	static DBController instance;
 
-	/**
-	 * Constructs a DBManager.
-	 */
 	public DBController() {
 		String url = ENSF_DB_URL;
 		String user = ENSF_DB_USER;
@@ -54,12 +49,16 @@ public class DBController {
 			System.exit(1);
 		}
 	}
-	
-	public static DBController getInstance()
-	{ // don't need to redeclare static here
-	    if (instance == null)
-	        instance = new DBController();
-	    return instance;
+
+	/**
+	 * Returns the single instance of the DBController.
+	 * 
+	 * @return DBController object.
+	 */
+	public static DBController getInstance() { // don't need to redeclare static here
+		if (instance == null)
+			instance = new DBController();
+		return instance;
 	}
 
 	/**
@@ -90,10 +89,10 @@ public class DBController {
 	}
 
 	/**
-	 * adds information to the database given a query and arguments.
+	 * Adds information to the database given a query and arguments.
 	 * 
-	 * @param query the command given to the database.
-	 * @param args  the arguments given to the database.
+	 * @param query The command given to the database.
+	 * @param args  The arguments given to the database.
 	 * @return returns # rows changed or 0.
 	 */
 	public int execute(String query, Object... args) {
@@ -112,13 +111,15 @@ public class DBController {
 
 		return 0;
 	}
-	
+
 	/**
-	 * adds information to the database given a query and arguments, and then returns the auto generated primary key associated with the new row.
+	 * Adds information to the database given a query and arguments, and then
+	 * returns the auto generated primary key associated with the new row.
 	 * 
-	 * @param query the command given to the database.
-	 * @param args  the arguments given to the database.
-	 * @return returns -1 on error (no rows changed), or the PK of the newly inserted row.
+	 * @param query The command given to the database.
+	 * @param args  The arguments given to the database.
+	 * @return returns -1 on error (no rows changed), or the PK of the newly
+	 *         inserted row.
 	 */
 	public int executeReturnKey(String query, Object... args) {
 		try {
@@ -129,15 +130,15 @@ public class DBController {
 			}
 
 			int rows = s.executeUpdate();
-			if(rows == 0) return -1;
+			if (rows == 0)
+				return -1;
 			try (ResultSet generatedKeys = s.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	                return generatedKeys.getInt(1);
-	            }
-	            else {
-	                throw new SQLException("Error in fetching generated key.");
-	            }
-	        }
+				if (generatedKeys.next()) {
+					return generatedKeys.getInt(1);
+				} else {
+					throw new SQLException("Error in fetching generated key.");
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -148,9 +149,9 @@ public class DBController {
 	/**
 	 * Requests data from the database given a query and arguments.
 	 * 
-	 * @param query the query
-	 * @param args  the object array of arguments.
-	 * @return returns a ResultSet containing the desired information, if fails,
+	 * @param query The query
+	 * @param args  The object array of arguments.
+	 * @return returns A ResultSet containing the desired information, if fails,
 	 *         returns null.
 	 */
 	public ResultSet query(String query, Object... args) {

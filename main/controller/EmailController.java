@@ -5,6 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import main.model.Email;
 
+/**
+ * Manages access to the Email table in the database.
+ * 
+ * @author Alexa Calkhoven
+ * 
+ */
 public class EmailController {
 
 	private DBController DB;
@@ -37,7 +43,13 @@ public class EmailController {
 		return emailList;
 	}
 
-	// creates receipt email for ticket PURCHASE. inserts to Email and UserToEmail.
+	/**
+	 * Creates receipt email for ticket PURCHASE. inserts to Email and UserToEmail.
+	 * 
+	 * @param username Username to have email added to.
+	 * @param emailId  Email to be added to user's account.
+	 * @return if the email was added successfully or not.
+	 */
 	public boolean addEmailToUser(String username, int emailId) {
 		int rowCount = DB.execute("INSERT INTO UserToEmail (username, emailId) VALUES (?, ?)", username, emailId);
 		if (rowCount != 0)
@@ -45,21 +57,19 @@ public class EmailController {
 		return true;
 	}
 
-	// creates receipt email for ticket PURCHASE. inserts to Email and UserToEmail.
+	/**
+	 * Creates receipt email for ticket PURCHASE. inserts to Email and UserToEmail.
+	 * 
+	 * @param type    Type of email. 0 --> receipt, 1 --> promo.
+	 * @param message Contents of email.
+	 * @return Email created, or null if failed.
+	 */
 	public Email addEmail(int type, String message) {
 		// insert to Email
 		int emailId = DB.executeReturnKey("INSERT INTO Email (emailType, message) VALUES (?, ?)", type, message);
-		if (emailId == -1) return null;
+		if (emailId == -1)
+			return null;
 		// insert to UserToEmail
 		return new Email(emailId, type, message);
 	}
-
-	/*
-	 * public static void main(String[] args) { // a few tests... EmailController ec
-	 * = new EmailController(); ec.addEmail("alexa12", "hello???");
-	 * ec.addEmail("alexa12", "email2"); ArrayList<Email> el =
-	 * ec.getEmails("alexa12"); for(int i = 0; i < el.size(); i++) {
-	 * System.out.println(el.get(i).getEmailId() + " " + el.get(i).getMessage()); }
-	 * }
-	 */
 }

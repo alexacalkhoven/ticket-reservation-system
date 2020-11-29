@@ -5,6 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import main.model.Showtime;
 
+/**
+ * Controls access to the Showtime table in the database.
+ * 
+ * @author Alexa Calkhoven
+ *
+ */
 public class ShowtimeController {
 
 	private DBController DB;
@@ -13,6 +19,11 @@ public class ShowtimeController {
 		DB = DBController.getInstance();
 	}
 
+	/**
+	 * Retrieves all showtimes in the database.
+	 * 
+	 * @return Showtime list.
+	 */
 	public ArrayList<Showtime> getShowtimes() {
 		ResultSet r = DB.query("SELECT * FROM Showtime");
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
@@ -27,6 +38,13 @@ public class ShowtimeController {
 		return showtimeList;
 	}
 
+	/**
+	 * Adds a showtime to the DB.
+	 * 
+	 * @param time    Time of the showtime (in form of a string).
+	 * @param movieId PK of movie to link to showtime.
+	 * @return Showtime object added. Null if error.
+	 */
 	public Showtime addShowtime(String time, int movieId) {
 		int showtimeId = DB.executeReturnKey("INSERT INTO Showtime (time, movieId) VALUES (?, ?)", time, movieId);
 		if (showtimeId == -1)
@@ -34,7 +52,12 @@ public class ShowtimeController {
 		return new Showtime(showtimeId, time, movieId);
 	}
 
-	// gets Showtime for showtimeId
+	/**
+	 * Gets Showtime for showtimeId.
+	 * 
+	 * @param showtimeId PK of showtime to retrieve.
+	 * @return Showtime if successful. Null if error.
+	 */
 	public Showtime getShowtime(int showtimeId) {
 		ResultSet r = DB.query("SELECT * FROM Showtime WHERE showtimeId = ?", showtimeId);
 		try {

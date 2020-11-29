@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import main.model.Ticket;
 
+/**
+ * Controls access to the Ticket table in the database.
+ * 
+ * @author Alexa Calkhoven
+ *
+ */
 public class TicketController {
 
 	private DBController DB;
@@ -14,7 +20,14 @@ public class TicketController {
 		DB = DBController.getInstance();
 	}
 
-	// creates new ticket in database and return it as a ticket object
+	/**
+	 * Adds ticket to the database.
+	 * 
+	 * @param seatId     PK of seat for ticket.
+	 * @param showtimeId PK of showtime for ticket.
+	 * @param paymentId  PK of payment made for ticket.
+	 * @return Ticket if added successfully. Null if not.
+	 */
 	public Ticket addTicket(int seatId, int showtimeId, int paymentId) {
 		// note: ticketId is automatically generated
 		// timePurchased will be set to current time/date (date and time)
@@ -27,6 +40,12 @@ public class TicketController {
 		return new Ticket(ticketId, seatId, showtimeId, paymentId, date);
 	}
 
+	/**
+	 * Gets all tickets for a user.
+	 * 
+	 * @param username Username to retrieve tickets for.
+	 * @return ArrayList of tickets.
+	 */
 	// Returns a list of tickets associated with a user.
 	public ArrayList<Ticket> getTickets(String username) {
 		ResultSet r = DB.query("SELECT ticketId FROM UserToTicket WHERE username = ?", username);
@@ -45,8 +64,6 @@ public class TicketController {
 		}
 		return ticketList;
 	}
-
-	// getTicket(ticketId)
 
 	/**
 	 * Inserts a row to UserToTicket, assigning a ticket to a user.
@@ -76,29 +93,22 @@ public class TicketController {
 		return true;
 	}
 
-	// gets Ticket for ticketId
+	/**
+	 * Gets a ticket from the database.
+	 * 
+	 * @param ticketId PK of ticket to get.
+	 * @return Ticket if found. Null if error.
+	 */
 	public Ticket getTicket(int ticketId) {
 		ResultSet r = DB.query("SELECT * FROM Ticket WHERE ticketId = ?", ticketId);
 		try {
 			if (r.next()) {
-				return new Ticket(r.getInt("ticketId"), r.getInt("seatId"), r.getInt("showtimeId"), r.getInt("paymentId"), r.getDate("timePurchased"));
+				return new Ticket(r.getInt("ticketId"), r.getInt("seatId"), r.getInt("showtimeId"),
+						r.getInt("paymentId"), r.getDate("timePurchased"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
-	/*
-	 * public static void main(String[] args) { // a few tests... TicketController
-	 * sc = new TicketController(); Ticket t = sc.addTicket(1, 1, 1);
-	 * sc.assignTicketToUser("alexa12", t.getTicketId()); Ticket t2 =
-	 * sc.addTicket(1, 3, 1); sc.assignTicketToUser("alexa12", t2.getTicketId());
-	 * ArrayList<Ticket> tl = sc.getTickets("alexa12"); for(int i = 0; i <
-	 * tl.size(); i++) { System.out.println(tl.get(i).toString()); }
-	 * sc.cancelTicket(t2.getTicketId());
-	 * System.out.println("After cancellation.."); ArrayList<Ticket> tl2 =
-	 * sc.getTickets("alexa12"); for(int i = 0; i < tl2.size(); i++) {
-	 * System.out.println(tl2.get(i).toString()); } }
-	 */
 }
