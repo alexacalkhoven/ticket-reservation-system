@@ -37,9 +37,10 @@ public class Movie {
 	 */
 	@Override
 	public String toString() {
-		return "name: " + name + "movieId: " + movieId;
+		return "name: " + name + " movieId: " + movieId;
 	}
 
+	//getters and setters
 	public String getName() {
 		return name;
 	}

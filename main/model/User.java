@@ -16,14 +16,14 @@ public class User {
 
 	/** A list of tickets that the User object has. */
 	ArrayList<Ticket> tickets;
-	
+
 	/** The type of user, where 0 represents an OrdinaryUser and 1 represents a RegisteredUser.*/
 	int type; 
-	
+
 	/** The username of a User. Both Registered and non-registered Users have usernames for purchase tracking purposes.*/
 	String username;
 
-	
+
 	/** The default constructor for the User object.*/
 	public User() {
 
@@ -62,7 +62,9 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
+
+
 	/*
 	 * Handled in the controller
 	// other functions
@@ -73,21 +75,33 @@ public class User {
 	void selectSeat(Seat seat) {
 		seat.claimSeat();
 	}
-*/ 
-	
+	 */ 
+	/**
+	 * Converts class information to a string for GUI to use.
+	 * @return Returns class in String form.
+	 */
+	@Override
+	public String toString() {
+		String t= " type: " + type + " username: " + username + "tickets: \n"; 
+		for(int i=0;i<tickets.size();i++)
+			t+=tickets.get(i).toString();
+
+		return t;
+	}
+
 	/** 
 	 * The cancelTicket function, which is responsible for passing the username and type into the ticket classes cancel ticket function
 	 * in order to cancel a ticket to receive a refund and receipt, as well as access the database. 
 	 * @param t the Ticket object to be cancelled.
 	 * */
 	void cancelTicket(Ticket t) { //i think we need this here, so we can pass user name into the ticket class for a refund to simplify. 
-	
+
 		t.cancelTicket(username, type);
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

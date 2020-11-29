@@ -74,5 +74,17 @@ public class RegisteredUser extends User{
 	public void setFeePaid(boolean fee) {
 		this.feePaid=fee;
 	}
+
+	/**
+	 * Converts class information into string to be passed to GUI.
+	 * @return Returns class in string form.
+	 */
+	@Override
+	public String toString() {
+		return "name: " + name + " address: " + address + " cardNum: " + cardNum + " feePaid: " + feePaid
+				+ "]";
+	}
+	
+	
 	
 }

@@ -60,9 +60,10 @@ public class Ticket {
 	@Override
 	public String toString() {
 		return "ticketId: " + ticketId + " seatId: " + seatId + " showtimeId:" + showtimeId + " paymentId:" + paymentId
-				+ " timePurchased:" + timePurchased.toString();
+				+ " timePurchased:" + timePurchased.toString() + "\n";
 	}
 
+	//getters and setters
 	public int getTicketId() {
 		return ticketId;
 	}

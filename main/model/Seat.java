@@ -97,6 +97,17 @@ public class Seat {
 	public void setCol(int col) {
 		this.col = col;
 	}
+
+
+	/**
+	 * Converts class information into a string to be used by GUI.
+	 * @return Returns class in string form.
+	 */
+	@Override
+	public String toString() {
+		return "seatId: " + seatId + " row: " + row + " col: " + col + " screen: " + screen + " isTaken: "
+				+ isTaken + " type: " + type;
+	}
 	
 	
 	

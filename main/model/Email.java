@@ -69,4 +69,15 @@ public class Email {
 		this.type = type;
 	}
 
+	/**
+	 * Method to pass class information in string form.
+	 * @return Returns class as a string.
+	 */
+	@Override
+	public String toString() {
+		return "message: " + message + "emailId: " + emailId + "type: " + type;
+	}
+	
+	
+
 }

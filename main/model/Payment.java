@@ -62,6 +62,17 @@ public class Payment {
 		this.cardNum = cardNum;
 	}
 
+	/**
+	 * Converts class information int oa string to be passed to GUI
+	 * @return Returns class in string form
+	 */
+	@Override
+	public String toString() {
+		return "paymentId: " + paymentId + " amount: " + amount + " cardNum: " + cardNum;
+	}
+	
+	
+
 	/*
 	//additoinal functions 
 	void makePaymentToTheatre(User user) { //need to change payment functionality now that account is no longer going to be considered . 
