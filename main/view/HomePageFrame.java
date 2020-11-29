@@ -1,22 +1,23 @@
-package main.view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+package main.view;
 
 public class HomePageFrame extends JFrame{
     private JPanel mainPanel, buttonPanel;
-    private JButton viewMovies, purchaseTicket, viewTickets, cancelTicket, viewEmail, paySubscription, quitButton;
+    private JButton registerGuest, viewMovies, searchMovies, purchaseTicket, viewTickets, cancelTicket, viewEmail, paySubscription, quitButton;
     private JLabel message1, message2;
     private JScrollPane scrollArea;
     private JTextArea displayArea;
     private String username;
     private BorderLayout layout;
-    private String userType; 
+    private String userType;
 
-    public HomePageFrame (String s, String u){
+    public HomePageFrame (String s, String u, String type){
         super(s);
         username = u;
-
+        userType = type;
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         buttonPanel = new JPanel();
@@ -25,7 +26,7 @@ public class HomePageFrame extends JFrame{
 
         addComponents();
 
-        setSize(1500, 1000);
+        setSize(2000, 1500);
         setContentPane(mainPanel);
         pack();
         setVisible(true);
@@ -34,17 +35,27 @@ public class HomePageFrame extends JFrame{
     }
 
     private void addComponents(){
-        String s = "Welcome to your Homepage " + username + "!";
+        String s = "Welcome to your Homepage " + username + "!       ";
         message1 = new JLabel(s);
         message1.setBounds(8,10,1000,20);
         mainPanel.add(message1);
 
-        message2 = new JLabel("Please choose an option below:");
+        message2 = new JLabel("Please choose an option below:       ");
         message2.setBounds(8,50,1000,20);
         mainPanel.add(message2);
 
-        viewMovies = new JButton("View movies");
-        viewMovies.setBounds(8, 90, 100, 20);//setLocation(100, 100);
+        if(userType == "G"){
+            registerGuest = new JButton("Register now!");
+            registerGuest.setBounds(8,30,100,20);
+            buttonPanel.add(registerGuest);
+        }
+
+        searchMovies = new JButton("Search movie");
+        searchMovies.setBounds(8,60,100,20);
+        buttonPanel.add(searchMovies);
+
+        viewMovies = new JButton("View all movies");
+        viewMovies.setBounds(8, 90, 100, 20);
         buttonPanel.add(viewMovies);
 
         purchaseTicket = new JButton("Purchase ticket");
@@ -71,7 +82,7 @@ public class HomePageFrame extends JFrame{
         quitButton.setBounds(8, 210, 120, 20);
         buttonPanel.add(quitButton);
 
-        displayArea = new JTextArea(25,75);
+        displayArea = new JTextArea(40,30);//15/45
         displayArea.setEditable(false);
         displayArea.setVisible(true);
         scrollArea = new JScrollPane(displayArea);
@@ -80,12 +91,13 @@ public class HomePageFrame extends JFrame{
 
     }
 
-
-
     public void addActionListeners(GUIController.ViewMoviesListener movies, GUIController.PurchaseTicketListener ticket, 
                                     GUIController.ViewTicketsListener tickets, GUIController.CancelTicketListener cancel,
                                     GUIController.ViewEmailListener emails, GUIController.PaySubscriptionListener pay,
-                                    GUIController.QuitListener quit){
+                                    GUIController.QuitListener quit, GUIController.SearchMovieListener searchM,
+                                    GUIController.RegisterListener register){
+        registerGuest.addActionListener(register);
+        searchMovies.addActionListener(searchM);
         viewMovies.addActionListener(movies);
         purchaseTicket.addActionListener(ticket);
         viewTickets.addActionListener(tickets);

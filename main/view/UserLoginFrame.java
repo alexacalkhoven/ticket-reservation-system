@@ -1,7 +1,7 @@
-package main.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+package main.view;
 
 public class UserLoginFrame extends JFrame{
     
@@ -9,7 +9,7 @@ public class UserLoginFrame extends JFrame{
     private JButton login;
     private JLabel message;
     private JTextField usernameInput;
-    public String usernameAnswer, passwordAnswer;
+    public String usernameAnswer;
 
     public UserLoginFrame (String s){
         super(s);
@@ -36,6 +36,7 @@ public class UserLoginFrame extends JFrame{
         mainPanel.add(message);
 
         usernameAnswer = this.displayInputDialog("Username: ");
+        //check username answer here
 
         login = new JButton("Login");
         login.setAlignmentX(Component.CENTER_ALIGNMENT);
