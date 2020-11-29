@@ -35,8 +35,8 @@ public class GUIController {
 
     public GUIController (MainFrame f){
         mainFrame = f;
-        mainFrame.addActionListeners(new LoginGuestListener(), new LoginRUListener(), new LoginOUListener());
-    }
+        mainFrame.addActionListeners(new LoginGuestListener(username), new LoginRUListener(username), new LoginOUListener(username));
+         }
 
     public boolean validateUsername (String u){
         uc = new UserController();
@@ -52,6 +52,13 @@ public class GUIController {
     }
 
     public class LoginGuestListener implements ActionListener{
+    	String username;
+        public LoginGuestListener(String username) {
+			super();
+			this.username=username;
+			// TODO Auto-generated constructor stub
+		}
+
         @Override
         public void actionPerformed(ActionEvent e){
             type = "G";
@@ -63,12 +70,18 @@ public class GUIController {
             type = "G";
 >>>>>>> 88b1986c311132a01f58522b99ea97c2aee33ced
             loginFrame = new UserLoginFrame("Ticket Reservation System");
-            loginFrame.addActionListeners(new LoginListener());
+            loginFrame.addActionListeners(new LoginListener(username));
             mainFrame.dispose();
         }
     }
 
     public class LoginOUListener implements ActionListener{
+    	String username;
+        public LoginOUListener(String username) {
+			super();
+			this.username=username;
+			// TODO Auto-generated constructor stub
+		}
         @Override
         public void actionPerformed(ActionEvent e){
             type = "O";
@@ -76,12 +89,18 @@ public class GUIController {
             boolean valid = validateUsername(username);
             if(!valid) return;
             loginFrame = new UserLoginFrame("Ticket Reservation System");
-            loginFrame.addActionListeners(new LoginListener());
+            loginFrame.addActionListeners(new LoginListener(username));
             mainFrame.dispose();
         }
     }
 
     public class LoginRUListener implements ActionListener{
+    	String username;
+        public LoginRUListener(String username) {
+			super();
+			this.username=username;
+			// TODO Auto-generated constructor stub
+		}
         @Override
         public void actionPerformed(ActionEvent e){
             type = "R";
@@ -89,17 +108,23 @@ public class GUIController {
             boolean valid = validateUsername(username);
             if(!valid) return;
             loginFrame = new UserLoginFrame("Ticket Reservation System");
-            loginFrame.addActionListeners(new LoginListener());
+            loginFrame.addActionListeners(new LoginListener(username));
             mainFrame.dispose();
         }
     }
 
     public class LoginListener implements ActionListener{
+    	String username;
+        public LoginListener(String username) {
+			super();
+			this.username=username;
+			// TODO Auto-generated constructor stub
+		}
         @Override
         public void actionPerformed(ActionEvent e){
             homeFrame = new HomePageFrame("Ticket Reservation System", username, type);
             homeFrame.addActionListeners(new ViewMoviesListener(), new PurchaseTicketListener(), new ViewTicketsListener(), 
-                                        new CancelTicketListener(), new ViewEmailListener(), new PaySubscriptionListener(),
+                                        new CancelTicketListener(), new ViewEmailListener(),  new PaySubscriptionListener(username),
                                         new QuitListener(), new SearchMovieListener(), new RegisterListener());
             loginFrame.dispose();
         }
@@ -285,14 +310,70 @@ public class GUIController {
         }
     }
 
-    // TODO Madee
+    //Get cardNumber for payments
+    public String paymentProcess() {
+    	String cardNo = displayInputDialog("Please enter your card number. Note: All card numbers must be between 10000000-99999999");
+    	if(cardNo == null) return "cancel";
+    	String confirm = displayInputDialog("Is your card number: "+cardNo+"\n If yes Enter Y. If no Enter N");
+    	if(confirm == null) return "cancel";
+    	if (confirm.equals("Y") && (Integer.parseInt(cardNo)<99999999 &&Integer.parseInt(cardNo)>10000000))
+    		return cardNo;
+    	else
+    		return paymentProcess();
+    }
+    
+    
+  //enter name
+    public String[] enterUserInfo() {
+    	String name = displayInputDialog("Please enter your name");
+    	if(name == null) {
+    		String[] temp={"cancel"};
+    		return temp;
+    	}
+    	String address= displayInputDialog("Please enter your address");
+    	if(address == null) {
+    		String[] temp={"cancel"};
+    		return temp;
+    	}
+    	String confirm = displayInputDialog("Please confirm this information is correct: \n"+"Name: "+name+"\nAddress: "+address+"\n If yes Enter Y. If no Enter N");
+    	if(confirm == null) {
+    		String[] temp={"cancel"};
+    		return temp;
+    	}
+    	if (confirm.equals("Y")) {
+    		String[]temp= {name,address};
+    		return temp;
+    	}
+    	else
+    		return enterUserInfo();
+    }
+    
+ // TODO Madee
     public class PaySubscriptionListener implements ActionListener{
-        @Override
+    	String username;
+    	
+        public PaySubscriptionListener(String username) {
+        	super();
+        	this.username=username;
+		}
+
+		@Override
         public void actionPerformed(ActionEvent e){
-            String payment = "$20.00";
-            homeFrame.printToTextArea("Your outstanding payment is: " + payment);
+            double payment = 20.00;
+            homeFrame.printToTextArea("Your outstanding payment is: $" + payment);
+            String cardNo=paymentProcess();
+            if(cardNo.equals("cancel"))return;
+            PaymentController pc=new PaymentController();
+            pc.addPayment(payment, Integer.parseInt(cardNo));
+            String[]info=enterUserInfo();
+            if(info[0].equals("cancel"))return;
             String confirmation = displayInputDialog("Enter 'Confirm' to purchase your membership: ");
+            
             if(confirmation == null) return; // to prevent crash on cancel selection
+            if(confirmation.equals("Confirm")) {
+            	UserController uc=new UserController();
+            	uc.addRegisteredUser(username, info[0], info[1], Integer.parseInt(cardNo), true);
+            }
             homeFrame.printToTextArea("Payment confirmed! Receipt sent to email");
         }
     }
