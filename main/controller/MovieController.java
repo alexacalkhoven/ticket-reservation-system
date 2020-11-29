@@ -68,5 +68,25 @@ public class MovieController {
 		}
 		return null;
 	}
+	
+	/**
+	 * Gets movie from the database with matching name.
+	 * 
+	 * @param movieId Name of desired movie.
+	 * @return Movie found. Null if error.
+	 */
+	public Movie searchMovie(String name) {
+		ResultSet r = DB.query("SELECT * FROM Movie WHERE name = ?", name);
+		try {
+			if (r.next()) {
+				return new Movie(r.getInt("movieId"), r.getString("name"));
+			} else {
+				return null; // no match found!
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
