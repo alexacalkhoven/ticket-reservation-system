@@ -1,13 +1,40 @@
 package main.model;
 
-public class RegisteredUser extends User{
+/**
+ * 
+ * @author(s) Noah Bradley, Trevor Brown, Alexa Calkhoven, Madisson Carle
+ *
+ *The Registered User class. Represents a User who has special 
+ *features compared to ordinary user, such as the ability to receive promotions,
+ *claim reserved seats and receive 100% discounts. They also pay a monthly fee 
+ *to remain as a registered user. 
+ * 
+ */
 
+public class RegisteredUser extends User{
+	
+	/** The name of the registered user. First and last names. */
 	String name;
+	
+	 /** The complete address of the registered user. */
+	 
 	String address;
-	int cardNum;//card num - 8digits 
-	//String email; // do we need this?
+	
+	 /** The card 8-digit number of the registered user to be charged to. */
+	int cardNum;
+
+	 /** A boolean that keeps track of whether or not a registered user has paid their monthly fee. */
 	boolean feePaid;
 	
+	
+	/**
+	 * The non-default constructor for a Registered user. 
+	 * @param username the username of the RegisteredUser.
+	 * @param name the name of the RegisteredUser.
+	 * @param address the address of the RegisteredUser.
+	 * @param cardNum the 8-digit card number of the RegisteredUser. 
+	 * @param feePaid a boolean that checks whether the RegisteredUser has paid their monthly fee or not.
+	 */
 	public RegisteredUser(String username, String name, String address, int cardNum, boolean feePaid) {
 		super(1, username);
 		this.name = name;
@@ -17,10 +44,12 @@ public class RegisteredUser extends User{
 		
 	}
 	
-	//getters and setters
+	/** The default constructor for a RegisteredUser.*/
 	public RegisteredUser() {
 		
 	}
+	
+	//getters and setters
 	
 	public String getName() {
 		return name;
