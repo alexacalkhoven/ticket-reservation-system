@@ -83,6 +83,8 @@ public class GUIController {
         }
     }
 
+    // TODO (Alexa)
+    // get non-RUs to enter credit card number
     public class PurchaseTicketListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -91,13 +93,14 @@ public class GUIController {
             // show showtimes for chosen movie
             // select a showtime id
             // show seats for chosen showtime (might have to change the seat grid to show seat IDs)?
-            // select a seat placement (choose a seat ID?)
+            // select a seat placement (choose a seat ID?)	
             String movie = displayInputDialog("Enter the name of the movie you would like to book ticket(s) for: ");
             if(movie == null) return;
             homeFrame.printToTextArea(theatre);
             String seats = displayInputDialog("Enter the seats you would like to book (row/col) separated by spaces (ex: 11 12 13): ");
             if(seats == null) return;
             String [] seats_parsed = seats.split(" "); //list of seats ordered
+            // generate better seat chart
             //if one or more seat in unavailable
             //homeFrame.printToTextArea("One or more seats that you have selected are unavailable, please try again");
             //else
@@ -118,10 +121,11 @@ public class GUIController {
         }
     }
 
+    // TODO Trevor
     public class CancelTicketListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-        	// is there a way to call the view tickets function without pressing the button?
+        	// is there a way to call the view tickets function without pressing the button? <-- make into a function
             homeFrame.printToTextArea("My tickets: ");
             String ticket = displayInputDialog("Enter the ticketId you would like to cancel: ");
             if(ticket == null) return;
@@ -148,13 +152,14 @@ public class GUIController {
         }
     }
 
+    // TODO Madee
     public class PaySubscriptionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             String payment = "$20.00";
             homeFrame.printToTextArea("Your outstanding payment is: " + payment);
             String confirmation = displayInputDialog("Enter 'Confirm' to purchase your membership: ");
-            if(confirmation == null) return;
+            if(confirmation == null) return; // to prevent crash on cancel selection
             homeFrame.printToTextArea("Payment confirmed! Receipt sent to email");
         }
     }
@@ -169,6 +174,7 @@ public class GUIController {
         }
     }
 
+    // TODO Noah
     public class RegisterListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -187,9 +193,11 @@ public class GUIController {
         }
     }
 
+    // TODO Alexa
     public class SearchMovieListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+        	// make into a function (have to use in the purchase ticket)
             String movie = displayInputDialog("Enter the name of a movie you would like to search for: ");
             //find movie
             //if movie doesnt exist

@@ -78,7 +78,7 @@ public class HomePageFrame extends JFrame{
         paySubscription.setBounds(8, 180, 120, 20);
         buttonPanel.add(paySubscription);
 
-        quitButton = new JButton("Quit");
+        quitButton = new JButton("Logout");
         quitButton.setBounds(8, 210, 120, 20);
         buttonPanel.add(quitButton);
 
