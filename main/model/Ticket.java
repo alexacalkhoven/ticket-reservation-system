@@ -168,7 +168,7 @@ public class Ticket {
 		for(RegisteredUser ru: uc.getRegisteredUsers()) {
 			if(ru.getUsername().equals(username)) { //set the type to registerd user and exit the loop
 				type =1;
-				return;
+				break;
 			}
 		}
 
