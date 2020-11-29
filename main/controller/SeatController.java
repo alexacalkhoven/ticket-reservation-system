@@ -156,8 +156,8 @@ public class SeatController {
 		ResultSet r = DB.query("SELECT * FROM Seat WHERE seatId = ?", seatId);
 		try {
 			if (r.next()) {
-				return new Seat(r.getInt("seatId"), r.getInt("row"), r.getInt("col"), r.getString("screen"),
-						r.getBoolean("isTaken"), r.getInt("type"));
+				return new Seat(r.getInt("seatId"), r.getInt("rowNumber"), r.getInt("colNumber"), r.getString("screen"),
+						r.getBoolean("isTaken"), r.getInt("seatType"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

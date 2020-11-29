@@ -61,7 +61,7 @@ public class UserController {
 		// if not, add username and 1 to User
 		// add username and other info to RegUser
 
-		
+		// TODO
 		// ADD LOGIC TO ADD TYPE 1 EMAILS TO NEW RU's EMAIL LIST HERE
 		
 		int userTable;

@@ -57,10 +57,12 @@ public class Ticket {
 	 * Converts Ticket class to a string to be passed over to the GUI.
 	 * @return Returns the ticket class as a String.
 	 */
+	//NOTE :  reformatted so the time purchased would be readable. And got rid of other values that would add clutter in GUI area.
 	@Override
 	public String toString() {
-		return "ticketId: " + ticketId + " seatId: " + seatId + " showtimeId:" + showtimeId + " paymentId:" + paymentId
-				+ " timePurchased:" + timePurchased.toString() + "\n";
+		return "Ticket ID: " + ticketId 
+				+ " timePurchased:" + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+				+ (timePurchased.getYear() + 1900) + "\n";
 	}
 
 	//getters and setters
