@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 import main.controller.EmailController;
 import main.controller.MovieController;
+import main.controller.PaymentController;
 import main.controller.SeatController;
 import main.controller.ShowtimeController;
 import main.model.Email;
 import main.model.Movie;
+import main.model.Payment;
 import main.model.Seat;
 import main.model.Showtime;
 import main.model.Ticket;
@@ -95,30 +97,31 @@ public class GUIController {
     public class ViewMoviesListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-        	String message = "-----Movies-----\n";
-        	MovieController mc = new MovieController();
-        	ArrayList<Movie> movieList = mc.getMovies();
-        	for(int i = 0; i < movieList.size(); i++) {
-        		message += (movieList.get(i).toString() + "\n");
-        	}
-            homeFrame.printToTextArea(message);
+        	viewMovies();
         }
     }
+    
+    private void viewMovies() {
+    	String message = "-----Movies-----\n";
+    	MovieController mc = new MovieController();
+    	ArrayList<Movie> movieList = mc.getMovies();
+    	for(int i = 0; i < movieList.size(); i++) {
+    		message += (movieList.get(i).toString() + "\n");
+    	}
+        homeFrame.printToTextArea(message);
+    }
 
-    // TODO (Alexa)
-    // get non-RUs to enter credit card number
+    /**
+     * Allows user to purchase a ticket.
+     */
     public class PurchaseTicketListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-        	// show movies
-            // select movie id
-            // show showtimes for chosen movie
-            // select a showtime id
-            // show seats for chosen showtime (might have to change the seat grid to show seat IDs)?
-            // select a seat placement (choose a seat ID?)	
+        	viewMovies();
             String movie = displayInputDialog("Enter the name of the movie you would like to book a ticket for: ");
             if(movie == null) return;
-            searchMovie(movie);
+            Movie m = searchMovie(movie);
+            if(m == null) return;
             String showtime = displayInputDialog("Enter the id of the showtime you would like to book a ticket for: ");
             if(showtime == null) return;
             int showtimeId; 
@@ -128,15 +131,23 @@ public class GUIController {
             	homeFrame.printToTextArea("Invalid showtime id entered.");
                 return;
             }
+            ShowtimeController stc = new ShowtimeController();
+            Showtime selectedShowtime = stc.getShowtime(showtimeId);
+            if(selectedShowtime == null || selectedShowtime.getMovieId() != m.getMovieId()) {
+            	homeFrame.printToTextArea("Invalid showtime selected.");
+            	return;
+            }
             SeatController sc = new SeatController();
             Seat [][] seats = sc.getSeats(showtimeId);
-            // might want to do some sort of check that a proper showtimeId was entered here...
-            String seatChart = "-----Screen-----\n";
+            String seatChart = "{id} = Seat reserved for Registered Users.\n";
+            seatChart += "[id] = Seat unavailable.\n";
+            seatChart += "(id) = Seat available.\n";
+            seatChart += "-----Screen-----\n";
             for (int i = 0; i < Constants.NUM_ROWS; i++) {
     			for (int j = 0; j < Constants.NUM_COLS; j++) {
     				Seat current = seats[i][j];
     				int seatId = current.getSeatId();
-    				//{01} (02) (03) [04] [05]
+    				// {01} (02) (03) [04] [05]
     				// curly brackets: reserved for RUs
     				// round brackets: available
     				// square brackets: unavailable
@@ -150,17 +161,34 @@ public class GUIController {
     			}
     			seatChart += "\n";
     		}
-            /*
-            homeFrame.printToTextArea(theatre);
-            String seats = displayInputDialog("Enter the seats you would like to book (row/col) separated by spaces (ex: 11 12 13): ");
-            if(seats == null) return;
-            String [] seats_parsed = seats.split(" "); //list of seats ordered
-            // generate better seat chart
-            //if one or more seat in unavailable
-            //homeFrame.printToTextArea("One or more seats that you have selected are unavailable, please try again");
-            //else
-            homeFrame.printToTextArea("Your receipt and ticket have been sent to your email!");
-            */
+            homeFrame.printToTextArea(seatChart);
+            String seat = displayInputDialog("Enter the seat id you would like to book: ");
+            if(seat == null) return;
+            int seatId; 
+            try {
+            	seatId = Integer.parseInt(seat); 
+            } catch (NumberFormatException n) {
+            	homeFrame.printToTextArea("Invalid seat id entered.");
+                return;
+            }
+            // check if valid seat entered here... (is it an actual seat for the selected show time..?)
+            if(sc.isValidSeat(username, seatId)) {
+            	// go through with purchase
+            	homeFrame.printToTextArea("Selected ticket is $9.99. Please enter your payment information.");
+            	String cardNum = paymentProcess();
+            	int card = Integer.parseInt(cardNum);
+            	PaymentController pc = new PaymentController();
+            	Payment p = pc.addPayment(9.99, card);
+            	TicketController tc = new TicketController();
+            	Ticket t = tc.addTicket(seatId, showtimeId, p.getPaymentId());
+            	tc.assignTicketToUser(username, t.getTicketId());
+            	t.makePurchaseReceipt(username);
+            	sc.markSeatAsTaken(seatId);
+            	homeFrame.printToTextArea("Your receipt and ticket have been sent to your email!");
+            } else {
+            	homeFrame.printToTextArea("This seat is not available for purchase.\n");
+            	return;
+            }
         }
     }
 
@@ -259,11 +287,15 @@ public class GUIController {
         }
     }
     
-    private void searchMovie(String movie) {
+    private Movie searchMovie(String movie) {
     	MovieController mc = new MovieController();
         Movie m = mc.searchMovie(movie);
         String message = "-----Movie-----\n";
-        if(m == null) message += "Sorry, movie entered is not available.";
+        if(m == null) {
+        	message += "Sorry, movie entered is not available.";
+        	homeFrame.printToTextArea(message);
+        	return null;
+        }
         else {
         	message += (movie.toString() + "\n");
         	message += "-----Showtimes-----\n";
@@ -274,6 +306,7 @@ public class GUIController {
         	}
         }
         homeFrame.printToTextArea(message);
+        return m;
     }
 
     public String displayInputDialog(String s) {
