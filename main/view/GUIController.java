@@ -206,20 +206,71 @@ public class GUIController {
     }
 
     // TODO Trevor
+    public class ViewTicketsListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String message = "-----My Tickets-----\n";
+            TicketController tc = new TicketController();
+            ArrayList<Ticket> ticketList = tc.getTickets(loginFrame.usernameAnswer);
+            for(int i = 0; i < ticketList.size(); i++) {
+            	message += ticketList.get(i).toString();
+            }
+            homeFrame.printToTextArea(message);
+        }
+    }
+
+    // TODO Trevor
     public class CancelTicketListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+        	
         	// is there a way to call the view tickets function without pressing the button? <-- make into a function
-            homeFrame.printToTextArea("My tickets: ");
-            String ticket = displayInputDialog("Enter the ticketId you would like to cancel: ");
-            if(ticket == null) return;
-            //getticket()
-            //check 72 hours here - set to boolean
-            //if(before 72 hours)
-                //assign 85% credit to their account if Ordinary else give 100% credit
-                homeFrame.printToTextArea("Ticket cancelled!");
-            //else
-                //homeFrame.printToTextArea("You may not cancel your ticket less than 72 hours before the movie");
+        	//could reuse the view tickets listener to fill the homeframe test area. 
+        	 String message = "-----My Tickets-----\n";
+             TicketController tc = new TicketController();
+             ArrayList<Ticket> ticketList = tc.getTickets(loginFrame.usernameAnswer);
+             for(int i = 0; i < ticketList.size(); i++) {
+             	message += ticketList.get(i).toString();
+             }
+             
+             homeFrame.printToTextArea(message);
+        	
+            
+           //get user inputted ticket ID value from the input dialog box.
+             int ticketId = Integer.parseInt(displayInputDialog("Enter the ticketId you would like to cancel: "));
+          
+             Ticket ticket = null; //temp ticket object set to null for error checking.
+             
+             //check the ticket list to see if the ids match. 
+             for(Ticket t : ticketList) {
+            	 if(t.getTicketId() == ticketId) {
+            		 ticket = t;
+            		 break;
+            	 }
+             }
+             
+            if(ticket == null) {
+            	
+            	//display error pane
+            	JOptionPane.showMessageDialog(new JFrame(), "Error! Ticket not found.", "ERROR",
+            	        JOptionPane.ERROR_MESSAGE);
+            	return; //to avoid errors 
+            }
+         
+            
+            boolean isCancellable = ticket.validCancel(); //check if we can cancel 
+            
+            if(isCancellable == true) {
+            	ticket.cancelTicket(loginFrame.usernameAnswer);
+            	homeFrame.printToTextArea("Ticket " + ticketId + " successfully cancelled!");
+            } else {
+            	JOptionPane.showMessageDialog(new JFrame(), "Error. You may not cancel your ticket less than 72 hours before the movie.", "ERROR",
+            	        JOptionPane.ERROR_MESSAGE);
+            	
+            	return; //unsure about return but following Noah logic with the return in other spots. 
+            }
+            
+   
         }
     }
 
