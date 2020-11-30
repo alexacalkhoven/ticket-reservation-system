@@ -199,7 +199,7 @@ public class Ticket {
 			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
-					+ (currentDate.getYear() + 1900) + + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
+					+ (currentDate.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
 			message += "You will be refunded $" + payment.amount + " as a movie credit. Show this email to redeem.";
 
 		} else { // user is not RU so no discount
