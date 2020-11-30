@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 //import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import main.model.Email;
 import main.model.RegisteredUser;
 
 /**
@@ -78,6 +80,13 @@ public class UserController {
 
 		if (userTable != 1 || regTable != 1)
 			return false;
+		
+		// add promo emails to account
+		EmailController ec = new EmailController();
+		ArrayList<Email> emailList = ec.getPromoEmails();
+		for(int i = 0; i < emailList.size(); i++) {
+			ec.addEmailToUser(username, emailList.get(i).getEmailId());
+		}
 		return true;
 	}
 

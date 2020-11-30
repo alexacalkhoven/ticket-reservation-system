@@ -72,4 +72,21 @@ public class EmailController {
 		// insert to UserToEmail
 		return new Email(emailId, type, message);
 	}
+	
+	public ArrayList<Email> getPromoEmails(){
+		ResultSet r = DB.query("SELECT emailId FROM Email WHERE emailType = 1");
+		ArrayList<Email> emailList = new ArrayList<Email>();
+		try {
+			while (r.next()) {
+				int emailId = r.getInt("emailId");
+				ResultSet e = DB.query("SELECT * FROM Email WHERE emailId = ?", emailId);
+				e.next();
+				Email email = new Email(e.getInt("emailId"), e.getInt("emailType"), e.getString("message"));
+				emailList.add(email);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return emailList;
+	}
 }
