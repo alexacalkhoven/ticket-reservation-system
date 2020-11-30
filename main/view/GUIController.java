@@ -33,20 +33,12 @@ public class GUIController {
 
 	public GUIController(MainFrame f) {
 		mainFrame = f;
-		mainFrame.addActionListeners(new LoginGuestListener(username), new LoginRUListener(username),
-				new LoginOUListener(username));
+		mainFrame.addActionListeners(new LoginGuestListener(), new LoginRUListener(),
+				new LoginOUListener());
 	}
 
 	public boolean validateUsername(String u) {
 		uc = new UserController();
-//		if (type == "G") {
-//			uc.addGuestUser(username);
-//			return true;
-//		}
-//		if (!uc.isValidUser(u)) {
-//			JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); // should pop up an error window
-//			return false;
-//		}
 
 		//checks too see if username is in DB
 		if(uc.isValidUser(u)) {
@@ -70,13 +62,7 @@ public class GUIController {
 	}
 
 	public class LoginGuestListener implements ActionListener {
-		String username;
-
-		public LoginGuestListener(String username) {
-			super();
-			this.username = username;
-		}
-
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			type = "G";
@@ -86,20 +72,13 @@ public class GUIController {
 				return;
 			
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
-			loginFrame.addActionListeners(new LoginListener(username));
+			loginFrame.addActionListeners(new LoginListener());
 			mainFrame.dispose();
 		}
 	}
 
 	public class LoginOUListener implements ActionListener {
-		String username;
-
-		public LoginOUListener(String username) {
-			super();
-			this.username = username;
-			// TODO Auto-generated constructor stub
-		}
-
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			type = "O";
@@ -111,19 +90,13 @@ public class GUIController {
 			}
 				
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
-			loginFrame.addActionListeners(new LoginListener(username));
+			loginFrame.addActionListeners(new LoginListener());
 			mainFrame.dispose();
 		}
 	}
 
 	public class LoginRUListener implements ActionListener {
-		String username;
-
-		public LoginRUListener(String username) {
-			super();
-			this.username = username;
-			// TODO Auto-generated constructor stub
-		}
+		
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -133,26 +106,19 @@ public class GUIController {
 			if (!valid)
 				return;
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
-			loginFrame.addActionListeners(new LoginListener(username));
+			loginFrame.addActionListeners(new LoginListener());
 			mainFrame.dispose();
 		}
 	}
 
 	public class LoginListener implements ActionListener {
-		String username;
-
-		public LoginListener(String username) {
-			super();
-			this.username = username;
-			// TODO Auto-generated constructor stub
-		}
-
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			homeFrame = new HomePageFrame("Ticket Reservation System", username, type);
 			homeFrame.addActionListeners(new ViewMoviesListener(), new PurchaseTicketListener(),
 					new ViewTicketsListener(), new CancelTicketListener(), new ViewEmailListener(),
-					new PaySubscriptionListener(username), new QuitListener(), new SearchMovieListener(),
+					new PaySubscriptionListener(), new QuitListener(), new SearchMovieListener(),
 					new RegisterListener());
 			loginFrame.dispose();
 		}
@@ -387,12 +353,7 @@ public class GUIController {
 
 	// TODO Madee
 	public class PaySubscriptionListener implements ActionListener {
-		String username;
-
-		public PaySubscriptionListener(String username) {
-			super();
-			this.username = username;
-		}
+		
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
