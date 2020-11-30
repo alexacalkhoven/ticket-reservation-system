@@ -1,5 +1,6 @@
 package main.model;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,7 +28,7 @@ public class Ticket {
 	private int seatId;
 	private int showtimeId;
 	private int paymentId;
-	private Date timePurchased;
+	private Timestamp timePurchased;
 
 	/**
 	 * Ticket constructor
@@ -44,7 +45,7 @@ public class Ticket {
 	 * @param paymentId The tickets payment ID
 	 * @param timePurchased The time the ticket was purchased
 	 */
-	public Ticket(int ticketId, int seatId, int showtimeId, int paymentId, Date timePurchased) {
+	public Ticket(int ticketId, int seatId, int showtimeId, int paymentId, Timestamp timePurchased) {
 		this.ticketId = ticketId;
 		this.seatId = seatId;
 		this.showtimeId = showtimeId;
@@ -61,8 +62,7 @@ public class Ticket {
 	@Override
 	public String toString() {
 		return "Ticket ID: " + ticketId 
-				+ " timePurchased:" + (timePurchased.getMonth() +1) + "/" + timePurchased.getDate() + "/"
-				+ (timePurchased.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
+				+ " timePurchased:" + timePurchased.toString() + "\n";
 	}
 
 	//getters and setters
@@ -98,11 +98,11 @@ public class Ticket {
 		this.paymentId = paymentId;
 	}
 
-	public Date getTimePurchased() {
+	public Timestamp getTimePurchased() {
 		return timePurchased;
 	}
 
-	public void setTimePurchased(Date timePurchased) {
+	public void setTimePurchased(Timestamp timePurchased) {
 		this.timePurchased = timePurchased;
 	}
 
@@ -196,10 +196,9 @@ public class Ticket {
 			message += "100% movie credit refund issued \n";
 			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 					+ paymentId + "\n";
-			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
-					+ (timePurchased.getYear() + 1900) + "\n";
+			message += "Date Purchased: " + timePurchased.toString() + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
-					+ (currentDate.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
+					+ (currentDate.getYear() + 1900) + " " + currentDate.getHours() + " : " + currentDate.getMinutes() + "\n";
 			message += "You will be refunded $" + payment.amount + " as a movie credit. Show this email to redeem.";
 
 		} else { // user is not RU so no discount
@@ -207,10 +206,9 @@ public class Ticket {
 			message += "85% movie credit refund issued \n"; // 100% minus 15% fee
 			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 					+ paymentId + "\n";
-			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
-					+ (timePurchased.getYear() + 1900) + "\n";
+			message += "Date Purchased: " + timePurchased.toString() + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
-					+ (currentDate.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
+					+ (currentDate.getYear() + 1900) + " " + currentDate.getHours() + " : " + currentDate.getMinutes() + "\n";
 			message += "You will be refunded $" + 0.85 * payment.amount
 					+ " as a movie credit. Show this email to redeem.";
 
@@ -261,8 +259,7 @@ public class Ticket {
 		//message += "Seat: row " + seat.getRow() + " column " + seat.getCol() + ", screen " + seat.getScreen() + "\n"; // COMMENT BACK IN WHEN WE HAVE SETTERS AND GETTERS
 		message += "Movie: " + movie.getName() + "\n";
 		message += "Time: " + st.getTimeOfShow() + "\n";
-		message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
-				+ (timePurchased.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
+		message += "Date Purchased: " + timePurchased.toString() + "\n";
 		message += "Cost: $" + payment.amount + ". Show this email as your ticket.\n";
 
 		// set up email

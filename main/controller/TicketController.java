@@ -2,6 +2,7 @@ package main.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import main.model.Ticket;
@@ -31,13 +32,14 @@ public class TicketController {
 	public Ticket addTicket(int seatId, int showtimeId, int paymentId) {
 		// note: ticketId is automatically generated
 		// timePurchased will be set to current time/date (date and time)
-		Date date = new Date();
+		//Date date = new Date();
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		int ticketId = DB.executeReturnKey(
 				"INSERT INTO Ticket (seatId, showtimeId, paymentId, timePurchased) VALUES (?, ?, ?, ?)", seatId,
-				showtimeId, paymentId, new java.sql.Timestamp(date.getTime()));
+				showtimeId, paymentId, ts);
 		if (ticketId == -1)
 			return null;
-		return new Ticket(ticketId, seatId, showtimeId, paymentId, date);
+		return new Ticket(ticketId, seatId, showtimeId, paymentId, ts);
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class TicketController {
 				ResultSet t = DB.query("SELECT * FROM Ticket WHERE ticketId = ?", ticketId);
 				t.next();
 				Ticket ticket = new Ticket(t.getInt("ticketId"), t.getInt("seatId"), t.getInt("showtimeId"),
-						t.getInt("paymentId"), t.getDate("timePurchased"));
+						t.getInt("paymentId"), t.getTimestamp("timePurchased"));
 				ticketList.add(ticket);
 			}
 		} catch (SQLException e) {
@@ -104,7 +106,7 @@ public class TicketController {
 		try {
 			if (r.next()) {
 				return new Ticket(r.getInt("ticketId"), r.getInt("seatId"), r.getInt("showtimeId"),
-						r.getInt("paymentId"), r.getDate("timePurchased"));
+						r.getInt("paymentId"), r.getTimestamp("timePurchased"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

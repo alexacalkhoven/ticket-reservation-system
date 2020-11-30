@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Movie (
 
 CREATE TABLE IF NOT EXISTS Showtime (
 	showtimeId INT PRIMARY KEY AUTO_INCREMENT,
-    time DATETIME NOT NULL,
+    time TIMESTAMP NOT NULL,
     movieId INT NOT NULL,
     FOREIGN KEY (movieId) REFERENCES Movie (movieId),
     CONSTRAINT dateMovie UNIQUE (time, movieId)
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS Ticket (
     seatId INT NOT NULL,
     showtimeId INT NOT NULL,
     paymentId INT NOT NULL,
-    timePurchased DATETIME NOT NULL,
+    timePurchased TIMESTAMP NOT NULL,
     FOREIGN KEY (seatId) REFERENCES Seat (seatId) ON DELETE CASCADE,
     FOREIGN KEY (showtimeId) REFERENCES Showtime (showtimeId) ON DELETE CASCADE,
     FOREIGN KEY (paymentId) REFERENCES Payment (paymentId) ON DELETE CASCADE

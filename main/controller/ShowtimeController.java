@@ -30,7 +30,7 @@ public class ShowtimeController {
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
 		try {
 			while (r.next()) {
-				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
+				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getTimestamp("time"), r.getInt("movieId"));
 				showtimeList.add(showtime);
 			}
 		} catch (SQLException e) {
@@ -63,7 +63,7 @@ public class ShowtimeController {
 		ResultSet r = DB.query("SELECT * FROM Showtime WHERE showtimeId = ?", showtimeId);
 		try {
 			if (r.next()) {
-				return new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
+				return new Showtime(r.getInt("showtimeId"), r.getTimestamp("time"), r.getInt("movieId"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,7 +82,7 @@ public class ShowtimeController {
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
 		try {
 			while (r.next()) {
-				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
+				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getTimestamp("time"), r.getInt("movieId"));
 				showtimeList.add(showtime);
 			}
 		} catch (SQLException e) {

@@ -1,6 +1,6 @@
 package main.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Holds information on all the available showtimes for specific movies.
@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Showtime {
 
-	private Date timeOfShow; // keep this as a string for now since we only really have to print it out.
+	private Timestamp timeOfShow; // keep this as a string for now since we only really have to print it out.
 	private int showtimeId;
 	private int movieId;
 
@@ -24,7 +24,7 @@ public class Showtime {
 	 * @param time time of showtime
 	 * @param movieId movie at showtime
 	 */
-	public Showtime(int showtimeId, Date time, int movieId) {
+	public Showtime(int showtimeId, Timestamp time, int movieId) {
 		this.showtimeId = showtimeId;
 		this.timeOfShow = time;
 		this.movieId = movieId;
@@ -43,14 +43,14 @@ public class Showtime {
 	 */
 	@Override
 	public String toString() {
-		return "time:" + timeOfShow + "\tshowtimeId: " + showtimeId + "\tmovieId: " + movieId;
+		return "time:" + timeOfShow.toString() + "\tshowtimeId: " + showtimeId + "\tmovieId: " + movieId;
 	}
 
 	/**
 	 * Gets time for showtime
 	 * @return Returns time as a string
 	 */
-	public Date getTimeOfShow() {
+	public Timestamp getTimeOfShow() {
 		return timeOfShow;
 	}
 
@@ -58,7 +58,7 @@ public class Showtime {
 	 * Sets time for showtime
 	 * @param time Time to be set
 	 */
-	public void setTime(Date time) {
+	public void setTime(Timestamp time) {
 		this.timeOfShow = time;
 	}
 
