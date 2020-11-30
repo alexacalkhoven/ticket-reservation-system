@@ -8,12 +8,21 @@ import java.awt.event.*;
  */
 public class HomePageFrame extends JFrame{
     private JPanel mainPanel, buttonPanel;
-    private JButton registerGuest, viewMovies, searchMovies, purchaseTicket, viewTickets, cancelTicket, viewEmail, paySubscription, quitButton;
-    private JLabel message1, message2;
-    private JScrollPane scrollArea;
-    private JTextArea displayArea;
+    private JButton registerGuest =new JButton("Register now!");
+    private JButton viewMovies  = new JButton("View all movies");
+    private JButton searchMovies = new JButton("Search movie");
+    private JButton purchaseTicket  = new JButton("Purchase ticket");
+    private JButton viewTickets = new JButton("View my tickets");
+    private JButton cancelTicket= new JButton("Cancel ticket");
+    private JButton viewEmail= new JButton("View my emails");
+    private JButton paySubscription = new JButton("Pay subscription");
+    private JButton logoutButton = new JButton("Logout");
+    private JLabel welcome;
+    private JLabel message = new JLabel("Please choose an option below:       ");
+    
+    private JTextArea displayArea= new JTextArea();
     private String username;
-    private BorderLayout layout;
+    
     private String userType;
 
     /*
@@ -26,81 +35,80 @@ public class HomePageFrame extends JFrame{
         super(s);
         username = u;
         userType = type;
+        
+        String temp = "Welcome to your Homepage " + username + "!       ";
+        welcome = new JLabel(temp);
+        welcome.setAlignmentX(CENTER_ALIGNMENT);
+        
+        setSize(1000, 1000);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(welcome);
+        
+        
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        
+        message.setAlignmentX(CENTER_ALIGNMENT);
+        if(userType == "G"){
+        	 registerGuest.setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
+        searchMovies.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewMovies.setAlignmentX(Component.CENTER_ALIGNMENT);
+        purchaseTicket.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cancelTicket.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewTickets.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewEmail.setAlignmentX(Component.CENTER_ALIGNMENT);
+        paySubscription.setAlignmentX(Component.CENTER_ALIGNMENT);
+        logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 20)));
+        buttonPanel.add(message);
+        if(userType == "G"){
+        	buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        	buttonPanel.add(registerGuest);
+        }
+       
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(searchMovies);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(viewMovies);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(purchaseTicket);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(cancelTicket);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(viewTickets);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(viewEmail);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(paySubscription);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+        buttonPanel.add(logoutButton);
+       
+        
+      //center panel that holds course text
+        displayArea.setSize(100,100);
+      		JPanel panel3= new JPanel();
+      		panel3.setSize(100,100);
+      		panel3.setLayout(new BorderLayout());
+      		panel3.add(displayArea,BorderLayout.CENTER);
+      		JScrollPane scroll = new JScrollPane (displayArea);
+      		scroll.setSize(100, 100);
+      		panel3.add(scroll);
+      		
+      		
+        add(mainPanel, BorderLayout.NORTH);
+        add(panel3,BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
 
-        addComponents();
-
-        setSize(2000, 1500);
-        setContentPane(mainPanel);
-        pack();
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setDefaultLookAndFeelDecorated(true);
+
     }
     
-    /*
-     * Adds buttons and messages to mainPanel and button panel
-     */
-    private void addComponents(){
-        String s = "Welcome to your Homepage " + username + "!       ";
-        message1 = new JLabel(s);
-        message1.setBounds(8,10,1000,20);
-        mainPanel.add(message1);
-
-        message2 = new JLabel("Please choose an option below:       ");
-        message2.setBounds(8,50,1000,20);
-        mainPanel.add(message2);
-
-        if(userType == "G"){
-            registerGuest = new JButton("Register now!");
-            registerGuest.setBounds(8,30,100,20);
-            buttonPanel.add(registerGuest);
-        }
-
-        searchMovies = new JButton("Search movie");
-        searchMovies.setBounds(8,60,100,20);
-        buttonPanel.add(searchMovies);
-
-        viewMovies = new JButton("View all movies");
-        viewMovies.setBounds(8, 90, 100, 20);
-        buttonPanel.add(viewMovies);
-
-        purchaseTicket = new JButton("Purchase ticket");
-        purchaseTicket.setBounds(8,120, 100, 20);
-        buttonPanel.add(purchaseTicket);
-
-        cancelTicket = new JButton("Cancel ticket");
-        cancelTicket.setBounds(8, 150, 100, 20);
-        buttonPanel.add(cancelTicket);
-
-        viewTickets = new JButton("View my tickets");
-        viewTickets.setBounds(8, 150, 120, 20);
-        buttonPanel.add(viewTickets);
-
-        viewEmail = new JButton("View my emails");
-        viewEmail.setBounds(8, 180, 150, 20);
-        buttonPanel.add(viewEmail);
-
-        paySubscription = new JButton("Pay subscription");
-        paySubscription.setBounds(8, 180, 120, 20);
-        buttonPanel.add(paySubscription);
-
-        quitButton = new JButton("Logout");
-        quitButton.setBounds(8, 210, 120, 20);
-        buttonPanel.add(quitButton);
-
-        displayArea = new JTextArea(40,30);//15/45
-        displayArea.setEditable(false);
-        displayArea.setVisible(true);
-        scrollArea = new JScrollPane(displayArea);
-        scrollArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        mainPanel.add(scrollArea, BorderLayout.EAST);
-
-    }
     
     /*
      * Once buttons are created, their actionListeners are linked
@@ -129,15 +137,21 @@ public class HomePageFrame extends JFrame{
         cancelTicket.addActionListener(cancel);
         viewEmail.addActionListener(emails);
         paySubscription.addActionListener(pay);
-        quitButton.addActionListener(quit);
+        logoutButton.addActionListener(quit);
     }
     
+    public void print(String s) {
+    	displayArea.append(s);
+    }
+    public void resetDisplay() {
+		displayArea.setText(null);
+	}
     /*
      * Prints argument to text area in GUI
      * @param s message to print
      */
     public void printToTextArea(String s){
-        displayArea.setText(null);
-        displayArea.setText(s);
+       resetDisplay();
+       print(s);
     }
 }
