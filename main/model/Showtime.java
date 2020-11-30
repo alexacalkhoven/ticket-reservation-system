@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Showtime {
 
-	private Date timeOfShow; 
+	private Date timeOfShow; // keep this as a string for now since we only really have to print it out.
 	private int showtimeId;
 	private int movieId;
 
@@ -43,7 +43,7 @@ public class Showtime {
 	 */
 	@Override
 	public String toString() {
-		return "time:" + timeOfShow.toString() + " showtimeId: " + showtimeId + " movieId: " + movieId;
+		return "time:" + timeOfShow + "\tshowtimeId: " + showtimeId + "\tmovieId: " + movieId;
 	}
 
 	/**
