@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Movie (
 
 CREATE TABLE IF NOT EXISTS Showtime (
 	showtimeId INT PRIMARY KEY AUTO_INCREMENT,
-    time DATETIME NOT NULL,
+    time DATE NOT NULL,
     movieId INT NOT NULL,
     FOREIGN KEY (movieId) REFERENCES Movie (movieId),
     CONSTRAINT dateMovie UNIQUE (time, movieId)

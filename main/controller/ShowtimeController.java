@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import main.model.Showtime;
+import java.util.Date;
 
 /**
  * Controls access to the Showtime table in the database.
@@ -30,7 +31,8 @@ public class ShowtimeController {
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
 		try {
 			while (r.next()) {
-				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
+				Date date = r.getTimestamp("time");
+				Showtime showtime = new Showtime(r.getInt("showtimeId"), date, r.getInt("movieId")); //r.getDate("time")
 				showtimeList.add(showtime);
 			}
 		} catch (SQLException e) {
@@ -82,7 +84,8 @@ public class ShowtimeController {
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
 		try {
 			while (r.next()) {
-				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
+				Date date = r.getTimestamp("time");
+				Showtime showtime = new Showtime(r.getInt("showtimeId"), date, r.getInt("movieId"));
 				showtimeList.add(showtime);
 			}
 		} catch (SQLException e) {

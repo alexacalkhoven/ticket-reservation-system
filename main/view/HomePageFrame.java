@@ -66,6 +66,8 @@ public class HomePageFrame extends JFrame{
 		message.setAlignmentX(CENTER_ALIGNMENT);
 		if(userType == "G"){
 			registerGuest.setAlignmentX(Component.CENTER_ALIGNMENT);
+			registerGuest.setBackground(new java.awt.Color(255, 215, 0));
+			registerGuest.setOpaque(true);
 		}
 		searchMovies.setAlignmentX(Component.CENTER_ALIGNMENT);
 		viewMovies.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -75,6 +77,23 @@ public class HomePageFrame extends JFrame{
 		viewEmail.setAlignmentX(Component.CENTER_ALIGNMENT);
 		paySubscription.setAlignmentX(Component.CENTER_ALIGNMENT);
 		logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		//setting colour
+		searchMovies.setBackground(new java.awt.Color(255, 215, 0));
+		searchMovies.setOpaque(true);
+		viewMovies.setBackground(new java.awt.Color(255, 215, 0));
+		viewMovies.setOpaque(true);
+		purchaseTicket.setBackground(new java.awt.Color(255, 215, 0));
+		purchaseTicket.setOpaque(true);
+		cancelTicket.setBackground(new java.awt.Color(255, 215, 0));
+		cancelTicket.setOpaque(true);
+		viewTickets.setBackground(new java.awt.Color(255, 215, 0));
+		viewTickets.setOpaque(true);
+		viewEmail.setBackground(new java.awt.Color(255, 215, 0));
+		viewEmail.setOpaque(true);
+		paySubscription.setBackground(new java.awt.Color(255, 215, 0));
+		paySubscription.setOpaque(true);
+		logoutButton.setBackground(new java.awt.Color(255, 215, 0));
+		logoutButton.setOpaque(true);
 
 		//adding buttons to button panel
 		buttonPanel.add(Box.createRigidArea(new Dimension(20, 20)));
@@ -104,6 +123,7 @@ public class HomePageFrame extends JFrame{
 
 		//center panel that holds all text
 		displayArea.setSize(100,100);
+		displayArea.setBackground(new java.awt.Color(0, 200, 250));
 		JPanel panel3= new JPanel();
 		panel3.setSize(100,100);
 		panel3.setLayout(new BorderLayout());
@@ -116,7 +136,9 @@ public class HomePageFrame extends JFrame{
 		add(mainPanel, BorderLayout.NORTH);
 		add(panel3,BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
-
+		
+		getContentPane().setBackground(new java.awt.Color(0, 150, 200));
+        buttonPanel.setBackground(new java.awt.Color(0, 150, 200));
 		setVisible(true);
 
 	}

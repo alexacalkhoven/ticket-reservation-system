@@ -35,6 +35,8 @@ public class UserLoginFrame extends JFrame{
 
         setSize(300, 300);
         setContentPane(mainPanel);
+        getContentPane().setBackground(new java.awt.Color(0, 150, 200));
+        buttonPanel.setBackground(new java.awt.Color(0, 150, 200));
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
@@ -51,6 +53,8 @@ public class UserLoginFrame extends JFrame{
         
         login = new JButton("Login");
         login.setAlignmentX(Component.CENTER_ALIGNMENT);
+        login.setBackground(new java.awt.Color(255, 215, 0));
+        login.setOpaque(true);
         buttonPanel.add(login);
 
     }
