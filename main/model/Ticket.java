@@ -149,6 +149,8 @@ public class Ticket {
 	 */
 	public void cancelTicket(String username) {
 
+		
+		//the controllers responsible for reading information from database. 
 		TicketController tc = new TicketController();
 
 		EmailController ec = new EmailController();
@@ -157,6 +159,7 @@ public class Ticket {
 
 		UserController uc = new UserController(); //to see if username matches a registered user or not. 
 			
+		SeatController sc = new SeatController();
 		
 		// check if cancellation is valid
 		if (validCancel() == false) {
@@ -199,7 +202,7 @@ public class Ticket {
 			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
-					+ (currentDate.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
+					+ (currentDate.getYear() + 1900) +  " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
 			message += "You will be refunded $" + payment.amount + " as a movie credit. Show this email to redeem.";
 
 		} else { // user is not RU so no discount
@@ -223,7 +226,9 @@ public class Ticket {
 
 		tc.cancelTicket(ticketId); // call the ticket controller to cancel the ticket. Should also free up the
 									// occupied seat.
-
+			
+		sc.markSeatAsEmpty(seatId); //let the seat no longer be marked as occupied 
+		
 	}
 
 	/**
