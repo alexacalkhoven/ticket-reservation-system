@@ -26,8 +26,6 @@ public class SampleData {
 	public static void addMoviesAndShowtimes() {
 		MovieController mc = new MovieController();
 		ShowtimeController sc = new ShowtimeController();
-		//sc.clearShowtimes();
-		//mc.clearMovies();
 		
 		Date d1 = new Date(2020 - 1901, 11, 1, 19, 0);
 		Date d2 = new Date(2020 - 1901, 11, 1, 21, 0);
@@ -114,10 +112,3 @@ public class SampleData {
 
 }
 
-/*
- * TODO: 
- * Link to GUI. 
- * Go through the original document and make sure all functionalities are achieved (should make
- * a pay fee function for RUs).
- * DOCUMENT
- */

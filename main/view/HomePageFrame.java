@@ -20,8 +20,8 @@ public class HomePageFrame extends JFrame{
 	private JButton searchMovies = new JButton("Search movie");
 	private JButton purchaseTicket  = new JButton("Purchase ticket");
 	private JButton viewTickets = new JButton("View my tickets");
-	private JButton cancelTicket= new JButton("Cancel ticket");
-	private JButton viewEmail= new JButton("View my emails");
+	private JButton cancelTicket = new JButton("Cancel ticket");
+	private JButton viewEmail = new JButton("View my emails");
 	private JButton paySubscription = new JButton("Pay subscription");
 	private JButton logoutButton = new JButton("Logout");
 	//labels for frame

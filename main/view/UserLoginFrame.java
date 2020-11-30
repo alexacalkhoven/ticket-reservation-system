@@ -6,6 +6,10 @@ import main.controller.UserController;
 
 /*
  * After the user submits username, this is the brief frame to make the user login
+ * @author Alexa Calkhoven
+ * @author Madisson Carle
+ * @author Trevor Brown
+ * @author Noah Bradley
  */
 public class UserLoginFrame extends JFrame{
     
@@ -45,7 +49,7 @@ public class UserLoginFrame extends JFrame{
         message.setBounds(300, 300, 300, 300);
         mainPanel.add(message);
         
-        login = new JButton("Login"); // what is the purpose of this extra login button?
+        login = new JButton("Login");
         login.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(login);
 

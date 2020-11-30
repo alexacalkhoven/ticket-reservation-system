@@ -53,7 +53,6 @@ public class GUIController {
 	 * Checks database to validate user entered username
 	 * 
 	 * @param u username defined by user
-	 * 
 	 * @return true if username is valid, false otherwise
 	 */
 	public boolean validateUsername(String u) {
@@ -71,8 +70,7 @@ public class GUIController {
 				uc.addGuestUser(u);
 				return true;
 			} else {
-				JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); // should pop up an error
-																							// window
+				JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); 															
 				return false;
 			}
 		}

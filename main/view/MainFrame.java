@@ -4,6 +4,10 @@ import java.awt.*;
 
 /*
  * First frame in the application. Welcomes user then gets them to sign in
+ * @author Alexa Calkhoven
+ * @author Madisson Carle
+ * @author Trevor Brown
+ * @author Noah Bradley
  */
 public class MainFrame extends JFrame{
 
@@ -17,7 +21,6 @@ public class MainFrame extends JFrame{
      */
     public MainFrame (String s){
         super(s);
-        //setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());

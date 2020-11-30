@@ -29,8 +29,6 @@ public class UserController {
 	 * @return if user is valid or not. True if valid, false if not.
 	 */
 	public boolean isValidUser(String username) {
-		// if username exists in User table return true
-		// else return false
 		ResultSet result = DB.query("SELECT COUNT(*) AS count FROM User WHERE User.username = ?", username);
 		try {
 			result.next();
@@ -48,8 +46,6 @@ public class UserController {
 	 * SQL related error. Checks if username entered corresponds to an existing user
 	 * already, if so, changes their type to registered.
 	 * 
-	 * NOTE: we may want this to return a User/RegUser object in the future
-	 * depending on what operations we will need in the GUI.
 	 * 
 	 * @param username PK for user.
 	 * @param name     name of user.
@@ -58,13 +54,6 @@ public class UserController {
 	 * @return
 	 */
 	public boolean addRegisteredUser(String username, String name, String address, int cardNum, boolean feePaid) {
-		// check if username is already in user table ???
-		// if so, change type to 1 (RU)
-		// if not, add username and 1 to User
-		// add username and other info to RegUser
-
-		// TODO
-		// ADD LOGIC TO ADD TYPE 1 EMAILS TO NEW RU's EMAIL LIST HERE
 		
 		int userTable;
 		if (isValidUser(username)) { // this username already exists, let's update it to RU
@@ -81,15 +70,7 @@ public class UserController {
 		if (userTable != 1 || regTable != 1)
 			return false;
 		
-		// add promo emails to account
-		/*
-		EmailController ec = new EmailController();
-		ArrayList<Email> emailList = ec.getPromoEmails();
-		System.out.println("Emails being added...");
-		for(int i = 0; i < emailList.size(); i++) {
-			ec.addEmailToUser(username, emailList.get(i).getEmailId());
-		}
-		*/
+		
 		return true;
 	}
 
@@ -99,8 +80,8 @@ public class UserController {
 	 * @param username PK of user.
 	 */
 	public void addGuestUser(String username) {
-		if (!isValidUser(username)) { // if this username already exists, don't do anything
-			DB.execute("INSERT INTO User (username, userType) VALUES (?, ?)", username, 0); // type = 0 --> OU
+		if (!isValidUser(username)) {
+			DB.execute("INSERT INTO User (username, userType) VALUES (?, ?)", username, 0);
 		}
 	}
 
@@ -110,8 +91,6 @@ public class UserController {
 	 * @return ArrayList of RUs
 	 */
 	public ArrayList<RegisteredUser> getRegisteredUsers() {
-		// get all rows from RegUser table
-		// construct into RegisteredUser objects and add to arraylist
 		ResultSet r = DB.query("SELECT * FROM RegUser");
 		ArrayList<RegisteredUser> ruList = new ArrayList<RegisteredUser>();
 		try {
@@ -127,8 +106,6 @@ public class UserController {
 	}
 	
 	public boolean isRegisteredUser(String username) {
-		// if username exists in RegUser table return true
-		// else return false
 		ResultSet result = DB.query("SELECT COUNT(*) AS count FROM RegUser WHERE username = ?", username);
 		try {
 			result.next();
