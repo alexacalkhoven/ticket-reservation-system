@@ -81,8 +81,7 @@ public class RegisteredUser extends User{
 	 */
 	@Override
 	public String toString() {
-		return "name: " + name + " address: " + address + " cardNum: " + cardNum + " feePaid: " + feePaid
-				+ "]";
+		return "name: " + name + "\taddress: " + address + "\tcardNum: " + cardNum + "\tfeePaid: " + feePaid;
 	}
 	
 	

@@ -37,7 +37,7 @@ public class Movie {
 	 */
 	@Override
 	public String toString() {
-		return "name: " + name + " movieId: " + movieId;
+		return "name: " + name + "\tmovieId: " + movieId;
 	}
 
 	//getters and setters

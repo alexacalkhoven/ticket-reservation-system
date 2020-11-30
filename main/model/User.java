@@ -82,7 +82,7 @@ public class User {
 	 */
 	@Override
 	public String toString() {
-		String t= " type: " + type + " username: " + username + "tickets: \n"; 
+		String t= " type: " + type + "\tusername: " + username + "\ttickets: \n"; 
 		for(int i=0;i<tickets.size();i++)
 			t+=tickets.get(i).toString();
 

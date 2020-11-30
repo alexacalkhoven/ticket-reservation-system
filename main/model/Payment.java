@@ -68,7 +68,7 @@ public class Payment {
 	 */
 	@Override
 	public String toString() {
-		return "paymentId: " + paymentId + " amount: " + amount + " cardNum: " + cardNum;
+		return "amount: " + amount +  "\tcardNum: " + cardNum+ "\tpaymentId: " + paymentId ;
 	}
 	
 	
