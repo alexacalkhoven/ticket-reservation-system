@@ -1,5 +1,7 @@
 package main.model;
 
+import java.util.Date;
+
 /**
  * Holds information on all the available showtimes for specific movies.
  * This class is used to pass information between GUI and controllers.
@@ -12,7 +14,7 @@ package main.model;
  */
 public class Showtime {
 
-	private String time; // keep this as a string for now since we only really have to print it out.
+	private Date timeOfShow; // keep this as a string for now since we only really have to print it out.
 	private int showtimeId;
 	private int movieId;
 
@@ -22,9 +24,9 @@ public class Showtime {
 	 * @param time time of showtime
 	 * @param movieId movie at showtime
 	 */
-	public Showtime(int showtimeId, String time, int movieId) {
+	public Showtime(int showtimeId, Date time, int movieId) {
 		this.showtimeId = showtimeId;
-		this.time = time;
+		this.timeOfShow = time;
 		this.movieId = movieId;
 	}
 
@@ -32,7 +34,7 @@ public class Showtime {
 	 * constructor
 	 */
 	public Showtime() {
-
+			
 	}
 
 	/**
@@ -41,23 +43,23 @@ public class Showtime {
 	 */
 	@Override
 	public String toString() {
-		return "time:" + time + " showtimeId: " + showtimeId + " movieId: " + movieId;
+		return "time:" + timeOfShow + " showtimeId: " + showtimeId + " movieId: " + movieId;
 	}
 
 	/**
 	 * Gets time for showtime
 	 * @return Returns time as a string
 	 */
-	public String getTime() {
-		return time;
+	public Date getTimeOfShow() {
+		return timeOfShow;
 	}
 
 	/**
 	 * Sets time for showtime
 	 * @param time Time to be set
 	 */
-	public void setTime(String time) {
-		this.time = time;
+	public void setTime(Date time) {
+		this.timeOfShow = time;
 	}
 
 	/**
@@ -93,3 +95,4 @@ public class Showtime {
 	}
 
 }
+
