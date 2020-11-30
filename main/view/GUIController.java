@@ -23,6 +23,14 @@ import resources.Constants;
 import main.controller.TicketController;
 import main.controller.UserController;
 
+/*
+ * Controls buttons and frames of the GUI
+ * 
+ * @author Alexa Calkhoven
+ * @author Madisson Carle
+ * @author Trevor Brown
+ * @author Noah Bradley
+ */
 public class GUIController {
 	private MainFrame mainFrame;
 	private UserLoginFrame loginFrame;
@@ -31,12 +39,21 @@ public class GUIController {
 	private String username;
 	private UserController uc;
 
+	/*
+	 * Constructor
+	 * @param f first frame of GUI
+	 */
 	public GUIController(MainFrame f) {
 		mainFrame = f;
 		mainFrame.addActionListeners(new LoginGuestListener(), new LoginRUListener(),
 				new LoginOUListener());
 	}
-
+	
+	/*
+	 * Checks database to validate user entered username
+	 * @param u username defined by user
+	 * @return true if username is valid, false otherwise
+	 */
 	public boolean validateUsername(String u) {
 		uc = new UserController();
 
@@ -60,9 +77,15 @@ public class GUIController {
 			}
 		}
 	}
-
+	
+	/*
+	 * Login guest button class
+	 */
 	public class LoginGuestListener implements ActionListener {
 		
+		/*
+		 * Function called if this classes button is pressed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			type = "G";
@@ -76,9 +99,15 @@ public class GUIController {
 			mainFrame.dispose();
 		}
 	}
-
+	
+	/*
+	 * Login OU button class
+	 */
 	public class LoginOUListener implements ActionListener {
 		
+		/*
+		 * Function called if this classes button is pressed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			type = "O";
@@ -92,10 +121,15 @@ public class GUIController {
 			mainFrame.dispose();
 		}
 	}
-
+	
+	/*
+	 * Login RU button class
+	 */
 	public class LoginRUListener implements ActionListener {
 		
-
+		/*
+		 * Function called if this classes button is pressed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			type = "R";
@@ -109,9 +143,15 @@ public class GUIController {
 			mainFrame.dispose();
 		}
 	}
-
+	
+	/*
+	 * Login button after users username is validated
+	 */
 	public class LoginListener implements ActionListener {
 		
+		/*
+		 * Function called if this classes button is pressed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			homeFrame = new HomePageFrame("Ticket Reservation System", username, type);
@@ -122,14 +162,24 @@ public class GUIController {
 			loginFrame.dispose();
 		}
 	}
-
+	
+	/*
+	 * View movies button class
+	 */
 	public class ViewMoviesListener implements ActionListener {
+		
+		/*
+		 * Function called if this classes button is pressed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			viewMovies();
 		}
 	}
-
+	
+	/*
+	 * Called to display the list of movies currently available to the user
+	 */
 	private void viewMovies() {
 		String message = "-----Movies-----\n";
 		MovieController mc = new MovieController();
@@ -144,6 +194,10 @@ public class GUIController {
 	 * Allows user to purchase a ticket.
 	 */
 	public class PurchaseTicketListener implements ActionListener {
+		
+		/*
+		 * Function called if this classes button is pressed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			viewMovies();
@@ -208,8 +262,6 @@ public class GUIController {
 				homeFrame.printToTextArea("Invalid seat id entered.");
 				return;
 			}
-			// check if valid seat entered here... (is it an actual seat for the selected
-			// show time..?)
 			if (sc.isValidSeat(username, seatId)) {
 				// go through with purchase
 				homeFrame.printToTextArea("Selected ticket is $9.99. Please enter your payment information.");
@@ -229,8 +281,15 @@ public class GUIController {
 			}
 		}
 	}
-
+	
+	/*
+	 * Button used to view users tickets
+	 */
 	public class ViewTicketsListener implements ActionListener {
+		
+		/*
+		 * Function called when this classes button is pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String message = "-----My Tickets-----\n";
@@ -243,14 +302,17 @@ public class GUIController {
 		}
 	}
 
-	// TODO Trevor
+	/*
+	 * Button used to cancel user's ticket
+	 */
 	public class CancelTicketListener implements ActionListener {
+		
+		/*
+		 * Function called if this classes button is pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			// is there a way to call the view tickets function without pressing the button?
-			// <-- make into a function
-			// could reuse the view tickets listener to fill the homeframe test area.
 			String message = "-----My Tickets-----\n";
 			TicketController tc = new TicketController();
 			ArrayList<Ticket> ticketList = tc.getTickets(username);
@@ -296,8 +358,15 @@ public class GUIController {
 
 		}
 	}
-
+	
+	/*
+	 * Class responsible for the view email button
+	 */
 	public class ViewEmailListener implements ActionListener {
+		
+		/*
+		 * Function called if this classes button is pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String message = "-----My Emails-----\n";
@@ -310,7 +379,10 @@ public class GUIController {
 		}
 	}
 
-	// Get cardNumber for payments
+	/*
+	 * Ensures the credit card entered by user is the correct one
+	 * @return card number
+	 */
 	public String paymentProcess() {
 		String cardNo = displayInputDialog(
 				"Please enter your card number. Note: All card numbers must be between 10000000-99999999");
@@ -325,7 +397,10 @@ public class GUIController {
 			return paymentProcess();
 	}
 
-	// enter name
+	/*
+	 * Used for registering a guest user into an OU or RU
+	 * @return array of strings filled with user info
+	 */
 	public String[] enterUserInfo() {
 		String name = displayInputDialog("Please enter your name");
 		if (name == null) {
@@ -350,10 +425,14 @@ public class GUIController {
 			return enterUserInfo();
 	}
 
-	// TODO Madee
+	/*
+	 * Enables user to pay their subscription and keep their membership. 
+	 */
 	public class PaySubscriptionListener implements ActionListener {
 		
-
+		/*
+		 * Function called when this classes button is pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			double payment = 20.00;
@@ -386,7 +465,14 @@ public class GUIController {
 		}
 	}
 
+	/*
+	 * Used as the logout button
+	 */
 	public class QuitListener implements ActionListener {
+		
+		/*
+		 * Function called when classes button is pressed. Logs out of current session
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mainFrame.dispose();
@@ -395,27 +481,16 @@ public class GUIController {
 			System.exit(1);
 		}
 	}
-
-	public boolean addNewUserCredentials(String t) {
-		if (t.compareTo("RU") == 0) {
-			// System.out.println(username);
-			String n = displayInputDialog("Enter your name: ");
-			if (n == null)
-				return false;
-			String a = displayInputDialog("Enter your address: ");
-			if (a == null)
-				return false;
-			String c = displayInputDialog("Enter your card number, must be between 10000000-99999999: ");
-			if (c == null)
-				return false;
-			uc.addRegisteredUser(username, n, a, Integer.parseInt(c), false); // assume member must pay fee when logged
-																				// in as RU
-		} else if (t.compareTo("OU") == 0)
-			uc.addGuestUser(username);
-		return true;
-	}
-
+	
+	/*
+	 * Used only by guest users. Gives them the opportunity to register as an OU or RU. Class is a 
+	 * button.
+	 */
 	public class RegisterListener implements ActionListener {
+		
+		/*
+		 * Function called when register is pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String selectedType = displayInputDialog(
@@ -439,8 +514,15 @@ public class GUIController {
 
 		}
 	}
-
+	
+	/*
+	 * Button responsible for searching for a movie
+	 */
 	public class SearchMovieListener implements ActionListener {
+		
+		/*
+		 * Function called when register is pressed
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// make into a function (have to use in the purchase ticket)
@@ -448,7 +530,36 @@ public class GUIController {
 			searchMovie(movie);
 		}
 	}
+	
+	/*
+	 * Gets the guests credentials to add them as a user
+	 * @param t
+	 * @return true if user fills all fields correctly, fasle otherwise
+	 */
+	public boolean addNewUserCredentials(String t) {
+		if (t.compareTo("RU") == 0) {
+			// System.out.println(username);
+			String n = displayInputDialog("Enter your name: ");
+			if (n == null)
+				return false;
+			String a = displayInputDialog("Enter your address: ");
+			if (a == null)
+				return false;
+			String c = displayInputDialog("Enter your card number, must be between 10000000-99999999: ");
+			if (c == null)
+				return false;
+			uc.addRegisteredUser(username, n, a, Integer.parseInt(c), false); // assume member must pay fee when logged
+																				// in as RU
+		} else if (t.compareTo("OU") == 0)
+			uc.addGuestUser(username);
+		return true;
+	}
 
+	/*
+	 * Looks for the movie in the database the user defined
+	 * @param movie user defined movie
+	 * @return movie object if found, null otherwise
+	 */
 	private Movie searchMovie(String movie) {
 		MovieController mc = new MovieController();
 		Movie m = mc.searchMovie(movie);

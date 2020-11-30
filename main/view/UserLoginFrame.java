@@ -4,13 +4,20 @@ import java.awt.*;
 import java.awt.event.*;
 import main.controller.UserController;
 
+/*
+ * After the user submits username, this is the brief frame to make the user login
+ */
 public class UserLoginFrame extends JFrame{
     
     private JPanel mainPanel, buttonPanel;
     private JButton login;
     private JLabel message;
     private JTextField usernameInput;
-
+    
+    /*
+     * Constructor
+     * @param s frame name
+     */
     public UserLoginFrame (String s){
         super(s);
 
@@ -28,7 +35,10 @@ public class UserLoginFrame extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
     }
-
+    
+    /*
+     * Adds label in centre of panel and login button
+     */
     private void addComponents(){
 
         message = new JLabel("    Hello Theatre Member! Please click login.");
@@ -40,13 +50,14 @@ public class UserLoginFrame extends JFrame{
         buttonPanel.add(login);
 
     }
-
+    
+    /*
+     * Defines login button
+     * @param loginButton login button action listener
+     */
     public void addActionListeners(GUIController.LoginListener loginButton){
         login.addActionListener(loginButton);
     }
-
-    public String displayInputDialog(String s) {
-        return JOptionPane.showInputDialog(s);
-    }
+   
 
 }

@@ -3,7 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
+/*
+ * Page used as homepage for all users. This is the page with most GUI functionality
+ */
 public class HomePageFrame extends JFrame{
     private JPanel mainPanel, buttonPanel;
     private JButton registerGuest, viewMovies, searchMovies, purchaseTicket, viewTickets, cancelTicket, viewEmail, paySubscription, quitButton;
@@ -14,6 +16,12 @@ public class HomePageFrame extends JFrame{
     private BorderLayout layout;
     private String userType;
 
+    /*
+     * Constructor
+     * @param s Frame name
+     * @param u username of user
+     * @param type type of user
+     */
     public HomePageFrame (String s, String u, String type){
         super(s);
         username = u;
@@ -33,7 +41,10 @@ public class HomePageFrame extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
     }
-
+    
+    /*
+     * Adds buttons and messages to mainPanel and button panel
+     */
     private void addComponents(){
         String s = "Welcome to your Homepage " + username + "!       ";
         message1 = new JLabel(s);
@@ -90,7 +101,19 @@ public class HomePageFrame extends JFrame{
         mainPanel.add(scrollArea, BorderLayout.EAST);
 
     }
-
+    
+    /*
+     * Once buttons are created, their actionListeners are linked
+     * @param movies view movies listener
+     * @param ticket purchase ticket listener
+     * @param tickets user tickets listener
+     * @param cancel cancel button listener
+     * @param emails email button listener
+     * @param pay pay subscription button listener
+     * @param quit logout button listener
+     * @param searchM search movie listener
+     * @param register register user for guest - button listener
+     */
     public void addActionListeners(GUIController.ViewMoviesListener movies, GUIController.PurchaseTicketListener ticket, 
                                     GUIController.ViewTicketsListener tickets, GUIController.CancelTicketListener cancel,
                                     GUIController.ViewEmailListener emails, GUIController.PaySubscriptionListener pay,
@@ -108,7 +131,11 @@ public class HomePageFrame extends JFrame{
         paySubscription.addActionListener(pay);
         quitButton.addActionListener(quit);
     }
-
+    
+    /*
+     * Prints argument to text area in GUI
+     * @param s message to print
+     */
     public void printToTextArea(String s){
         displayArea.setText(null);
         displayArea.setText(s);
