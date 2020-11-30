@@ -62,7 +62,7 @@ public class Ticket {
 	public String toString() {
 		return "Ticket ID: " + ticketId 
 				+ " timePurchased:" + (timePurchased.getMonth() +1) + "/" + timePurchased.getDate() + "/"
-				+ (timePurchased.getYear() + 1900) + "\n";
+				+ (timePurchased.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
 	}
 
 	//getters and setters
@@ -199,7 +199,7 @@ public class Ticket {
 			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
-					+ (currentDate.getYear() + 1900) + "\n";
+					+ (currentDate.getYear() + 1900) + + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
 			message += "You will be refunded $" + payment.amount + " as a movie credit. Show this email to redeem.";
 
 		} else { // user is not RU so no discount
@@ -210,7 +210,7 @@ public class Ticket {
 			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
-					+ (currentDate.getYear() + 1900);
+					+ (currentDate.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
 			message += "You will be refunded $" + 0.85 * payment.amount
 					+ " as a movie credit. Show this email to redeem.";
 
@@ -254,7 +254,7 @@ public class Ticket {
 			System.err.println("Error in retrieving payment information for purchase.");
 		}
 
-		message = "\nReceipt for: " + username + "\n";
+		message = "Receipt for: " + username + "\n";
 		message += "Movie ticket purchased \n";
 		message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 				+ paymentId + "\n";
@@ -262,8 +262,8 @@ public class Ticket {
 		message += "Movie: " + movie.getName() + "\n";
 		message += "Time: " + st.getTimeOfShow() + "\n";
 		message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
-				+ (timePurchased.getYear() + 1900) + "\n";
-		message += "Cost: $" + payment.amount + ". Show this email as your ticket.";
+				+ (timePurchased.getYear() + 1900) + " " + timePurchased.getHours() + " : " + timePurchased.getMinutes() + "\n";
+		message += "Cost: $" + payment.amount + ". Show this email as your ticket.\n";
 
 		// set up email
 		Email email = ec.addEmail(0, message);
@@ -272,3 +272,4 @@ public class Ticket {
 	}
 
 }
+
