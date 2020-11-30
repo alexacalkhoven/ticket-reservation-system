@@ -61,7 +61,7 @@ public class Ticket {
 	@Override
 	public String toString() {
 		return "Ticket ID: " + ticketId 
-				+ " timePurchased:" + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+				+ " timePurchased:" + (timePurchased.getMonth() +1) + "/" + timePurchased.getDate() + "/"
 				+ (timePurchased.getYear() + 1900) + "\n";
 	}
 
@@ -171,6 +171,7 @@ public class Ticket {
 	
 		if (payment == null) {
 			System.err.println("Error in retrieving payment information for refund.");
+			return;
 		}
 
 		// rough form of what it should like. Next version should have the actual amount
@@ -184,7 +185,7 @@ public class Ticket {
 		for(RegisteredUser ru: uc.getRegisteredUsers()) {
 			if(ru.getUsername().equals(username)) { //set the type to registerd user and exit the loop
 				type =1;
-				return;
+				break;
 			}
 		}
 
@@ -195,7 +196,7 @@ public class Ticket {
 			message += "100% movie credit refund issued \n";
 			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 					+ paymentId + "\n";
-			message += "Date Purchased: " + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
 					+ (currentDate.getYear() + 1900) + "\n";
@@ -206,7 +207,7 @@ public class Ticket {
 			message += "85% movie credit refund issued \n"; // 100% minus 15% fee
 			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 					+ paymentId + "\n";
-			message += "Date Purchased: " + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
 					+ (currentDate.getYear() + 1900);
@@ -260,7 +261,7 @@ public class Ticket {
 		//message += "Seat: row " + seat.getRow() + " column " + seat.getCol() + ", screen " + seat.getScreen() + "\n"; // COMMENT BACK IN WHEN WE HAVE SETTERS AND GETTERS
 		message += "Movie: " + movie.getName() + "\n";
 		message += "Time: " + st.getTimeOfShow() + "\n";
-		message += "Date Purchased: " + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+		message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 				+ (timePurchased.getYear() + 1900) + "\n";
 		message += "Cost: $" + payment.amount + ". Show this email as your ticket.\n";
 
