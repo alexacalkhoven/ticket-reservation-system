@@ -108,6 +108,16 @@ public class SeatController {
 	public void markSeatAsTaken(int seatId) {
 		DB.execute("UPDATE seat SET isTaken = 1 WHERE seatId = ?", seatId);
 	}
+	
+	/**
+	 * Changes status of seat from true (taken) to false (not taken). If already
+	 * empty, does nothing.
+	 * 
+	 * @param seatId seat to update.
+	 */
+	public void markSeatAsEmpty(int seatId) {
+		DB.execute("UPDATE seat SET isTaken = 0 WHERE seatId = ?", seatId);
+	}
 
 	/**
 	 * Adds seat to DB and returns the Seat.
