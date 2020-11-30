@@ -41,48 +41,48 @@ public class GUIController {
 
 	/*
 	 * Constructor
+	 * 
 	 * @param f first frame of GUI
 	 */
 	public GUIController(MainFrame f) {
 		mainFrame = f;
-		mainFrame.addActionListeners(new LoginGuestListener(), new LoginRUListener(),
-				new LoginOUListener());
+		mainFrame.addActionListeners(new LoginGuestListener(), new LoginRUListener(), new LoginOUListener());
 	}
-	
+
 	/*
 	 * Checks database to validate user entered username
+	 * 
 	 * @param u username defined by user
+	 * 
 	 * @return true if username is valid, false otherwise
 	 */
 	public boolean validateUsername(String u) {
 		uc = new UserController();
 
-		//checks too see if username is in DB
-		if(uc.isValidUser(u)) {
-			if(type.equals("G")) {
+		// checks to see if username is in DB
+		if (uc.isValidUser(u)) {
+			if (type.equals("G")) {
 				JOptionPane.showMessageDialog(mainFrame, "This username is already taken... Try again");
 				return false;
-			}
-			else 
+			} else
 				return true;
-		}
-		else {
-			if(type.equals("G")) {
+		} else {
+			if (type.equals("G")) {
 				uc.addGuestUser(u);
 				return true;
-			}
-			else {
-				JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); // should pop up an error window
+			} else {
+				JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); // should pop up an error
+																							// window
 				return false;
 			}
 		}
 	}
-	
+
 	/*
 	 * Login guest button class
 	 */
 	public class LoginGuestListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed.
 		 */
@@ -91,20 +91,20 @@ public class GUIController {
 			type = "G";
 			username = displayInputDialog("Username: ");
 			boolean valid = validateUsername(username);
-			 if(!valid) 
-			 	return;
-			
+			if (!valid)
+				return;
+
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
 			loginFrame.addActionListeners(new LoginListener());
 			mainFrame.dispose();
 		}
 	}
-	
+
 	/*
 	 * Login OU button class
 	 */
 	public class LoginOUListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed.
 		 */
@@ -113,20 +113,20 @@ public class GUIController {
 			type = "O";
 			username = displayInputDialog("Username: ");
 			boolean valid = validateUsername(username);
-			if(!valid)
+			if (!valid)
 				return;
-				
+
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
 			loginFrame.addActionListeners(new LoginListener());
 			mainFrame.dispose();
 		}
 	}
-	
+
 	/*
 	 * Login RU button class
 	 */
 	public class LoginRUListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed.
 		 */
@@ -135,20 +135,42 @@ public class GUIController {
 			type = "R";
 			username = displayInputDialog("Username: ");
 			boolean valid = validateUsername(username);
-			if(!valid)
+			if (!valid)
 				return;
-
+			boolean isRu = validateRU(username);
+			if (!isRu)
+				return;
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
 			loginFrame.addActionListeners(new LoginListener());
 			mainFrame.dispose();
 		}
 	}
-	
+
+	/*
+	 * Checks database to validate if user is an RU.
+	 * 
+	 * @param u username defined by user
+	 * 
+	 * @return true if user is valid RU, false otherwise
+	 */
+	public boolean validateRU(String u) {
+		uc = new UserController();
+
+		// checks to see if username is in DB
+		if (!uc.isRegisteredUser(u)) {
+			JOptionPane.showMessageDialog(mainFrame,
+					"User is not a Registered User... Try logging in as an Ordinary User"); // should pop up an error
+																							// window
+			return false;
+		}
+		return true;
+	}
+
 	/*
 	 * Login button after users username is validated
 	 */
 	public class LoginListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed.
 		 */
@@ -162,12 +184,12 @@ public class GUIController {
 			loginFrame.dispose();
 		}
 	}
-	
+
 	/*
 	 * View movies button class
 	 */
 	public class ViewMoviesListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed.
 		 */
@@ -176,7 +198,7 @@ public class GUIController {
 			viewMovies();
 		}
 	}
-	
+
 	/*
 	 * Called to display the list of movies currently available to the user
 	 */
@@ -194,7 +216,7 @@ public class GUIController {
 	 * Allows user to purchase a ticket.
 	 */
 	public class PurchaseTicketListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed.
 		 */
@@ -281,12 +303,12 @@ public class GUIController {
 			}
 		}
 	}
-	
+
 	/*
 	 * Button used to view users tickets
 	 */
 	public class ViewTicketsListener implements ActionListener {
-		
+
 		/*
 		 * Function called when this classes button is pressed
 		 */
@@ -306,7 +328,7 @@ public class GUIController {
 	 * Button used to cancel user's ticket
 	 */
 	public class CancelTicketListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed
 		 */
@@ -358,12 +380,12 @@ public class GUIController {
 
 		}
 	}
-	
+
 	/*
 	 * Class responsible for the view email button
 	 */
 	public class ViewEmailListener implements ActionListener {
-		
+
 		/*
 		 * Function called if this classes button is pressed
 		 */
@@ -381,6 +403,7 @@ public class GUIController {
 
 	/*
 	 * Ensures the credit card entered by user is the correct one
+	 * 
 	 * @return card number
 	 */
 	public String paymentProcess() {
@@ -399,6 +422,7 @@ public class GUIController {
 
 	/*
 	 * Used for registering a guest user into an OU or RU
+	 * 
 	 * @return array of strings filled with user info
 	 */
 	public String[] enterUserInfo() {
@@ -426,10 +450,10 @@ public class GUIController {
 	}
 
 	/*
-	 * Enables user to pay their subscription and keep their membership. 
+	 * Enables user to pay their subscription and keep their membership.
 	 */
 	public class PaySubscriptionListener implements ActionListener {
-		
+
 		/*
 		 * Function called when this classes button is pressed
 		 */
@@ -440,15 +464,18 @@ public class GUIController {
 			String cardNo = paymentProcess();
 			if (cardNo.equals("cancel"))
 				return;
-			String confirm = displayInputDialog("Please enter 'Confirm' if you would like to pay $"+payment+ " for a Registered User subscription");
-			if(confirm==null) return;
-			else if(confirm.equals("Confirm")) {
-			PaymentController pc = new PaymentController();
-			pc.addPayment(payment, Integer.parseInt(cardNo));
-			String receipt="A Registered User Subscription payment of $"+payment+" was made to your account. Have a nice day!";
-			EmailController ec= new EmailController();
-			Email email =ec.addEmail(0, receipt);
-			ec.addEmailToUser(username, email.getEmailId());
+			String confirm = displayInputDialog("Please enter 'Confirm' if you would like to pay $" + payment
+					+ " for a Registered User subscription");
+			if (confirm == null)
+				return;
+			else if (confirm.equals("Confirm")) {
+				PaymentController pc = new PaymentController();
+				pc.addPayment(payment, Integer.parseInt(cardNo));
+				String receipt = "A Registered User Subscription payment of $" + payment
+						+ " was made to your account. Have a nice day!";
+				EmailController ec = new EmailController();
+				Email email = ec.addEmail(0, receipt);
+				ec.addEmailToUser(username, email.getEmailId());
 			}
 //			String[] info = enterUserInfo();
 //			if (info[0].equals("cancel"))
@@ -469,7 +496,7 @@ public class GUIController {
 	 * Used as the logout button
 	 */
 	public class QuitListener implements ActionListener {
-		
+
 		/*
 		 * Function called when classes button is pressed. Logs out of current session
 		 */
@@ -481,13 +508,13 @@ public class GUIController {
 			System.exit(1);
 		}
 	}
-	
+
 	/*
-	 * Used only by guest users. Gives them the opportunity to register as an OU or RU. Class is a 
-	 * button.
+	 * Used only by guest users. Gives them the opportunity to register as an OU or
+	 * RU. Class is a button.
 	 */
 	public class RegisterListener implements ActionListener {
-		
+
 		/*
 		 * Function called when register is pressed
 		 */
@@ -514,12 +541,12 @@ public class GUIController {
 
 		}
 	}
-	
+
 	/*
 	 * Button responsible for searching for a movie
 	 */
 	public class SearchMovieListener implements ActionListener {
-		
+
 		/*
 		 * Function called when register is pressed
 		 */
@@ -530,10 +557,12 @@ public class GUIController {
 			searchMovie(movie);
 		}
 	}
-	
+
 	/*
 	 * Gets the guests credentials to add them as a user
+	 * 
 	 * @param t
+	 * 
 	 * @return true if user fills all fields correctly, fasle otherwise
 	 */
 	public boolean addNewUserCredentials(String t) {
@@ -557,7 +586,9 @@ public class GUIController {
 
 	/*
 	 * Looks for the movie in the database the user defined
+	 * 
 	 * @param movie user defined movie
+	 * 
 	 * @return movie object if found, null otherwise
 	 */
 	private Movie searchMovie(String movie) {
