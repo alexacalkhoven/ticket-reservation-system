@@ -115,7 +115,9 @@ public class GUIController {
 			boolean valid = validateUsername(username);
 			if (!valid)
 				return;
-
+			boolean isOu = validateOU(username);
+			if (!isOu)
+				return;
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
 			loginFrame.addActionListeners(new LoginListener());
 			mainFrame.dispose();
@@ -160,6 +162,26 @@ public class GUIController {
 		if (!uc.isRegisteredUser(u)) {
 			JOptionPane.showMessageDialog(mainFrame,
 					"User is not a Registered User... Try logging in as an Ordinary User"); // should pop up an error
+																							// window
+			return false;
+		}
+		return true;
+	}
+	
+	/*
+	 * Checks database to validate if user is an RU.
+	 * 
+	 * @param u username defined by user
+	 * 
+	 * @return true if user is valid RU, false otherwise
+	 */
+	public boolean validateOU(String u) {
+		uc = new UserController();
+
+		// checks to see if username is in DB
+		if (uc.isRegisteredUser(u)) {
+			JOptionPane.showMessageDialog(mainFrame,
+					"User is a Registered User... Try logging in as an Registered User"); // should pop up an error
 																							// window
 			return false;
 		}
