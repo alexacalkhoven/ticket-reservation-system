@@ -152,4 +152,22 @@ public class UserController {
 		}
 		return -1;
 	}
+	
+	public int getFeePaid(String username) {
+		ResultSet result = DB.query("SELECT * FROM RegUser WHERE username = ?", username);
+		try {
+			result.next();
+			int feePaid = result.getInt("feePaid");
+			return feePaid;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public boolean confirmFeePaid(String username) {
+		int rows = DB.execute("UPDATE RegUser SET feePaid = 1 WHERE username = ?", username);
+		if(rows != 1) return false;
+		return true;
+	}
 }
