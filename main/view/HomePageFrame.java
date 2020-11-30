@@ -96,7 +96,9 @@ public class HomePageFrame extends JFrame{
                                     GUIController.ViewEmailListener emails, GUIController.PaySubscriptionListener pay,
                                     GUIController.QuitListener quit, GUIController.SearchMovieListener searchM,
                                     GUIController.RegisterListener register){
-        registerGuest.addActionListener(register);
+        if(userType == "G")
+            registerGuest.addActionListener(register);
+            
         searchMovies.addActionListener(searchM);
         viewMovies.addActionListener(movies);
         purchaseTicket.addActionListener(ticket);
