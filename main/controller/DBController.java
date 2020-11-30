@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 
 /**
@@ -26,7 +27,7 @@ public class DBController {
 	// Note: change these locally as needed to access your database.
 	String ENSF_DB_URL = "jdbc:mysql://localhost:3306/ensf480";
 	String ENSF_DB_USER = "root";
-	String ENSF_DB_PASSWORD = "MyNewPass";
+	String ENSF_DB_PASSWORD = "pw";
 
 
 
@@ -105,7 +106,12 @@ public class DBController {
 				s.setObject(i + 1, args[i]);
 			}
 
-			s.execute();
+			try {
+				s.execute();
+			} catch (SQLIntegrityConstraintViolationException e) {
+				System.out.println("Table integrity constraint violated. Won't add this data to the DB.");
+			}
+			
 			return s.getUpdateCount();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -131,7 +137,13 @@ public class DBController {
 				s.setObject(i + 1, args[i]);
 			}
 
-			int rows = s.executeUpdate();
+			int rows = 0;
+			try {
+				rows = s.executeUpdate();
+			} catch (SQLIntegrityConstraintViolationException e) {
+				System.out.println("Table integrity constraint violated. Won't add this data to the DB.");
+			}
+			
 			if (rows == 0)
 				return -1;
 			try (ResultSet generatedKeys = s.getGeneratedKeys()) {
