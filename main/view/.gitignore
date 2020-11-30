@@ -11,3 +11,10 @@
 /TicketApp.class
 /GuestFrame.class
 /DataCommunicator.class
+/GUIController$CancelTicketListener.class
+/GUIController$PaySubscriptionListener.class
+/GUIController$QuitListener.class
+/GUIController$RegisterListener.class
+/GUIController$SearchMovieListener.class
+/GUIController$ViewEmailListener.class
+/GUIController$ViewTicketsListener.class

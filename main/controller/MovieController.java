@@ -46,8 +46,10 @@ public class MovieController {
 	 */
 	public Movie addMovie(String name) {
 		int movieId = DB.executeReturnKey("INSERT INTO Movie (name) VALUES (?)", name);
-		if (movieId == -1)
-			return null;
+		if (movieId == -1) {
+			// movie might already exist... let's try to search it
+			return searchMovie(name);
+		}
 		return new Movie(movieId, name);
 	}
 
@@ -87,6 +89,10 @@ public class MovieController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void clearMovies() {
+		DB.execute("DELETE FROM Movie");
 	}
 
 }
