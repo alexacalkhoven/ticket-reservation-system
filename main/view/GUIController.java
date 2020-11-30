@@ -287,7 +287,7 @@ public class GUIController {
 			if (sc.isValidSeat(username, seatId)) {
 				// go through with purchase
 				homeFrame.printToTextArea("Selected ticket is $9.99. Please enter your payment information.");
-				String cardNum = paymentProcess();
+				String cardNum = paymentProcess(username);
 				int card = Integer.parseInt(cardNum);
 				PaymentController pc = new PaymentController();
 				Payment p = pc.addPayment(9.99, card);
@@ -406,18 +406,29 @@ public class GUIController {
 	 * 
 	 * @return card number
 	 */
-	public String paymentProcess() {
-		String cardNo = displayInputDialog(
-				"Please enter your card number. Note: All card numbers must be between 10000000-99999999");
+	public String paymentProcess(String u) {
+		String cardNo = "";
+		String message = "";
+		if(type.equals("R")) {
+			System.out.println(u);
+			cardNo = String.valueOf(uc.getCardNum(u));
+			message += "Card number preloaded... ";
+		} else {
+			cardNo = displayInputDialog(
+					"Please enter your card number. Note: All card numbers must be between 10000000-99999999");
+		}
+		
 		if (cardNo == null)
 			return "cancel";
-		String confirm = displayInputDialog("Is your card number: " + cardNo + "\n If yes Enter Y. If no Enter N");
+		
+		message += "Is your card number: " + cardNo + "?\nIf yes Enter Y. If no Enter N";
+		String confirm = displayInputDialog(message);
 		if (confirm == null)
 			return "cancel";
 		if (confirm.equals("Y") && (Integer.parseInt(cardNo) < 99999999 && Integer.parseInt(cardNo) > 10000000))
 			return cardNo;
 		else
-			return paymentProcess();
+			return paymentProcess(u);
 	}
 
 	/*
@@ -461,7 +472,7 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			double payment = 20.00;
 			homeFrame.printToTextArea("Your outstanding payment is: $" + payment);
-			String cardNo = paymentProcess();
+			String cardNo = paymentProcess(username);
 			if (cardNo.equals("cancel"))
 				return;
 			String confirm = displayInputDialog("Please enter 'Confirm' if you would like to pay $" + payment

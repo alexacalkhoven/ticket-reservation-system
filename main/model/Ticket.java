@@ -254,7 +254,7 @@ public class Ticket {
 			System.err.println("Error in retrieving payment information for purchase.");
 		}
 
-		message = "Receipt for: " + username + "\n";
+		message = "\nReceipt for: " + username + "\n";
 		message += "Movie ticket purchased \n";
 		message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 				+ paymentId + "\n";
@@ -263,7 +263,7 @@ public class Ticket {
 		message += "Time: " + st.getTimeOfShow() + "\n";
 		message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 				+ (timePurchased.getYear() + 1900) + "\n";
-		message += "Cost: $" + payment.amount + ". Show this email as your ticket.\n";
+		message += "Cost: $" + payment.amount + ". Show this email as your ticket.";
 
 		// set up email
 		Email email = ec.addEmail(0, message);

@@ -93,17 +93,18 @@ public class SampleData {
 
 	public static void addPromotionEmails() {
 		addPromotionEmailsToUsers(
-				"Avengers: Endgame is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
+				"\nAvengers: Endgame is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
 		addPromotionEmailsToUsers(
-				"Clueless is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
+				"\nClueless is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
 		addPromotionEmailsToUsers(
-				"New movie is coming out tomorrow. Keep an eye out on your inbox for more information soon.");
+				"\nNew movie is coming out tomorrow. Keep an eye out on your inbox for more information soon.");
 
 	}
 
 	public static void addPromotionEmailsToUsers(String message) {
 		EmailController ec = new EmailController();
 		Email e = ec.addEmail(1, message);
+		if(e == null) return;
 		UserController uc = new UserController();
 		ArrayList<RegisteredUser> ruList = uc.getRegisteredUsers();
 		for (int i = 0; i < ruList.size(); i++) {

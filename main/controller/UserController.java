@@ -140,4 +140,16 @@ public class UserController {
 		}
 		return false;
 	}
+	
+	public int getCardNum(String username) {
+		ResultSet result = DB.query("SELECT * FROM RegUser WHERE username = ?", username);
+		try {
+			result.next();
+			int cardNum = result.getInt("cardNum");
+			return cardNum;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }

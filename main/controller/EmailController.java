@@ -67,8 +67,19 @@ public class EmailController {
 	public Email addEmail(int type, String message) {
 		// insert to Email
 		int emailId = DB.executeReturnKey("INSERT INTO Email (emailType, message) VALUES (?, ?)", type, message);
-		if (emailId == -1)
-			return null;
+		if (emailId == -1){
+			// try to return existing email
+			ResultSet r = DB.query("SELECT * FROM Email WHERE message = ?", message);
+			try {
+				if(r.next()) {
+					return new Email(r.getInt("emailId"), r.getInt("emailType"), r.getString("message"));
+				} else {
+					return null;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		// insert to UserToEmail
 		return new Email(emailId, type, message);
 	}

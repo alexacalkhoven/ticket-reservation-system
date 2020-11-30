@@ -37,7 +37,9 @@ public class Movie {
 	 */
 	@Override
 	public String toString() {
-		return "name: " + name + "\tmovieId: " + movieId;
+		String tabs = "\t";
+		if(name.length() <= 8) tabs += "\t";
+		return "name: " + name + tabs + "movieId: " + movieId;
 	}
 
 	//getters and setters
