@@ -75,7 +75,7 @@ public class Email {
 	 */
 	@Override
 	public String toString() {
-		return "message: " + message + "emailId: " + emailId + "type: " + type;
+		return "emailId: " + emailId + "type: " + type+"\nmessage: " + message ;
 	}
 	
 	

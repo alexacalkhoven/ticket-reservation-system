@@ -91,8 +91,8 @@ public class GUIController {
 			type = "G";
 			username = displayInputDialog("Username: ");
 			boolean valid = validateUsername(username);
-			// if(!valid) i dont think this needs to be here. You should never return when logging in as guest.
-			// 	return;
+			 if(!valid) 
+			 	return;
 			
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
 			loginFrame.addActionListeners(new LoginListener());
@@ -586,4 +586,3 @@ public class GUIController {
 	}
 
 }
-

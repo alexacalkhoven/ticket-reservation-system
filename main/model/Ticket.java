@@ -57,10 +57,12 @@ public class Ticket {
 	 * Converts Ticket class to a string to be passed over to the GUI.
 	 * @return Returns the ticket class as a String.
 	 */
+	//NOTE :  reformatted so the time purchased would be readable. And got rid of other values that would add clutter in GUI area.
 	@Override
 	public String toString() {
-		return "ticketId: " + ticketId + " seatId: " + seatId + " showtimeId:" + showtimeId + " paymentId:" + paymentId
-				+ " timePurchased:" + timePurchased.toString() + "\n";
+		return "Ticket ID: " + ticketId 
+				+ " timePurchased:" + (timePurchased.getMonth() +1) + "/" + timePurchased.getDate() + "/"
+				+ (timePurchased.getYear() + 1900) + "\n";
 	}
 
 	//getters and setters
@@ -112,7 +114,19 @@ public class Ticket {
 	 */
 	public boolean validCancel() {
 
-		long timeDifMS = new java.util.Date().getTime() - timePurchased.getTime(); // get current time in ms and
+		ShowtimeController sc = new ShowtimeController();
+		
+		
+		Showtime st = sc.getShowtime(showtimeId);
+		
+		if(st ==null) { //database error, so cancellation will not work.
+			return false; 
+		}
+		
+		
+		
+		
+		long timeDifMS = new java.util.Date().getTime() - st.getTimeOfShow().getTime(); // get current time in ms and
 																					// subtract purchase time in ms.
 
 		int timeDifHrs = (int) timeDifMS / 3600000; // get the integer time difference in hours
@@ -142,6 +156,7 @@ public class Ticket {
 		PaymentController pc = new PaymentController();
 
 		UserController uc = new UserController(); //to see if username matches a registered user or not. 
+			
 		
 		// check if cancellation is valid
 		if (validCancel() == false) {
@@ -153,8 +168,10 @@ public class Ticket {
 		String message = "";
 		Date currentDate = new Date();
 		Payment payment = pc.getPayment(paymentId);
+	
 		if (payment == null) {
 			System.err.println("Error in retrieving payment information for refund.");
+			return;
 		}
 
 		// rough form of what it should like. Next version should have the actual amount
@@ -179,7 +196,7 @@ public class Ticket {
 			message += "100% movie credit refund issued \n";
 			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 					+ paymentId + "\n";
-			message += "Date Purchased: " + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
 					+ (currentDate.getYear() + 1900) + "\n";
@@ -190,7 +207,7 @@ public class Ticket {
 			message += "85% movie credit refund issued \n"; // 100% minus 15% fee
 			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 					+ paymentId + "\n";
-			message += "Date Purchased: " + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+			message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 					+ (timePurchased.getYear() + 1900) + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
 					+ (currentDate.getYear() + 1900);
@@ -243,8 +260,8 @@ public class Ticket {
 				+ paymentId + "\n";
 		//message += "Seat: row " + seat.getRow() + " column " + seat.getCol() + ", screen " + seat.getScreen() + "\n"; // COMMENT BACK IN WHEN WE HAVE SETTERS AND GETTERS
 		message += "Movie: " + movie.getName() + "\n";
-		message += "Time: " + st.getTime() + "\n";
-		message += "Date Purchased: " + timePurchased.getMonth() + "/" + timePurchased.getDate() + "/"
+		message += "Time: " + st.getTimeOfShow() + "\n";
+		message += "Date Purchased: " + (timePurchased.getMonth()+1) + "/" + timePurchased.getDate() + "/"
 				+ (timePurchased.getYear() + 1900) + "\n";
 		message += "Cost: $" + payment.amount + ". Show this email as your ticket.\n";
 

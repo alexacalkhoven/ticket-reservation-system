@@ -82,11 +82,14 @@ public class UserController {
 			return false;
 		
 		// add promo emails to account
+		/*
 		EmailController ec = new EmailController();
 		ArrayList<Email> emailList = ec.getPromoEmails();
+		System.out.println("Emails being added...");
 		for(int i = 0; i < emailList.size(); i++) {
 			ec.addEmailToUser(username, emailList.get(i).getEmailId());
 		}
+		*/
 		return true;
 	}
 
@@ -121,5 +124,20 @@ public class UserController {
 			e.printStackTrace();
 		}
 		return ruList;
+	}
+	
+	public boolean isRegisteredUser(String username) {
+		// if username exists in RegUser table return true
+		// else return false
+		ResultSet result = DB.query("SELECT COUNT(*) AS count FROM RegUser WHERE username = ?", username);
+		try {
+			result.next();
+			int userCount = result.getInt("count");
+			if (userCount == 1)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

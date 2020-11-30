@@ -2,6 +2,7 @@ package main.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import main.model.Showtime;
 
@@ -29,7 +30,7 @@ public class ShowtimeController {
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
 		try {
 			while (r.next()) {
-				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getString("time"), r.getInt("movieId"));
+				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
 				showtimeList.add(showtime);
 			}
 		} catch (SQLException e) {
@@ -45,7 +46,7 @@ public class ShowtimeController {
 	 * @param movieId PK of movie to link to showtime.
 	 * @return Showtime object added. Null if error.
 	 */
-	public Showtime addShowtime(String time, int movieId) {
+	public Showtime addShowtime(Timestamp time, int movieId) {
 		int showtimeId = DB.executeReturnKey("INSERT INTO Showtime (time, movieId) VALUES (?, ?)", time, movieId);
 		if (showtimeId == -1)
 			return null;
@@ -62,7 +63,7 @@ public class ShowtimeController {
 		ResultSet r = DB.query("SELECT * FROM Showtime WHERE showtimeId = ?", showtimeId);
 		try {
 			if (r.next()) {
-				return new Showtime(r.getInt("showtimeId"), r.getString("time"), r.getInt("movieId"));
+				return new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,7 +82,7 @@ public class ShowtimeController {
 		ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
 		try {
 			while (r.next()) {
-				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getString("time"), r.getInt("movieId"));
+				Showtime showtime = new Showtime(r.getInt("showtimeId"), r.getDate("time"), r.getInt("movieId"));
 				showtimeList.add(showtime);
 			}
 		} catch (SQLException e) {
@@ -89,12 +90,21 @@ public class ShowtimeController {
 		}
 		return showtimeList;
 	}
-
-	/*
-	 * public static void main(String[] args) { // a few tests... ShowtimeController
-	 * sc = new ShowtimeController(); MovieController mc = new MovieController();
-	 * Movie m = mc.addMovie("test movie"); sc.addShowtime("Wednesday evening",
-	 * m.getMovieId()); ArrayList<Showtime> sl = sc.getShowtimes(); for(int i = 0; i
-	 * < sl.size(); i++) { System.out.println(sl.toString()); } }
-	 */
+	
+	public boolean hasSeats(int showtimeId) {
+		ResultSet result = DB.query("SELECT COUNT(*) AS count FROM ShowtimeToSeat WHERE showtimeId = ?", showtimeId);
+		try {
+			result.next();
+			int seatCount = result.getInt("count");
+			if (seatCount >= 20)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public void clearShowtimes() {
+		DB.execute("DELETE FROM Showtime");
+	}
 }
