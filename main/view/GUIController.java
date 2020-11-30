@@ -378,19 +378,27 @@ public class GUIController {
 			String cardNo = paymentProcess();
 			if (cardNo.equals("cancel"))
 				return;
+			String confirm = displayInputDialog("Please enter 'Confirm' if you would like to pay $"+payment+ " for a Registered User subscription");
+			if(confirm==null) return;
+			else if(confirm.equals("Confirm")) {
 			PaymentController pc = new PaymentController();
 			pc.addPayment(payment, Integer.parseInt(cardNo));
-			String[] info = enterUserInfo();
-			if (info[0].equals("cancel"))
-				return;
-			String confirmation = displayInputDialog("Enter 'Confirm' to purchase your membership: ");
-
-			if (confirmation == null)
-				return; // to prevent crash on cancel selection
-			if (confirmation.equals("Confirm")) {
-				UserController uc = new UserController();
-				uc.addRegisteredUser(username, info[0], info[1], Integer.parseInt(cardNo), true);
+			String receipt="A Registered User Subscription payment of $"+payment+" was made to your account. Have a nice day!";
+			EmailController ec= new EmailController();
+			Email email =ec.addEmail(0, receipt);
+			ec.addEmailToUser(username, email.getEmailId());
 			}
+//			String[] info = enterUserInfo();
+//			if (info[0].equals("cancel"))
+//				return;
+//			String confirmation = displayInputDialog("Enter 'Confirm' to purchase your membership: ");
+//
+//			if (confirmation == null)
+//				return; // to prevent crash on cancel selection
+//			if (confirmation.equals("Confirm")) {
+//				UserController uc = new UserController();
+//				uc.addRegisteredUser(username, info[0], info[1], Integer.parseInt(cardNo), true);
+//			}
 			homeFrame.printToTextArea("Payment confirmed! Receipt sent to email");
 		}
 	}
