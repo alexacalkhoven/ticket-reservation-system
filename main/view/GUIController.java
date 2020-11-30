@@ -39,22 +39,39 @@ public class GUIController {
 
 	public boolean validateUsername(String u) {
 		uc = new UserController();
-		if (!uc.isValidUser(u)) {
-			JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); // should pop up an error window
-			return false;
+//		if (type == "G") {
+//			uc.addGuestUser(username);
+//			return true;
+//		}
+//		if (!uc.isValidUser(u)) {
+//			JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); // should pop up an error window
+//			return false;
+//		}
+
+		//checks too see if username is in DB
+		if(uc.isValidUser(u)) {
+			if(type.equals("G")) {
+				JOptionPane.showMessageDialog(mainFrame, "This username is already taken... Try again");
+				return false;
+			}
+			else 
+				return true;
 		}
-
-		//if (type == "G")
-			//uc.addGuestUser(username);
-
-		return true;
+		else {
+			if(type.equals("G")) {
+				uc.addGuestUser(u);
+				return true;
+			}
+			else {
+				JOptionPane.showMessageDialog(mainFrame, "Invalid Username... Try again"); // should pop up an error window
+				return false;
+			}
+		}
 	}
 
 	public class LoginGuestListener implements ActionListener {
 		String username;
 
-		// check if username entered is already associated with an account, if so give error message
-		
 		public LoginGuestListener(String username) {
 			super();
 			this.username = username;
@@ -62,11 +79,12 @@ public class GUIController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//type = "G";
-			username = displayInputDialog("Username: ");
-			UserController uc = new UserController();
-			uc.addGuestUser(username);
 			type = "G";
+			username = displayInputDialog("Username: ");
+			boolean valid = validateUsername(username);
+			if (!valid)
+				return;
+			
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
 			loginFrame.addActionListeners(new LoginListener(username));
 			mainFrame.dispose();
@@ -79,6 +97,7 @@ public class GUIController {
 		public LoginOUListener(String username) {
 			super();
 			this.username = username;
+			// TODO Auto-generated constructor stub
 		}
 
 		@Override
@@ -86,8 +105,11 @@ public class GUIController {
 			type = "O";
 			username = displayInputDialog("Username: ");
 			boolean valid = validateUsername(username);
-			if (!valid)
+			if (valid==false) {
+				System.out.println("invalid");
 				return;
+			}
+				
 			loginFrame = new UserLoginFrame("Ticket Reservation System");
 			loginFrame.addActionListeners(new LoginListener(username));
 			mainFrame.dispose();
@@ -100,6 +122,7 @@ public class GUIController {
 		public LoginRUListener(String username) {
 			super();
 			this.username = username;
+			// TODO Auto-generated constructor stub
 		}
 
 		@Override
@@ -492,3 +515,4 @@ public class GUIController {
 	}
 
 }
+
