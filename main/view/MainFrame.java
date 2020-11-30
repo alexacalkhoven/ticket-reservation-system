@@ -32,6 +32,8 @@ public class MainFrame extends JFrame{
 
         setSize(300, 300);
         setContentPane(mainPanel);
+        getContentPane().setBackground(new java.awt.Color(0, 150, 200));
+        buttonPanel.setBackground(new java.awt.Color(0, 150, 200));
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
@@ -48,14 +50,21 @@ public class MainFrame extends JFrame{
 
         loginAsGuest = new JButton("Login as Guest");
         loginAsGuest.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginAsGuest.setBackground(new java.awt.Color(255, 215, 0));
+        loginAsGuest.setOpaque(true);
+        //loginAsGuest.setBorderPainted(false);
         buttonPanel.add(loginAsGuest);
 
         loginAsRegisteredUser = new JButton("Login as Registered User");
         loginAsRegisteredUser.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginAsRegisteredUser.setBackground(new java.awt.Color(255, 215, 0));
+        loginAsRegisteredUser.setOpaque(true);
         buttonPanel.add(loginAsRegisteredUser);
 
         loginAsOrdinaryUser = new JButton("Login as Ordinary User");
         loginAsOrdinaryUser.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginAsOrdinaryUser.setBackground(new java.awt.Color(255, 215, 0));
+        loginAsOrdinaryUser.setOpaque(true);
         buttonPanel.add(loginAsOrdinaryUser);
     }
     

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import main.model.Showtime;
+import java.util.Date;
 
 /**
  * Controls access to the Showtime table in the database.

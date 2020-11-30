@@ -62,7 +62,7 @@ public class Ticket {
 	@Override
 	public String toString() {
 		return "Ticket ID: " + ticketId 
-				+ " timePurchased:" + timePurchased.toString() + "\n";
+				+ " timePurchased: " + timePurchased.toString() + "\n";
 	}
 
 	//getters and setters
@@ -149,6 +149,8 @@ public class Ticket {
 	 */
 	public void cancelTicket(String username) {
 
+		
+		//the controllers responsible for reading information from database. 
 		TicketController tc = new TicketController();
 
 		EmailController ec = new EmailController();
@@ -157,6 +159,7 @@ public class Ticket {
 
 		UserController uc = new UserController(); //to see if username matches a registered user or not. 
 			
+		SeatController sc = new SeatController();
 		
 		// check if cancellation is valid
 		if (validCancel() == false) {
@@ -221,7 +224,9 @@ public class Ticket {
 
 		tc.cancelTicket(ticketId); // call the ticket controller to cancel the ticket. Should also free up the
 									// occupied seat.
-
+			
+		sc.markSeatAsEmpty(seatId); //let the seat no longer be marked as occupied 
+		
 	}
 
 	/**
