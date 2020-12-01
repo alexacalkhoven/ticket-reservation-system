@@ -128,7 +128,6 @@ public class Ticket {
 																					// subtract purchase time in ms.
 
 		int timeDifHrs = (int) timeDifMS / 3600000; // get the integer time difference in hours
-		System.out.println(timeDifHrs);
 		if (timeDifHrs >= 72) {
 			return true;
 		}
@@ -264,7 +263,7 @@ public class Ticket {
 		message += "Movie: " + movie.getName() + "\n";
 		message += "Time: " + st.getTimeOfShow() + "\n";
 		message += "Date Purchased: " + timePurchased.toString() + "\n";
-		message += "Cost: $" + payment.amount + ". Show this email as your ticket.\n";
+		message += "Cost: $" + payment.amount + ". Show this email as your ticket.";
 
 		// set up email
 		Email email = ec.addEmail(0, message);

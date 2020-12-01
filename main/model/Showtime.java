@@ -43,7 +43,7 @@ public class Showtime {
 	 */
 	@Override
 	public String toString() {
-		return "time:" + timeOfShow.toString() + "\tshowtimeId: " + showtimeId + "\tmovieId: " + movieId;
+		return "time:" + timeOfShow.toString() + "\tshowtimeId: " + showtimeId + "\tmovieId: " + movieId + "\n";
 	}
 
 	/**

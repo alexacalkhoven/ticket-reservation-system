@@ -39,7 +39,7 @@ public class Movie {
 	public String toString() {
 		String tabs = "\t";
 		if(name.length() <= 8) tabs += "\t";
-		return "name: " + name + tabs + "movieId: " + movieId;
+		return "name: " + name + tabs + "movieId: " + movieId + "\n";
 	}
 
 	//getters and setters

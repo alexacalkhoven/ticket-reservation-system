@@ -92,11 +92,11 @@ public class SampleData {
 
 	public static void addPromotionEmails() {
 		addPromotionEmailsToUsers(
-				"\nAvengers: Endgame is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
+				"Avengers: Endgame is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
 		addPromotionEmailsToUsers(
-				"\nClueless is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
+				"Clueless is out now! Book tickets today. 2 seats reserved specially for Registered Users.");
 		addPromotionEmailsToUsers(
-				"\nNew movie is coming out tomorrow. Keep an eye out on your inbox for more information soon.");
+				"New movie is coming out tomorrow. Keep an eye out on your inbox for more information soon.");
 
 	}
 

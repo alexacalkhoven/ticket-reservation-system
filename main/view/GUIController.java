@@ -230,7 +230,7 @@ public class GUIController {
 		MovieController mc = new MovieController();
 		ArrayList<Movie> movieList = mc.getMovies();
 		for (int i = 0; i < movieList.size(); i++) {
-			message += (movieList.get(i).toString() + "\n");
+			message += (movieList.get(i).toString());
 		}
 		homeFrame.printToTextArea(message);
 	}
@@ -337,14 +337,19 @@ public class GUIController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String message = "-----My Tickets-----\n";
-			TicketController tc = new TicketController();
-			ArrayList<Ticket> ticketList = tc.getTickets(username);
-			for (int i = 0; i < ticketList.size(); i++) {
-				message += ticketList.get(i).toString();
-			}
-			homeFrame.printToTextArea(message);
+			printTickets(username);
 		}
+	}
+	
+	private ArrayList<Ticket> printTickets(String u) {
+		String message = "-----My Tickets-----\n";
+		TicketController tc = new TicketController();
+		ArrayList<Ticket> ticketList = tc.getTickets(username);
+		for (int i = 0; i < ticketList.size(); i++) {
+			message += (ticketList.get(i).toString());
+		}
+		homeFrame.printToTextArea(message);
+		return ticketList;
 	}
 
 	/*
@@ -358,15 +363,8 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			String message = "-----My Tickets-----\n";
-			TicketController tc = new TicketController();
-			ArrayList<Ticket> ticketList = tc.getTickets(username);
-			for (int i = 0; i < ticketList.size(); i++) {
-				message += ticketList.get(i).toString();
-			}
-
-			homeFrame.printToTextArea(message);
-
+			ArrayList<Ticket> ticketList = printTickets(username);
+			
 			// get user inputted ticket ID value from the input dialog box.
 			int ticketId = Integer.parseInt(displayInputDialog("Enter the ticketId you would like to cancel: "));
 
@@ -418,7 +416,7 @@ public class GUIController {
 			EmailController ec = new EmailController();
 			ArrayList<Email> emailList = ec.getEmails(username);
 			for (int i = 0; i < emailList.size(); i++) {
-				message += (emailList.get(i).getMessage() + "\n");
+				message += (emailList.get(i).getMessage() + "\n\n");
 			}
 			homeFrame.printToTextArea(message);
 		}
@@ -645,12 +643,12 @@ public class GUIController {
 			homeFrame.printToTextArea(message);
 			return null;
 		} else {
-			message += (movie.toString() + "\n");
-			message += "-----Showtimes-----\n";
+			message += (movie.toString());
+			message += "\n-----Showtimes-----\n";
 			ShowtimeController sc = new ShowtimeController();
 			ArrayList<Showtime> sList = sc.getShowtimesForMovie(m.getMovieId());
 			for (int i = 0; i < sList.size(); i++) {
-				message += (sList.get(i).toString() + "\n");
+				message += (sList.get(i).toString());
 			}
 		}
 		homeFrame.printToTextArea(message);
