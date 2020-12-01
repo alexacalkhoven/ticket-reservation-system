@@ -27,7 +27,7 @@ public class DBController {
 	// Note: change these locally as needed to access your database.
 	String ENSF_DB_URL = "jdbc:mysql://localhost:3306/ensf480";
 	String ENSF_DB_USER = "root";
-	String ENSF_DB_PASSWORD = "pw";
+	String ENSF_DB_PASSWORD = "Sharks1919*";
 
 
 
