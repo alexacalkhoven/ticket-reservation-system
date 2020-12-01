@@ -1,9 +1,6 @@
 package main.view;
 
-import javax.lang.model.util.ElementScanner6;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

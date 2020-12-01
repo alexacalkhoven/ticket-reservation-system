@@ -9,6 +9,7 @@ import java.awt.*;
  * @author Trevor Brown
  * @author Noah Bradley
  */
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 
     private JPanel mainPanel, buttonPanel;

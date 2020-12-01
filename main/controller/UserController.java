@@ -1,11 +1,9 @@
 package main.controller;
 
 import java.sql.ResultSet;
-//import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import main.model.Email;
 import main.model.RegisteredUser;
 
 /**

@@ -1,7 +1,6 @@
 package main.view;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 
 /**
@@ -12,6 +11,7 @@ import java.awt.event.*;
  * @author Noah Bradley
  *
  */
+@SuppressWarnings("serial")
 public class HomePageFrame extends JFrame{
 	private JPanel mainPanel, buttonPanel;
 	//buttons for frame
