@@ -533,10 +533,13 @@ public class GUIController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			username=null;
 			mainFrame.dispose();
 			loginFrame.dispose();
 			homeFrame.dispose();
-			System.exit(1);
+			MainFrame frame = new MainFrame("Ticket Reservation System");
+			GUIController gc= new GUIController(frame);
+			//System.exit(1);
 		}
 	}
 
