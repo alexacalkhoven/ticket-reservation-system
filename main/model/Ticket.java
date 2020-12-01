@@ -126,11 +126,11 @@ public class Ticket {
 		
 		
 		
-		long timeDifMS =  st.getTimeOfShow().getTime() - new java.util.Date().getTime(); // get current time in ms and
+		long timeDifMS =  st.getTimeOfShow().getTime() - timePurchased.getTime();	// get current time in ms and
 																					// subtract purchase time in ms.
 
 		int timeDifHrs = (int) timeDifMS / 3600000; // get the integer time difference in hours
-
+		
 		if (timeDifHrs >= 72) {
 			return true;
 		}
