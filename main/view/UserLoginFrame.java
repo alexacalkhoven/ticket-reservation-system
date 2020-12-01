@@ -46,7 +46,8 @@ public class UserLoginFrame extends JFrame{
      */
     private void addComponents(){
 
-        message = new JLabel("    Hello Theatre Member! Please click login.");
+        message = new JLabel("   Hello Theatre Member! Please click login.");
+        message.setFont(new Font("Serif", Font.PLAIN, 16));
         message.setBounds(300, 300, 300, 300);
         mainPanel.add(message);
         

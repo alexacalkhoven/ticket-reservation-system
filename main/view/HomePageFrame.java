@@ -47,7 +47,7 @@ public class HomePageFrame extends JFrame{
 		String temp = "Welcome to your Homepage " + username + "!       ";
 		welcome = new JLabel(temp);
 		welcome.setAlignmentX(CENTER_ALIGNMENT);
-
+		welcome.setFont(new Font("Serif", Font.PLAIN, 30));
 		//setting frame info
 		setSize(1000, 1000);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -64,6 +64,7 @@ public class HomePageFrame extends JFrame{
 
 		//Initializing button alignment
 		message.setAlignmentX(CENTER_ALIGNMENT);
+		message.setFont(new Font("Serif", Font.PLAIN, 30));
 		if(userType == "G"){
 			registerGuest.setAlignmentX(Component.CENTER_ALIGNMENT);
 			registerGuest.setBackground(new java.awt.Color(255, 215, 0));
