@@ -85,7 +85,7 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "G";
 			username = displayInputDialog("Username: ");
-			if(username==null)
+			if(username==null || username.equals(""))
 				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
@@ -109,7 +109,7 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "O";
 			username = displayInputDialog("Username: ");
-			if(username==null)
+			if(username==null || username.equals(""))
 				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
@@ -135,7 +135,7 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "R";
 			username = displayInputDialog("Username: ");
-			if(username==null)
+			if(username==null || username.equals(""))
 				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
@@ -230,7 +230,7 @@ public class GUIController {
 		MovieController mc = new MovieController();
 		ArrayList<Movie> movieList = mc.getMovies();
 		for (int i = 0; i < movieList.size(); i++) {
-			message += (movieList.get(i).toString());
+			message += (movieList.get(i).toString() + "\n");
 		}
 		homeFrame.printToTextArea(message);
 	}
@@ -337,19 +337,14 @@ public class GUIController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			printTickets(username);
+			String message = "-----My Tickets-----\n";
+			TicketController tc = new TicketController();
+			ArrayList<Ticket> ticketList = tc.getTickets(username);
+			for (int i = 0; i < ticketList.size(); i++) {
+				message += ticketList.get(i).toString();
+			}
+			homeFrame.printToTextArea(message);
 		}
-	}
-	
-	private ArrayList<Ticket> printTickets(String u) {
-		String message = "-----My Tickets-----\n";
-		TicketController tc = new TicketController();
-		ArrayList<Ticket> ticketList = tc.getTickets(username);
-		for (int i = 0; i < ticketList.size(); i++) {
-			message += (ticketList.get(i).toString());
-		}
-		homeFrame.printToTextArea(message);
-		return ticketList;
 	}
 
 	/*
@@ -363,8 +358,15 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			ArrayList<Ticket> ticketList = printTickets(username);
-			
+			String message = "-----My Tickets-----\n";
+			TicketController tc = new TicketController();
+			ArrayList<Ticket> ticketList = tc.getTickets(username);
+			for (int i = 0; i < ticketList.size(); i++) {
+				message += ticketList.get(i).toString();
+			}
+
+			homeFrame.printToTextArea(message);
+
 			// get user inputted ticket ID value from the input dialog box.
 			int ticketId = Integer.parseInt(displayInputDialog("Enter the ticketId you would like to cancel: "));
 
@@ -378,7 +380,7 @@ public class GUIController {
 				}
 			}
 
-			if (ticket == null) {
+			if (ticket == null || ticket.equals("")) {
 
 				// display error pane
 				JOptionPane.showMessageDialog(new JFrame(), "Error! Ticket not found.", "ERROR",
@@ -416,7 +418,7 @@ public class GUIController {
 			EmailController ec = new EmailController();
 			ArrayList<Email> emailList = ec.getEmails(username);
 			for (int i = 0; i < emailList.size(); i++) {
-				message += (emailList.get(i).getMessage() + "\n\n");
+				message += (emailList.get(i).getMessage() + "\n");
 			}
 			homeFrame.printToTextArea(message);
 		}
@@ -431,6 +433,7 @@ public class GUIController {
 		String cardNo = "";
 		String message = "";
 		if(type.equals("R")) {
+			System.out.println(u);
 			cardNo = String.valueOf(uc.getCardNum(u));
 			message += "Card number preloaded... ";
 		} else {
@@ -519,12 +522,6 @@ public class GUIController {
 		}
 	}
 	
-	/**
-	 * Checks if user has paid their fee or not
-	 * 
-	 * @param u Username
-	 * @return if user has paid or not
-	 */
 	public boolean userNotPaid(String u) {
 		UserController uc = new UserController();
 		int r = uc.getFeePaid(u);
@@ -547,7 +544,6 @@ public class GUIController {
 			loginFrame.dispose();
 			homeFrame.dispose();
 			MainFrame frame = new MainFrame("Ticket Reservation System");
-			@SuppressWarnings("unused")
 			GUIController gc= new GUIController(frame);
 			//System.exit(1);
 		}
@@ -611,6 +607,7 @@ public class GUIController {
 	 */
 	public boolean addNewUserCredentials(String t) {
 		if (t.compareTo("RU") == 0) {
+			// System.out.println(username);
 			String n = displayInputDialog("Enter your name: ");
 			if (n == null)
 				return false;
@@ -643,12 +640,12 @@ public class GUIController {
 			homeFrame.printToTextArea(message);
 			return null;
 		} else {
-			message += (movie.toString());
-			message += "\n-----Showtimes-----\n";
+			message += (movie.toString() + "\n");
+			message += "-----Showtimes-----\n";
 			ShowtimeController sc = new ShowtimeController();
 			ArrayList<Showtime> sList = sc.getShowtimesForMovie(m.getMovieId());
 			for (int i = 0; i < sList.size(); i++) {
-				message += (sList.get(i).toString());
+				message += (sList.get(i).toString() + "\n");
 			}
 		}
 		homeFrame.printToTextArea(message);

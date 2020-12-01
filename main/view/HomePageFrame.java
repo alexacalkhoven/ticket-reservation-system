@@ -57,6 +57,7 @@ public class HomePageFrame extends JFrame{
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(welcome);
+		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		//button panel
 		buttonPanel = new JPanel();
@@ -76,7 +77,11 @@ public class HomePageFrame extends JFrame{
 		cancelTicket.setAlignmentX(Component.CENTER_ALIGNMENT);
 		viewTickets.setAlignmentX(Component.CENTER_ALIGNMENT);
 		viewEmail.setAlignmentX(Component.CENTER_ALIGNMENT);
-		paySubscription.setAlignmentX(Component.CENTER_ALIGNMENT);
+		if(userType =="R") {
+			paySubscription.setAlignmentX(Component.CENTER_ALIGNMENT);
+			paySubscription.setBackground(new java.awt.Color(255, 215, 0));
+			paySubscription.setOpaque(true);
+		}
 		logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		//setting colour
 		searchMovies.setBackground(new java.awt.Color(255, 215, 0));
@@ -91,8 +96,7 @@ public class HomePageFrame extends JFrame{
 		viewTickets.setOpaque(true);
 		viewEmail.setBackground(new java.awt.Color(255, 215, 0));
 		viewEmail.setOpaque(true);
-		paySubscription.setBackground(new java.awt.Color(255, 215, 0));
-		paySubscription.setOpaque(true);
+		
 		logoutButton.setBackground(new java.awt.Color(255, 215, 0));
 		logoutButton.setOpaque(true);
 
@@ -116,8 +120,11 @@ public class HomePageFrame extends JFrame{
 		buttonPanel.add(viewTickets);
 		buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
 		buttonPanel.add(viewEmail);
-		buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
-		buttonPanel.add(paySubscription);
+		
+		if(userType =="R") {
+			buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
+			buttonPanel.add(paySubscription);
+		}
 		buttonPanel.add(Box.createRigidArea(new Dimension(20, 10)));
 		buttonPanel.add(logoutButton);
 
