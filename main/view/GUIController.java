@@ -427,7 +427,6 @@ public class GUIController {
 		String cardNo = "";
 		String message = "";
 		if(type.equals("R")) {
-			System.out.println(u);
 			cardNo = String.valueOf(uc.getCardNum(u));
 			message += "Card number preloaded... ";
 		} else {
@@ -516,6 +515,12 @@ public class GUIController {
 		}
 	}
 	
+	/**
+	 * Checks if user has paid their fee or not
+	 * 
+	 * @param u Username
+	 * @return if user has paid or not
+	 */
 	public boolean userNotPaid(String u) {
 		UserController uc = new UserController();
 		int r = uc.getFeePaid(u);
@@ -538,6 +543,7 @@ public class GUIController {
 			loginFrame.dispose();
 			homeFrame.dispose();
 			MainFrame frame = new MainFrame("Ticket Reservation System");
+			@SuppressWarnings("unused")
 			GUIController gc= new GUIController(frame);
 			//System.exit(1);
 		}
@@ -601,7 +607,6 @@ public class GUIController {
 	 */
 	public boolean addNewUserCredentials(String t) {
 		if (t.compareTo("RU") == 0) {
-			// System.out.println(username);
 			String n = displayInputDialog("Enter your name: ");
 			if (n == null)
 				return false;

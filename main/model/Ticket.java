@@ -196,7 +196,7 @@ public class Ticket {
 
 			message = "Receipt for: " + username + "\n";
 			message += "100% movie credit refund issued \n";
-			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
+			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + " Payment ID: "
 					+ paymentId + "\n";
 			message += "Date Purchased: " + timePurchased.toString() + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
@@ -206,7 +206,7 @@ public class Ticket {
 		} else { // user is not RU so no discount
 			message = "Receipt for: " + username + "\n";
 			message += "85% movie credit refund issued \n"; // 100% minus 15% fee
-			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
+			message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + " Payment ID: "
 					+ paymentId + "\n";
 			message += "Date Purchased: " + timePurchased.toString() + "\n";
 			message += "Date Refunded: " + currentDate.getMonth() + "/" + currentDate.getDate() + "/"
@@ -258,7 +258,7 @@ public class Ticket {
 
 		message = "Receipt for: " + username + "\n";
 		message += "Movie ticket purchased \n";
-		message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
+		message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + " Payment ID: "
 				+ paymentId + "\n";
 		message += "Seat: row " + seat.getRow() + " column " + seat.getCol() + ", screen " + seat.getScreen() + "\n";
 		message += "Movie: " + movie.getName() + "\n";
