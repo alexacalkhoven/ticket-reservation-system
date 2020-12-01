@@ -85,6 +85,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "G";
 			username = displayInputDialog("Username: ");
+			if(username==null)
+				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
 				return;
@@ -107,6 +109,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "O";
 			username = displayInputDialog("Username: ");
+			if(username==null)
+				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
 				return;
@@ -131,6 +135,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "R";
 			username = displayInputDialog("Username: ");
+			if(username==null)
+				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
 				return;
