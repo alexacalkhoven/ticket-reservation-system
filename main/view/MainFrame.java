@@ -48,7 +48,13 @@ public class MainFrame extends JFrame{
         initialMessage = new JLabel(" Welcome to Ticket Registration System!");
         initialMessage.setFont(new Font("Serif", Font.PLAIN, 17));
         initialMessage.setBounds(300, 300, 300, 300);
-        mainPanel.add(initialMessage);
+        initialMessage.setAlignmentX(CENTER_ALIGNMENT);
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+        panel1.add(Box.createRigidArea(new Dimension(20, 100)));
+        panel1.add(initialMessage);
+        panel1.setBackground(new java.awt.Color(0, 150, 200));
+        mainPanel.add(panel1);
 
         loginAsGuest = new JButton("Login as Guest");
         loginAsGuest.setAlignmentX(Component.CENTER_ALIGNMENT);
