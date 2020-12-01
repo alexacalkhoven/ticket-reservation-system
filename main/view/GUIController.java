@@ -1,9 +1,6 @@
 package main.view;
 
-import javax.lang.model.util.ElementScanner6;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -88,6 +85,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "G";
 			username = displayInputDialog("Username: ");
+			if(username==null)
+				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
 				return;
@@ -110,6 +109,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "O";
 			username = displayInputDialog("Username: ");
+			if(username==null)
+				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
 				return;
@@ -134,6 +135,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			type = "R";
 			username = displayInputDialog("Username: ");
+			if(username==null)
+				return;
 			boolean valid = validateUsername(username);
 			if (!valid)
 				return;
@@ -536,10 +539,13 @@ public class GUIController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			username=null;
 			mainFrame.dispose();
 			loginFrame.dispose();
 			homeFrame.dispose();
-			System.exit(1);
+			MainFrame frame = new MainFrame("Ticket Reservation System");
+			GUIController gc= new GUIController(frame);
+			//System.exit(1);
 		}
 	}
 

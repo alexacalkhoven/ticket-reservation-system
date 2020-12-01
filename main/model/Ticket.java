@@ -1,10 +1,8 @@
 package main.model;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 
-import main.controller.DBController;
 import main.controller.EmailController;
 import main.controller.TicketController;
 import main.controller.UserController;
@@ -124,13 +122,13 @@ public class Ticket {
 		}
 		
 		
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		
-		
-		long timeDifMS =  st.getTimeOfShow().getTime() - new java.util.Date().getTime(); // get current time in ms and
+		long timeDifMS =  st.getTimeOfShow().getTime() - ts.getTime();				// get current time in ms and
 																					// subtract purchase time in ms.
 
 		int timeDifHrs = (int) timeDifMS / 3600000; // get the integer time difference in hours
-
+		System.out.println(timeDifHrs);
 		if (timeDifHrs >= 72) {
 			return true;
 		}
@@ -147,6 +145,7 @@ public class Ticket {
 	 * @param username The user who is canceling their ticket.
 	 * @param type The user type. 
 	 */
+	@SuppressWarnings("deprecation")
 	public void cancelTicket(String username) {
 
 		
@@ -261,7 +260,7 @@ public class Ticket {
 		message += "Movie ticket purchased \n";
 		message += "Ticket ID: " + ticketId + " seat ID: " + seatId + " Showtime ID: " + showtimeId + "Payment ID: "
 				+ paymentId + "\n";
-		//message += "Seat: row " + seat.getRow() + " column " + seat.getCol() + ", screen " + seat.getScreen() + "\n"; // COMMENT BACK IN WHEN WE HAVE SETTERS AND GETTERS
+		message += "Seat: row " + seat.getRow() + " column " + seat.getCol() + ", screen " + seat.getScreen() + "\n";
 		message += "Movie: " + movie.getName() + "\n";
 		message += "Time: " + st.getTimeOfShow() + "\n";
 		message += "Date Purchased: " + timePurchased.toString() + "\n";

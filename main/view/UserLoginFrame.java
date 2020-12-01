@@ -1,8 +1,6 @@
 package main.view;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import main.controller.UserController;
 
 /*
  * After the user submits username, this is the brief frame to make the user login
@@ -11,12 +9,13 @@ import main.controller.UserController;
  * @author Trevor Brown
  * @author Noah Bradley
  */
+@SuppressWarnings("serial")
 public class UserLoginFrame extends JFrame{
     
     private JPanel mainPanel, buttonPanel;
     private JButton login;
     private JLabel message;
-    private JTextField usernameInput;
+    //private JTextField usernameInput;
     
     /*
      * Constructor
@@ -47,7 +46,8 @@ public class UserLoginFrame extends JFrame{
      */
     private void addComponents(){
 
-        message = new JLabel("    Hello Theatre Member! Please click login.");
+        message = new JLabel("   Hello Theatre Member! Please click login.");
+        message.setFont(new Font("Serif", Font.PLAIN, 16));
         message.setBounds(300, 300, 300, 300);
         mainPanel.add(message);
         

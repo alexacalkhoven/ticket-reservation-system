@@ -9,6 +9,7 @@ import java.awt.*;
  * @author Trevor Brown
  * @author Noah Bradley
  */
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 
     private JPanel mainPanel, buttonPanel;
@@ -44,7 +45,8 @@ public class MainFrame extends JFrame{
      * Adds buttons to panels
      */
     private void addComponents(){
-        initialMessage = new JLabel("       Welcome to Ticket Registration System");
+        initialMessage = new JLabel(" Welcome to Ticket Registration System!");
+        initialMessage.setFont(new Font("Serif", Font.PLAIN, 17));
         initialMessage.setBounds(300, 300, 300, 300);
         mainPanel.add(initialMessage);
 

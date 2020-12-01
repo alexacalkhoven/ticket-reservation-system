@@ -28,14 +28,15 @@ public class SampleData {
 		MovieController mc = new MovieController();
 		ShowtimeController sc = new ShowtimeController();
 		
-		Timestamp d1 = new Timestamp(2020 - 1901, 11, 1, 19, 0, 0, 0);
-		Timestamp d2 = new Timestamp(2020 - 1901, 11, 7, 21, 0, 0, 0);
-		Timestamp d3 = new Timestamp(2020 - 1901, 11, 3, 19, 0, 0, 0);
-		Timestamp d4 = new Timestamp(2020 - 1901, 11, 3, 21, 0, 0, 0);
-		Timestamp d5 = new Timestamp(2020 - 1901, 11, 1, 13, 0, 0, 0);
-		Timestamp d6 = new Timestamp(2020 - 1901, 11, 2, 17, 0, 0, 0);
-		Timestamp d7 = new Timestamp(2020 - 1901, 11, 7, 13, 0, 0, 0);
-		Timestamp d8 = new Timestamp(2020 - 1901, 11, 2, 15, 0, 0, 0);
+
+		Timestamp d1 = new Timestamp(2020 - 1900, 11, 1, 19, 0, 0, 0);
+		Timestamp d2 = new Timestamp(2020 - 1900, 11, 7, 21, 0, 0, 0);
+		Timestamp d3 = new Timestamp(2020 - 1900, 11, 3, 19, 0, 0, 0);
+		Timestamp d4 = new Timestamp(2020 - 1900, 11, 3, 21, 0, 0, 0);
+		Timestamp d5 = new Timestamp(2020 - 1900, 11, 1, 13, 0, 0, 0);
+		Timestamp d6 = new Timestamp(2020 - 1900, 11, 2, 17, 0, 0, 0);
+		Timestamp d7 = new Timestamp(2020 - 1900, 11, 7, 13, 0, 0, 0);
+		Timestamp d8 = new Timestamp(2020 - 1900, 11, 2, 15, 0, 0, 0);
 		
 		Movie m1 = mc.addMovie("The Incredibles");
 		Showtime s1a = sc.addShowtime(d1, m1.getMovieId());

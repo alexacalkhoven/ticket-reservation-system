@@ -13,7 +13,8 @@ class TicketApp {
     public static void main(String[] args){
     	SampleData.addSampleData();
         MainFrame frame = new MainFrame("Ticket Reservation System");
-        GUIController guiController = new GUIController(frame);
+        @SuppressWarnings("unused")
+		GUIController guiController = new GUIController(frame);
     }
 
 }
