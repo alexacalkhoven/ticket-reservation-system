@@ -46,7 +46,7 @@ public class DBController {
 
 		try {
 			connection = DriverManager.getConnection(url, user, password);
-			executeFile("../../resources/init.sql");
+			executeFile("/init.sql");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.exit(1);

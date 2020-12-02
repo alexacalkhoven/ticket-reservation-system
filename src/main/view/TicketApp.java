@@ -8,7 +8,7 @@ import resources.SampleData;
  * @author Trevor Brown
  * @author Noah Bradley
  */
-class TicketApp {
+public class TicketApp {
 
     public static void main(String[] args){
     	SampleData.addSampleData();

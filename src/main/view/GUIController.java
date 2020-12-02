@@ -230,7 +230,7 @@ public class GUIController {
 		MovieController mc = new MovieController();
 		ArrayList<Movie> movieList = mc.getMovies();
 		for (int i = 0; i < movieList.size(); i++) {
-			message += (movieList.get(i).toString() + "\n");
+			message += (movieList.get(i).toString());
 		}
 		homeFrame.printToTextArea(message);
 	}
@@ -355,6 +355,7 @@ public class GUIController {
 		/*
 		 * Function called if this classes button is pressed
 		 */
+		@SuppressWarnings("unlikely-arg-type")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
@@ -418,7 +419,7 @@ public class GUIController {
 			EmailController ec = new EmailController();
 			ArrayList<Email> emailList = ec.getEmails(username);
 			for (int i = 0; i < emailList.size(); i++) {
-				message += (emailList.get(i).getMessage() + "\n");
+				message += (emailList.get(i).getMessage() + "\n\n");
 			}
 			homeFrame.printToTextArea(message);
 		}
@@ -544,6 +545,7 @@ public class GUIController {
 			loginFrame.dispose();
 			homeFrame.dispose();
 			MainFrame frame = new MainFrame("Ticket Reservation System");
+			@SuppressWarnings("unused")
 			GUIController gc= new GUIController(frame);
 			//System.exit(1);
 		}
@@ -645,7 +647,7 @@ public class GUIController {
 			ShowtimeController sc = new ShowtimeController();
 			ArrayList<Showtime> sList = sc.getShowtimesForMovie(m.getMovieId());
 			for (int i = 0; i < sList.size(); i++) {
-				message += (sList.get(i).toString() + "\n");
+				message += (sList.get(i).toString());
 			}
 		}
 		homeFrame.printToTextArea(message);
